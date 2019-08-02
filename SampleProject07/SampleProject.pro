@@ -18,6 +18,10 @@ win32 {
 unix {
      
 }
-
+QMAKE_CXX = /usr/bin/g++
 
 QMAKE_CXXFLAGS += -D_RELEASE_
+
+QMAKE_LIBS += -L ./opt
+
+#QMAKE_INCDIR_OPENGL_ES2

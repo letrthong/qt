@@ -11,7 +11,7 @@ MAKEFILE      = Makefile
 ####### Compiler, tools and options
 
 CC            = gcc
-CXX           = g++
+CXX           = /usr/bin/g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -D_RELEASE_ -O2 -std=gnu++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
@@ -36,7 +36,7 @@ DISTNAME      = qt.out1.0.0
 DISTDIR = /home/etr1hc/vmshare/qt/SampleProject07/.tmp/qt.out1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/opt/Qt5.6.3/5.6.3/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/opt/Qt5.6.3/5.6.3/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L ./opt -L/opt/Qt5.6.3/5.6.3/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
