@@ -5,7 +5,16 @@
  
  MainWindow::MainWindow(QWidget *parent)
    : QMainWindow(parent)
- {
+ { 
+    Qt::WindowFlags flags = windowFlags();
+ /*  flags |= Qt::CustomizeWindowHint;
+  flags &= ~Qt::WindowContextHelpButtonHint;
+  flags &= ~Qt::WindowSystemMenuHint;
+  flags &= ~Qt::WindowMinMaxButtonsHint;
+  flags &= ~Qt::WindowCloseButtonHint;*/
+
+  flags = Qt::Window | Qt::FramelessWindowHint;
+    setWindowFlags(flags);
     // Create the button, make "this" the parent
     m_button = new QPushButton("show date", this);
     // set size and location of the button
