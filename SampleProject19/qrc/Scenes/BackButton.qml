@@ -10,14 +10,13 @@ Item {
     height: 80
     property BackEnd backEnd: null
 
-
     Rectangle {
-        id: rectangle
+        id: id_rectangle
         x: 5
         y: 5
         width: 150
         height: 70
-        color: "#c4cfc2"
+        color: "lightsteelblue"
 
         Button {
             x: 5
@@ -25,7 +24,7 @@ Item {
             width: 140
             height: 60
             Image {
-                id: image
+                id: id_image
                 x: 0
                 y: 0
                 width: 140
@@ -35,7 +34,21 @@ Item {
 
             onClicked: {
                  id_root.qmlSignal("Click on Back Button")
+                 id_rectangle.color= "lightsteelblue"
+
             }
+
+            onPressedChanged: {
+                   if (pressed){
+                       id_rectangle.color= "red"
+                       id_image.source =  "../../qrc/images/backButton_pressed.png"
+                   }
+                   else{
+                       id_rectangle.color= "lightsteelblue"
+                       id_image.source =  "../../qrc/images/backButton.png"
+                   }
+            }
+
          }
     }
 }
