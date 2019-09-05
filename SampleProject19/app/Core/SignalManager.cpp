@@ -3,7 +3,9 @@
 
 void SignalManager::cppSlot(const QString &msg)
 {
-  qDebug() << "Called the C++ slot with message:" << msg;
+    static int count = 0;
+    count++;
+  qDebug() << "Called the C++ slot with message:" << msg <<" count="<<  count;
 }
 
 
