@@ -11,6 +11,10 @@ ApplicationWindow {
     signal qmlSignal(string msg)
 
 
+    function setTextField(text){
+        console.log("screen1.qml::setTextField: " + text)
+    }
+
     BackEnd {
         id: backend
     }

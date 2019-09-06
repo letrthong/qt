@@ -11,7 +11,11 @@
       Q_OBJECT
   public slots:
       void cppSlot(const QString &msg);
-        
+
+      void  handleSubmitTextField(const QString &in);
+
+  signals:
+    void setTextField(QVariant text);
   };
 
   #endif // SINGAL_MANAGER_H_

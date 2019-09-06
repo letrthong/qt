@@ -24,13 +24,14 @@ int main(int argc, char *argv[])
      QObject *topLevel = engine.rootObjects().at(0);
 
      QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
-    SignalManager signalManager;
 
-     QObject::connect(window,
-                        SIGNAL(qmlSignal(QString)),
-                        &signalManager,
-                        SLOT(cppSlot(QString))
-                        );
+     //QML to C++
+      SignalManager signalManager;
+     QObject::connect(window, SIGNAL(qmlSignal(QString)), &signalManager,SLOT(cppSlot(QString)));
+
+      //C++ to QML
+     QObject::connect(&signalManager, SIGNAL(setTextField(QVariant)),window, SLOT(setTextField(QVariant)));
+
     return app.exec();
 } 
 
