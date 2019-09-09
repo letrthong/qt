@@ -63,6 +63,9 @@ int main(int argc, char *argv[])
             if(className.find("PushButton") != std::string::npos)
             {
 
+                qInfo() << object->property("buttonName");
+
+
                 QObject::connect(&signalManager, SIGNAL(setProperrtyCpp(QVariant)),object, SLOT(setVisible(QVariant)));
 
                 //object->setProperty("visible", false);

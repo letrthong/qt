@@ -9,7 +9,7 @@ Item {
     height: 80
 
     property string buttonName: "unknow"
-    function getButtonName(name){
+    function getButtonName(){
            return  "pushButton/" + buttonName;
     }
 
