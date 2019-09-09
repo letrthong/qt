@@ -20,11 +20,11 @@ ApplicationWindow {
     }
 
     TextField {
-        text: "#backend.userName#"
+        text:  backend.getUserName
         placeholderText: qsTr("User name")
         anchors.centerIn: parent
 
-        onTextChanged: backend.userName = text
+        onTextChanged: backend.getUserName = text
     }
 
     Button {

@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_BackEnd_t {
     QByteArrayData data[4];
-    char stringdata0[34];
+    char stringdata0[37];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,10 @@ static const qt_meta_stringdata_BackEnd_t qt_meta_stringdata_BackEnd = {
 QT_MOC_LITERAL(0, 0, 7), // "BackEnd"
 QT_MOC_LITERAL(1, 8, 15), // "userNameChanged"
 QT_MOC_LITERAL(2, 24, 0), // ""
-QT_MOC_LITERAL(3, 25, 8) // "userName"
+QT_MOC_LITERAL(3, 25, 11) // "getUserName"
 
     },
-    "BackEnd\0userNameChanged\0\0userName"
+    "BackEnd\0userNameChanged\0\0getUserName"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +59,7 @@ static const uint qt_meta_data_BackEnd[] = {
     QMetaType::Void,
 
  // properties: name, type, flags
-       3, QMetaType::QString, 0x00495103,
+       3, QMetaType::QString, 0x00495003,
 
  // properties: notify_signal_id
        0,
@@ -93,7 +93,7 @@ void BackEnd::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
-        case 0: *reinterpret_cast< QString*>(_v) = _t->userName(); break;
+        case 0: *reinterpret_cast< QString*>(_v) = _t->getUserName(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {

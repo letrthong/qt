@@ -7,14 +7,15 @@
 class BackEnd : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString userName READ userName WRITE setUserName NOTIFY userNameChanged)
+    Q_PROPERTY(QString getUserName  READ getUserName  WRITE setUserName NOTIFY userNameChanged)
 
 public:
     explicit BackEnd(QObject *parent = nullptr);
 
-    QString userName();
+    QString getUserName();
     void setUserName(const QString &userName);
-     
+
+
 signals:
     void userNameChanged();
 

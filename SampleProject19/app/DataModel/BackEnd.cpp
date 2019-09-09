@@ -7,27 +7,27 @@ BackEnd::BackEnd(QObject *parent) :
     
 }
 
-QString BackEnd::userName()
+QString BackEnd::getUserName()
 {
-     qInfo() << "userName="<<  m_userName ; ;
+     qInfo() << "getUserName user name="<<  m_userName ; ;
     return m_userName;
 }
 
 void BackEnd::setUserName(const QString &userName)
 {
-    if (userName == m_userName)
+    if (userName == m_userName){
         return;
+    }
 
     m_userName = userName;
    
 
-    if( userName == "Thong")
-    {
+    if( userName == "Thong"){
         m_userName = "Hi !!!";
     }
     
     emit userNameChanged();
-    qInfo() << "setUserName="<< m_userName ;
+    qInfo() << "setUserName user name="<< m_userName ;
 }
 
  
