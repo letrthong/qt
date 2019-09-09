@@ -1,14 +1,18 @@
 import QtQuick 2.0
 import QtQuick.Controls  1.2
-import io.qt.examples.backend 1.0
+
 
 Item {
-    id: backgroud
+    id: id_back_button
     x: 0
     y: 0
     width: 160
     height: 80
-    property BackEnd backEnd: null
+
+    property string buttonName: "back"
+    function getButtonName(name){
+           return  "backbutton/" + buttonName;
+    }
 
     Rectangle {
         id: id_rectangle
@@ -33,7 +37,7 @@ Item {
             }
 
             onClicked: {
-                 id_root.qmlSignal("Click on BackButton.qml")
+                 qmlSignalButton(getButtonName())
                  id_rectangle.color= "lightsteelblue"
             }
 

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<BackEnd>("io.qt.examples.backend", 1, 0,  "BackEnd");
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl::fromLocalFile("qrc/Scenes/screen01.qml"));
+    engine.load(QUrl::fromLocalFile("./qrc/Scenes/screen01.qml"));
 
      QObject *topLevel = engine.rootObjects().at(0);
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
      //QML to C++
       SignalManager signalManager;
-     QObject::connect(window, SIGNAL(qmlSignal(QString)), &signalManager,SLOT(cppSlot(QString)));
+     QObject::connect(window, SIGNAL(qmlSignalButton(QString)), &signalManager,SLOT(cppSlot(QString)));
 
       //C++ to QML
      QObject::connect(&signalManager, SIGNAL(setTextFieldcpp(QVariant)),window, SLOT(setTextField(QVariant)));

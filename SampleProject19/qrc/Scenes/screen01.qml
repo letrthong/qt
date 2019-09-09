@@ -3,12 +3,12 @@ import QtQuick.Controls  1.2
 import io.qt.examples.backend 1.0
 
 ApplicationWindow {
-    id: id_root
+    id: id_screen1
     width: 300
     height: 480
     visible: true
 
-    signal qmlSignal(string msg)
+    signal qmlSignalButton(string msg)
 
 
     function setTextField(text){
@@ -32,7 +32,6 @@ ApplicationWindow {
         y: 44
         text: "Quit"
         onClicked: Qt.quit()
-
     }
 
     Button {
@@ -41,7 +40,7 @@ ApplicationWindow {
 
         text: "Button"
 
-        onClicked: id_root.qmlSignal("screen1/button01")
+        onClicked: id_screen1.qmlSignalButton("screen1/button01")
     }
 
     BackButton {
@@ -54,6 +53,7 @@ ApplicationWindow {
         id: pushButton
         x: 59
         y: 116
+        buttonName: "button01"
     }
 
     Component.onCompleted: {

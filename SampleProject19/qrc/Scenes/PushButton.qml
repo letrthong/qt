@@ -1,14 +1,17 @@
 import QtQuick 2.0
 import QtQuick.Controls  1.2
-import io.qt.examples.backend 1.0
 
 Item {
-    id: backgroud
+    id: id_push_button
     x: 0
     y: 0
     width: 160
     height: 80
-    property BackEnd backEnd: null
+
+    property string buttonName: "unknow"
+    function getButtonName(name){
+           return  "pushButton/" + buttonName;
+    }
 
     Rectangle {
         id: id_rectangle
@@ -17,6 +20,7 @@ Item {
         width: 150
         height: 70
         color: "lightsteelblue"
+
 
         Button {
             x: 5
@@ -33,9 +37,8 @@ Item {
             }
 
 
-
             onClicked: {
-                 id_root.qmlSignal("Click on PushButton.qml")
+                 qmlSignalButton(getButtonName())
                  id_rectangle.color= "lightsteelblue"
                 if(id_text.text == "ON"){
                         id_text.text=   "OFF"
