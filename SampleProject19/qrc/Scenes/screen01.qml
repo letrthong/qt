@@ -8,7 +8,7 @@ ApplicationWindow {
     height: 480
     visible: true
 
-    signal qmlSignalButton(string msg)
+    signal qmlSignalButton(int sendTo, string msg)
 
 
     function setTextField(text){
@@ -21,6 +21,8 @@ ApplicationWindow {
 
     TextField {
         text:  backend.getUserName
+        anchors.verticalCenterOffset: 122
+        anchors.horizontalCenterOffset: -49
         placeholderText: qsTr("User name")
         anchors.centerIn: parent
 
@@ -40,20 +42,27 @@ ApplicationWindow {
 
         text: "Button"
 
-        onClicked: id_screen1.qmlSignalButton("screen1/button01")
+        onClicked: id_screen1.qmlSignalButton(1, "screen1/button01")
     }
 
     BackButton {
         id: backButton
-        x: 83
-        y: 313
+        x: 15
+        y: 387
     }
 
     PushButton {
         id: pushButton
-        x: 59
-        y: 116
+        x: 15
+        y: 109
         buttonName: "button01"
+    }
+
+    PushButton {
+        id: pushButton1
+        x: 28
+        y: 218
+        buttonName: "button02"
     }
 
     Component.onCompleted: {

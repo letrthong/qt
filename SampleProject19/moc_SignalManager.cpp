@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_SignalManager_t {
-    QByteArrayData data[6];
-    char stringdata0[48];
+    QByteArrayData data[8];
+    char stringdata0[78];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,15 +30,18 @@ struct qt_meta_stringdata_SignalManager_t {
 static const qt_meta_stringdata_SignalManager_t qt_meta_stringdata_SignalManager = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "SignalManager"
-QT_MOC_LITERAL(1, 14, 15), // "setTextFieldcpp"
+QT_MOC_LITERAL(1, 14, 15), // "setTextFieldCpp"
 QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 4), // "text"
-QT_MOC_LITERAL(4, 36, 7), // "cppSlot"
-QT_MOC_LITERAL(5, 44, 3) // "msg"
+QT_MOC_LITERAL(4, 36, 15), // "setProperrtyCpp"
+QT_MOC_LITERAL(5, 52, 14), // "onclickCppSlot"
+QT_MOC_LITERAL(6, 67, 6), // "sendTo"
+QT_MOC_LITERAL(7, 74, 3) // "msg"
 
     },
-    "SignalManager\0setTextFieldcpp\0\0text\0"
-    "cppSlot\0msg"
+    "SignalManager\0setTextFieldCpp\0\0text\0"
+    "setProperrtyCpp\0onclickCppSlot\0sendTo\0"
+    "msg"
 };
 #undef QT_MOC_LITERAL
 
@@ -48,24 +51,26 @@ static const uint qt_meta_data_SignalManager[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   24,    2, 0x06 /* Public */,
+       1,    1,   29,    2, 0x06 /* Public */,
+       4,    1,   32,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,   27,    2, 0x0a /* Public */,
+       5,    2,   35,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QVariant,    3,
+    QMetaType::Void, QMetaType::QVariant,    3,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,    6,    7,
 
        0        // eod
 };
@@ -76,8 +81,9 @@ void SignalManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         SignalManager *_t = static_cast<SignalManager *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->setTextFieldcpp((*reinterpret_cast< QVariant(*)>(_a[1]))); break;
-        case 1: _t->cppSlot((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->setTextFieldCpp((*reinterpret_cast< QVariant(*)>(_a[1]))); break;
+        case 1: _t->setProperrtyCpp((*reinterpret_cast< QVariant(*)>(_a[1]))); break;
+        case 2: _t->onclickCppSlot((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -85,8 +91,15 @@ void SignalManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         void **func = reinterpret_cast<void **>(_a[1]);
         {
             typedef void (SignalManager::*_t)(QVariant );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&SignalManager::setTextFieldcpp)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&SignalManager::setTextFieldCpp)) {
                 *result = 0;
+                return;
+            }
+        }
+        {
+            typedef void (SignalManager::*_t)(QVariant );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&SignalManager::setProperrtyCpp)) {
+                *result = 1;
                 return;
             }
         }
@@ -118,21 +131,28 @@ int SignalManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
 
 // SIGNAL 0
-void SignalManager::setTextFieldcpp(QVariant _t1)
+void SignalManager::setTextFieldCpp(QVariant _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void SignalManager::setProperrtyCpp(QVariant _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE

@@ -11,7 +11,7 @@ Item {
 
     property string buttonName: "back"
     function getButtonName(name){
-           return  "backbutton/" + buttonName;
+         return  "backbutton/" + buttonName;
     }
 
     Rectangle {
@@ -37,7 +37,7 @@ Item {
             }
 
             onClicked: {
-                 qmlSignalButton(getButtonName())
+                 qmlSignalButton(0, getButtonName())
                  id_rectangle.color= "lightsteelblue"
             }
 

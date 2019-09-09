@@ -10,9 +10,12 @@
   {
       Q_OBJECT
   public slots:
-      void cppSlot(const QString &msg);
+      void onclickCppSlot(int sendTo, const QString &msg);
+
   signals:
-    void setTextFieldcpp(QVariant text);
+    void setTextFieldCpp(QVariant text);
+     void setProperrtyCpp(QVariant text);
+
   public :
          void  handleSubmitTextField(const QString &in);
   };

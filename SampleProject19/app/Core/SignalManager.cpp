@@ -1,11 +1,23 @@
 #include "SignalManager.h"
 #include <QDebug>
 
-void SignalManager::cppSlot(const QString &msg)
+void SignalManager::onclickCppSlot(int sendTo, const QString &msg)
 {
     static int count = 0;
     count++;
-  qDebug() << "Called the C++ slot with message:" << msg <<" count="<<  count;
+  qDebug() << "onclickCppSlot::Called the C++ slot with message:" << msg <<" count="<<  count;
+
+  if(1 == sendTo){
+       qDebug()<<"onclickCppSlot::sendTo Model";
+       if(msg == "pushButton/button01") {
+           emit setProperrtyCpp("pushButton/button02");
+           qDebug() << "onclickCppSlot::emit setProperrtyCpp";
+       }
+  }
+  else {
+      qDebug()<<"onclickCppSlot::sendTo Controlller";
+  }
+
 
   handleSubmitTextField("C++ to Qml");
 }
@@ -14,5 +26,5 @@ void SignalManager::cppSlot(const QString &msg)
 void SignalManager::handleSubmitTextField(const QString &in)
 {
     qDebug() << "handleSubmitTextField::" << in;
-    emit setTextFieldcpp(in.toUpper());
+    emit setTextFieldCpp(in.toUpper());
 }

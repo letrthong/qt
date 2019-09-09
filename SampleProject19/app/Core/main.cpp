@@ -9,6 +9,7 @@
 #include "BackEnd.h"
 #include "SignalManager.h"
 
+#include <string>
 
 #include <thread>
 		
@@ -36,17 +37,40 @@ int main(int argc, char *argv[])
         for (QObject *object : objectList)
         {
             qInfo() << "\t" << object;
-            qInfo() << "\t id=" << object->property("id");
+
         }
 
     }
 
      //QML to C++
       SignalManager signalManager;
-     QObject::connect(window, SIGNAL(qmlSignalButton(QString)), &signalManager,SLOT(cppSlot(QString)));
+     QObject::connect(window, SIGNAL(qmlSignalButton(int, QString)), &signalManager,SLOT(onclickCppSlot(int,QString)));
 
       //C++ to QML
-     QObject::connect(&signalManager, SIGNAL(setTextFieldcpp(QVariant)),window, SLOT(setTextField(QVariant)));
+     QObject::connect(&signalManager, SIGNAL(setTextFieldCpp(QVariant)),window, SLOT(setTextField(QVariant)));
+
+     foreach(QObject* n, qlist)
+     {
+
+         QObjectList objectList =  n->children();
+
+         for (QObject *object : objectList)
+         {
+             QString  QclassName = object->metaObject()->className();
+              std::string className = QclassName.toStdString();
+
+              qInfo() << QclassName;
+            if(className.find("PushButton") != std::string::npos)
+            {
+
+                QObject::connect(&signalManager, SIGNAL(setProperrtyCpp(QVariant)),object, SLOT(setVisible(QVariant)));
+            }
+         }
+
+     }
+
+
+
 
     return app.exec();
 } 
