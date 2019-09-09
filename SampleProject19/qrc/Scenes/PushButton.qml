@@ -23,27 +23,33 @@ Item {
             y: 5
             width: 140
             height: 60
-            Image {
-                id: id_image
-                x: 0
-                y: 0
-                width: 140
-                height: 60
-                source: "../../qrc/images/backButton.png"
+
+            Text {
+                id: id_text
+                text: "ON"
+                font.family: "Helvetica"
+                font.pointSize: 18
+                color: "red"
             }
 
+
+
             onClicked: {
-                 id_root.qmlSignal("Click on BackButton.qml")
+                 id_root.qmlSignal("Click on PushButton.qml")
                  id_rectangle.color= "lightsteelblue"
+                if(id_text.text == "ON"){
+                        id_text.text=   "OFF"
+                }
+                else{
+                    id_text.text =  "ON"
+                }
             }
 
             onPressedChanged: {
                 if (pressed){
                     id_rectangle.color= "red"
-                    id_image.source =  "../../qrc/images/backButton_pressed.png"
                 }else{
                     id_rectangle.color= "lightsteelblue"
-                    id_image.source =  "../../qrc/images/backButton.png"
                 }
             }
          }

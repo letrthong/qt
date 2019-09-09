@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
         for (QObject *object : objectList)
         {
             qInfo() << "\t" << object;
+            qInfo() << "\t id=" << object->property("id");
         }
 
     }

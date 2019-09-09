@@ -50,6 +50,12 @@ ApplicationWindow {
         y: 313
     }
 
+    PushButton {
+        id: pushButton
+        x: 59
+        y: 116
+    }
+
     Component.onCompleted: {
             var JsonString = '{"a":"A whatever, run","b":"B fore something happens"}';
             var JsonObject= JSON.parse(JsonString);

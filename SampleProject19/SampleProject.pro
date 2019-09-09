@@ -71,8 +71,11 @@ DISTFILES += \
     qrc/Scenes/BtnListElement.qml \
     qrc/Scenes/List_T_3_2.qml \
     qrc/images/backButton.png \
-    qrc/Scenes/BackButton.qml
-
+    qrc/Scenes/BackButton.qml \
+	qrc/Scenes/PushButton.qml \
+    qrc/Scenes/PushButton .qml \
+    qrc/Scenes/PushButton .qml
+ 
 
 SUBDIRS += \
     SampleProject.pro
