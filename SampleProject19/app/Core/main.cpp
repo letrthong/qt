@@ -64,6 +64,8 @@ int main(int argc, char *argv[])
             {
 
                 QObject::connect(&signalManager, SIGNAL(setProperrtyCpp(QVariant)),object, SLOT(setVisible(QVariant)));
+
+                //object->setProperty("visible", false);
             }
          }
 
