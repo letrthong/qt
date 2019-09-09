@@ -25,12 +25,27 @@ int main(int argc, char *argv[])
 
      QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
 
+     QList<QObject *>  qlist=  engine.rootObjects();
+    foreach(QObject* n, qlist)
+    {
+        qDebug() << n->objectName();
+         qInfo() << "qlist" ;
+
+        QObjectList objectList =  n->children();
+
+        for (QObject *object : objectList)
+        {
+            qInfo() << "\t" << object;
+        }
+
+    }
+
      //QML to C++
       SignalManager signalManager;
      QObject::connect(window, SIGNAL(qmlSignal(QString)), &signalManager,SLOT(cppSlot(QString)));
 
       //C++ to QML
-     QObject::connect(&signalManager, SIGNAL(setTextField(QVariant)),window, SLOT(setTextField(QVariant)));
+     QObject::connect(&signalManager, SIGNAL(setTextFieldcpp(QVariant)),window, SLOT(setTextField(QVariant)));
 
     return app.exec();
 } 

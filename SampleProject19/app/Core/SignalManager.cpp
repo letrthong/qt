@@ -14,5 +14,5 @@ void SignalManager::cppSlot(const QString &msg)
 void SignalManager::handleSubmitTextField(const QString &in)
 {
     qDebug() << "handleSubmitTextField::" << in;
-    emit setTextField(in.toUpper());
+    emit setTextFieldcpp(in.toUpper());
 }

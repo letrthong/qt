@@ -15,7 +15,7 @@
       void  handleSubmitTextField(const QString &in);
 
   signals:
-    void setTextField(QVariant text);
+    void setTextFieldcpp(QVariant text);
   };
 
   #endif // SINGAL_MANAGER_H_
