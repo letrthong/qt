@@ -24,7 +24,7 @@ void InfoStore::sendUpdated(int id){
 }
 
 
-void* InfoStore::runThread()
+void* InfoStore::run()
 {
     return NULL;
 }
