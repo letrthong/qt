@@ -1,13 +1,11 @@
 #include "SignalManager.h"
 #include <QDebug>
-SignalManager::SignalManager(ISceneBase* pSceneBase)
- {
+SignalManager::SignalManager(ISceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
- }
+}
 
 
-void SignalManager::onclickCppSlot(int sendTo, const QString &msg)
-{
+void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
     static int count = 0;
     count++;
   qDebug() << "onclickCppSlot::Called the C++ slot with message:" << msg <<" count="<<  count;
@@ -30,8 +28,7 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg)
 }
 
 
-void SignalManager::handleSubmitTextField(const QString &in)
-{
+void SignalManager::handleSubmitTextField(const QString &in){
     qDebug() << "handleSubmitTextField::" << in;
     emit setTextFieldCpp(in.toUpper());
 }

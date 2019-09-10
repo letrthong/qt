@@ -12,7 +12,8 @@ class screen01Handler : public SceneBase
   public:
      explicit screen01Handler(QQmlApplicationEngine* pEngine);
 
-     void  onClick(const std::string& from) override;
+     void onClick(const std::string& from) override;
+     void onChanged(int id) override;
   private:
 };
 #endif // SCREEN_01_HANDLER_H_

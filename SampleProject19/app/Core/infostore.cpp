@@ -1,36 +1,49 @@
 #include "infostore.h"
-#include <thread>
+#include <QDebug>
+#include  <iostream>
+using namespace std;
 
-InfoStore::InfoStore(ISceneBase* pSceneBase)
-{
+
+InfoStore::InfoStore(ISceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
-
-   //  std::thread threadObj(runThread);
+    _isRunning = false;
 }
 
-void InfoStore::setText(const std::string& text)
+InfoStore::~InfoStore()
 {
+    if(true ==_isRunning){
+        _isRunning = false;
+    }
+
+    if(_pSceneBase){
+        _pSceneBase = NULL;
+    }
+}
+void InfoStore::setText(const std::string& text){
     _text = text;
 }
 
-std::string InfoStore::getText()
-{
+std::string InfoStore::getText(){
     return  this->_text;
 }
 
-
 void InfoStore::sendUpdated(int id){
-     _pSceneBase->onUpdateListener(id);
+    if(_pSceneBase){
+         _pSceneBase->onChangedListener(id);
+    }
 }
 
-
-void* InfoStore::run()
-{
-    return NULL;
+void  InfoStore::run(){
+    qInfo() << "star thread" ;
+    int index = 0;
+    while (true == _isRunning) {
+        cout<<"\npress index=?";
+        cin>> index;
+        this->sendUpdated(index);
+    }
 }
 
-
-void InfoStore::startThread()
-{
-
+void InfoStore::startThread(){
+    _isRunning = true;
+    QThread::start();
 }

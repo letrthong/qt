@@ -5,7 +5,6 @@ Rectangle { // size controlled by height
 
 // public
     property string text: 'text'
-    signal clicked(); // onClicked: print('onClicked')
 
     property string buttonName: "pushButton"
 

@@ -41,7 +41,6 @@ ApplicationWindow {
         y: 7
 
         text: "Button"
-
         onClicked: id_screen1.qmlSignalButton(1, "screen1/button01")
     }
 

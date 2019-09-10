@@ -9,7 +9,7 @@
 
 class SignalManager : public QObject
 {
-      Q_OBJECT
+  Q_OBJECT
   public slots:
         void onclickCppSlot(int sendTo, const QString &msg);
 
