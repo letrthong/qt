@@ -73,8 +73,9 @@ DISTFILES += \
     qrc/images/backButton.png \
     qrc/Scenes/BackButton.qml \
 	qrc/Scenes/PushButton.qml \
-    qrc/Scenes/PushButton .qml \
-    qrc/Scenes/PushButton .qml
+    qrc/Scenes/PushButton_250_50 .qml \ 
+    qrc/Scenes/PushButton_250_50.qml
+ 
  
 
 SUBDIRS += \

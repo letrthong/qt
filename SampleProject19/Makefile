@@ -71,10 +71,9 @@ DIST          = qrc/Scenes/screen01.qml \
 		qrc/images/backButton.png \
 		qrc/Scenes/BackButton.qml \
 		qrc/Scenes/PushButton.qml \
-		qrc/Scenes/PushButton \
+		qrc/Scenes/PushButton_250_50 \
 		.qml \
-		qrc/Scenes/PushButton \
-		.qml \
+		qrc/Scenes/PushButton_250_50.qml \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/common/linux.conf \

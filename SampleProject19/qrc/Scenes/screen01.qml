@@ -30,15 +30,15 @@ ApplicationWindow {
     }
 
     Button {
-        x: 28
-        y: 44
+        x: 15
+        y: 7
         text: "Quit"
         onClicked: Qt.quit()
     }
 
     Button {
-        x: 180
-        y: 44
+        x: 189
+        y: 7
 
         text: "Button"
 
@@ -53,16 +53,23 @@ ApplicationWindow {
 
     PushButton {
         id: pushButton
-        x: 15
-        y: 109
+        x: 50
+        y: 181
         buttonName: "button01"
     }
 
     PushButton {
         id: pushButton1
-        x: 28
-        y: 218
+        x: 27
+        y: 260
         buttonName: "button02"
+    }
+
+    PushButton_250_50 {
+        id: pushButton_250_50
+        x: 27
+        y: 79
+        buttonName: "button01"
     }
 
     Component.onCompleted: {
