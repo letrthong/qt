@@ -2,19 +2,16 @@
 #include<QDebug>
 
 BackEnd::BackEnd(QObject *parent) :
-    QObject(parent)
-{
+    QObject(parent){
     
 }
 
-QString BackEnd::getUserName()
-{
+QString BackEnd::getUserName(){
      qInfo() << "getUserName user name="<<  m_userName ; ;
     return m_userName;
 }
 
-void BackEnd::setUserName(const QString &userName)
-{
+void BackEnd::setUserName(const QString &userName){
     if (userName == m_userName){
         return;
     }

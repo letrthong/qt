@@ -38,12 +38,19 @@ SOURCES += \
     app/Core/SignalManager.cpp \
     app/DataModel/BackEnd.cpp \
     SM/ScreenController.cpp \
+    app/Core/SceneBase.cpp \
+    app/Core/screen01Handler.cpp \
+    app/Core/infostore.cpp
 
 
 HEADERS +=  qmlbase/QmlBackButton.h \
     app/Core/SignalManager.h \
     app/DataModel/BackEnd.h \
     SM/ScreenController.h \
+    app/Core/SceneBase.h \
+    app/Core/screen01Handler.h \
+    app/Core/ISceneBase.h \
+    app/Core/infostore.h
 
 
       
@@ -71,9 +78,9 @@ DISTFILES += \
     qrc/Scenes/BtnListElement.qml \
     qrc/Scenes/List_T_3_2.qml \
     qrc/images/backButton.png \
-    qrc/Scenes/BackButton.qml \
-	qrc/Scenes/PushButton.qml \
+    qrc/Scenes/BackButton_160_80.qml \
     qrc/Scenes/PushButton_250_50 .qml \ 
+    qrc/Scenes/PushButton_160_80.qml \
     qrc/Scenes/PushButton_250_50.qml
  
  

@@ -1,5 +1,10 @@
 #include "SignalManager.h"
 #include <QDebug>
+SignalManager::SignalManager(ISceneBase* pSceneBase)
+ {
+    _pSceneBase = pSceneBase;
+ }
+
 
 void SignalManager::onclickCppSlot(int sendTo, const QString &msg)
 {
@@ -13,6 +18,8 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg)
            emit setProperrtyCpp("pushButton/button02");
            qDebug() << "onclickCppSlot::emit setProperrtyCpp";
        }
+
+       _pSceneBase->onClickListener(msg.toStdString());
   }
   else {
       qDebug()<<"onclickCppSlot::sendTo Controlller";

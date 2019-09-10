@@ -21,8 +21,7 @@ void QmlBackButton::setUserName(const QString &userName)
     m_userName = userName;
    
 
-    if( userName == "Thong")
-    {
+    if( userName == "Thong"){
         m_userName = "Hi !!!";
     }
     

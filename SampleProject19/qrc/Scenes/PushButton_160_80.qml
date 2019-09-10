@@ -13,18 +13,6 @@ Item {
            return  "pushButton/" + buttonName;
     }
 
-
-
-    function setVisible( text){
-         console.log("PushButton::setvisible " + text);
-        if("pushButton/button02" == text)
-        {
-            console.log("PushButton::visible ");
-           // pushButton1.visible = false;
-        }
-    }
-
-
     Rectangle {
         id: id_rectangle
         x: 5

@@ -45,20 +45,20 @@ ApplicationWindow {
         onClicked: id_screen1.qmlSignalButton(1, "screen1/button01")
     }
 
-    BackButton {
+    BackButton_160_80 {
         id: backButton
         x: 15
         y: 387
     }
 
-    PushButton {
+    PushButton_160_80 {
         id: pushButton
         x: 50
         y: 181
         buttonName: "button01"
     }
 
-    PushButton {
+    PushButton_160_80 {
         id: pushButton1
         x: 27
         y: 260
