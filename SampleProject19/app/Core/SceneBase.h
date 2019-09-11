@@ -32,6 +32,9 @@ class SceneBase  : public QObject, public ISceneBase
 
      void setVisibleButton(const std::string& buttonName, bool visible);
 
+public slots:
+      void onInfoStoreSlot(QVariant id);
+
   private:
       QQmlApplicationEngine* _pEngine;
       SignalManager*  _pSignalManager;

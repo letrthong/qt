@@ -4,7 +4,7 @@
 using namespace std;
 
 
-InfoStore::InfoStore(ISceneBase* pSceneBase){
+InfoStore::InfoStore(SceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
     _isRunning = false;
 }
@@ -39,11 +39,16 @@ void  InfoStore::run(){
     while (true == _isRunning) {
         cout<<"\npress index=?";
         cin>> index;
-        this->sendUpdated(index);
+        //this->sendUpdated(index);
+
+        emit sendInfoStoreSignal(index);
     }
 }
 
 void InfoStore::startThread(){
     _isRunning = true;
+    QObject::connect(this, SIGNAL(sendInfoStoreSignal(QVariant)),  _pSceneBase,SLOT(onInfoStoreSlot(QVariant)));
+
+
     QThread::start();
 }

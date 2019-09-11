@@ -15,5 +15,6 @@ class screen01Handler : public SceneBase
      void onClick(const std::string& from) override;
      void onChanged(int id) override;
   private:
+     void testApi();
 };
 #endif // SCREEN_01_HANDLER_H_

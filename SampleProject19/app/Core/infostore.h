@@ -1,15 +1,15 @@
 #ifndef INFOSTORE_H
 #define INFOSTORE_H
 
-#include  "ISceneBase.h"
+#include  "SceneBase.h"
 #include  <QThread>
 
 
-class InfoStore :public  QThread
-
+class InfoStore   :public  QThread
 {
+    Q_OBJECT
 public:
-    InfoStore(ISceneBase* pSceneBase);
+    InfoStore(SceneBase* pSceneBase);
     ~InfoStore();
 
     void setText(const std::string& text);
@@ -24,8 +24,12 @@ private:
 
 private:
         std::string _text;
-        ISceneBase* _pSceneBase;
+        SceneBase* _pSceneBase;
         bool _isRunning;
+
+
+signals:
+      void sendInfoStoreSignal(QVariant id);
 };
 
 #endif // INFOSTORE_H

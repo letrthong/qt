@@ -85,6 +85,12 @@ void  SceneBase::hideScene(const QString & screenName){
 void  SceneBase::destroyScene(const QString & screenName){
 }
 
+void SceneBase::onInfoStoreSlot(QVariant id)
+{
+     qInfo() << "onInfoStoreSlot" << id;
+     onChangedListener(1);
+}
+
 void SceneBase::setVisibleButton(const std::string& buttonName, bool visible){
     for (auto i = _vecButton.begin(); i != _vecButton.end(); ++i){
         std::string name =(*i)->property("buttonName").toString().toStdString();

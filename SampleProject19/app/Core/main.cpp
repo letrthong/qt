@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     pInfoStore->startThread();
     pScreen->createScene("./qrc/Scenes/screen01.qml");
 
-
     return app.exec();
 } 
 
