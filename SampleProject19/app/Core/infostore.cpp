@@ -9,6 +9,11 @@ InfoStore::InfoStore(SceneBase* pSceneBase){
     _isRunning = false;
 }
 
+ InfoStore::InfoStore( )
+ {
+     _pSceneBase = NULL;
+ }
+
 InfoStore::~InfoStore()
 {
     if(true ==_isRunning){
@@ -41,14 +46,20 @@ void  InfoStore::run(){
         cin>> index;
         //this->sendUpdated(index);
 
-        emit sendInfoStoreSignal(index);
+        if(_pSceneBase != NULL) {
+             emit sendInfoStoreSignal(index);
+        }
+        else {
+            emit sendControllerSignal(index);
+        }
     }
 }
 
 void InfoStore::startThread(){
+
     _isRunning = true;
-    QObject::connect(this, SIGNAL(sendInfoStoreSignal(QVariant)),  _pSceneBase,SLOT(onInfoStoreSlot(QVariant)));
-
-
+    if(_pSceneBase != NULL) {
+          QObject::connect(this, SIGNAL(sendInfoStoreSignal(QVariant)),  _pSceneBase,SLOT(onInfoStoreSlot(QVariant)));
+    }
     QThread::start();
 }

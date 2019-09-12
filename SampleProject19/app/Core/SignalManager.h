@@ -17,8 +17,11 @@ class SignalManager : public QObject
         void setTextFieldCpp(QVariant text);
         void setProperrtyCpp(QVariant text);
 
+        void  actionButton(int sendTo, const QString &msg);
+
   public :
         SignalManager(ISceneBase* pSceneBase);
+        ~SignalManager();
         void  handleSubmitTextField(const QString &in);
 
   private:

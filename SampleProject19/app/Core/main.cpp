@@ -1,20 +1,31 @@
 #include <QGuiApplication>
+
+#include <QQmlApplicationEngine>
+#include <QDebug>
+
+#include "MainController.h"
+
+
 #include "SceneBase.h"
 #include "screen01Handler.h"
-#include <QQmlApplicationEngine>
 #include "infostore.h"
+#include "singleton.h"
 
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
+    //QGuiApplication app(argc, argv);
+    QGuiApplication app(argc,argv);
 
-    SceneBase *pScreen = new screen01Handler(&engine);
 
-    InfoStore* pInfoStore = new InfoStore(pScreen);
+    InfoStore* pInfoStore = new InfoStore();
     pInfoStore->startThread();
-    pScreen->createScene("./qrc/Scenes/screen01.qml");
+
+    MainController* pController = new MainController(pInfoStore);
+
+    Singleton::getSingle()->setPointerOfController(pController);
+
+     QObject::connect(pInfoStore, SIGNAL(sendControllerSignal(QVariant)),  pController,SLOT(onControllerSlot(QVariant)));
 
     return app.exec();
 } 

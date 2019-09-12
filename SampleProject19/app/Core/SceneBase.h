@@ -1,28 +1,30 @@
-#ifndef SCENE_BASE_MANAGER_H_
-#define SCENE_BASE_MANAGER_H_
+#ifndef SCENE_BASE_H_
+#define SCENE_BASE_H_
 
 #include <QObject>
 #include <QVariant>
 #include <QString>
 #include <QMainWindow>
 #include <QQmlApplicationEngine>
-
+#include <QQuickWindow>
 #include "SignalManager.h"
 #include "ISceneBase.h"
 #include <vector>
-
+#include <QQuickView>
+#include <QQuickItem>
 
 class SceneBase  : public QObject, public ISceneBase
 {
       Q_OBJECT
   public:
-    explicit SceneBase(QQmlApplicationEngine* pEngine);
-
+    explicit SceneBase( QQuickView * pQuickView);
+    virtual ~SceneBase();
       void  createScene(const QString & screenName);
       void  viewScene(const QString & screenName);
       void  hideScene(const QString & screenName);
       void  destroyScene(const QString & screenName);
 
+    
      void onClickListener(const std::string& from)  override;
      void onChangedListener(int id)  override;
 
@@ -36,9 +38,11 @@ public slots:
       void onInfoStoreSlot(QVariant id);
 
   private:
-      QQmlApplicationEngine* _pEngine;
       SignalManager*  _pSignalManager;
 
-      std::vector<QObject*> _vecButton;
+      QQuickView * _pQuickView;
+      QObject*  _pMainScreen;
+
+      std::vector<QQuickItem*> _vecButton;
 };
-#endif // SCENE_BASE_MANAGER_H_
+#endif // SCENE_BASE_H_

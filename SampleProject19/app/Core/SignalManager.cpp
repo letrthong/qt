@@ -1,10 +1,18 @@
 #include "SignalManager.h"
 #include <QDebug>
+#include "singleton.h"
+
+
 SignalManager::SignalManager(ISceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
+
+    QObject::connect(this, SIGNAL(actionButton(int, QString)),   Singleton::getSingle()->getPointerOfController(),SLOT(eventClickCppSlot(int,QString)));
 }
 
+SignalManager::~SignalManager(){
+    QObject::disconnect(this, SIGNAL(actionButton(int, QString)),   Singleton::getSingle()->getPointerOfController(),SLOT(eventClickCppSlot(int,QString)));
 
+}
 void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
     static int count = 0;
     count++;
@@ -21,6 +29,7 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
   }
   else {
       qDebug()<<"onclickCppSlot::sendTo Controlller";
+      emit actionButton(1, "state machine");
   }
 
 

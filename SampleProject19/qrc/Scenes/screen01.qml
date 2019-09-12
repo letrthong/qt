@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls  1.2
 import io.qt.examples.backend 1.0
 
-ApplicationWindow {
+Item {
     id: id_screen1
     width: 300
     height: 480
@@ -40,8 +40,8 @@ ApplicationWindow {
         x: 189
         y: 7
 
-        text: "Button"
-        onClicked: id_screen1.qmlSignalButton(1, "screen1/button01")
+        text: "NextPage"
+        onClicked: id_screen1.qmlSignalButton(1, "screen1/netpage")
     }
 
     BackButton_160_80 {
@@ -71,15 +71,4 @@ ApplicationWindow {
         buttonName: "button01"
     }
 
-    Component.onCompleted: {
-            var JsonString = '{"a":"A whatever, run","b":"B fore something happens"}';
-            var JsonObject= JSON.parse(JsonString);
-
-            //retrieve values from JSON again
-            var aString = JsonObject.a;
-            var bString = JsonObject.b;
-
-            console.log(aString);
-            console.log(bString);
-        }
 }

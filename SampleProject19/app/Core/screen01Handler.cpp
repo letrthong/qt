@@ -2,8 +2,8 @@
 #include <QDebug>
 
 
-screen01Handler::screen01Handler(QQmlApplicationEngine* pEngine)
-    : SceneBase (pEngine){
+screen01Handler::screen01Handler(QQuickView * pQuickView )
+    :SceneBase (pQuickView){
 }
 
 void  screen01Handler::onClick(const std::string& from){
@@ -19,6 +19,7 @@ void screen01Handler::onChanged(int id){
 
 
 void screen01Handler::testApi(){
+     qInfo() << "screen01Handler.cpp::testApi" ;
     static bool flag = true;
     if(flag== true){
        setVisibleButton("button02", true) ;
