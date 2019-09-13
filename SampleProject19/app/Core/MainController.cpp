@@ -19,6 +19,7 @@ MainController::MainController(InfoStore *pInfoStor )
     pTimer->start(100);
     screenIndex = 1;
 
+    //_pQuickView->setGeometry(RectF(10,10,30,80));
 }
 
 MainController::~MainController(){

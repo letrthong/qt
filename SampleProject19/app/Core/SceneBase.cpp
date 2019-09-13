@@ -23,9 +23,9 @@ SceneBase::~SceneBase()
 {
     QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
     QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
-    _pQuickView->hide();
-    _pQuickView->destroy();
+
     delete _pSignalManager; 
+    _pSignalManager = NULL;
 }
 
 
@@ -44,8 +44,6 @@ void  SceneBase::createScene(const QString & screenName){
     QObject::connect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
     //C++ to QML
     QObject::connect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
-
-
 
 
     QQuickItem *item = _pQuickView->rootObject();
