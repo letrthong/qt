@@ -41,5 +41,7 @@ public slots:
       QObject*  _pMainScreen;
 
       std::vector<QQuickItem*> _vecButton;
+
+      QQuickItem* _pQQuickListView;
 };
 #endif // SCENE_BASE_H_

@@ -17,6 +17,7 @@ SceneBase::SceneBase(QQuickView * pQuickView ){
      qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
     _pQuickView  = pQuickView;
+    _pQQuickListView = NULL;
 }
 
 SceneBase::~SceneBase()
@@ -52,11 +53,22 @@ void  SceneBase::createScene(const QString & screenName){
          qInfo() <<"SceneBase::buttonName="<< child->property("buttonName");
          QString  QclassName = child->metaObject()->className();
           std::string className = QclassName.toStdString();
-          qInfo() <<QclassName;
+
+          qInfo() <<"SceneBase::className="<<QclassName;
           if(className.find("PushButton") != std::string::npos){
               qInfo() <<"SceneBase::PushButton" ;
                 _vecButton.push_back(child);
           }
+          else if(className.find("QQuickListView") != std::string::npos){
+              _pQQuickListView = child;
+          }
+    }
+
+    if(_pQQuickListView != NULL)
+    {
+           QVariant* pvalue = _pQQuickListView->property("delegate")  ;
+           qInfo()<<pvalue->toString();
+
     }
 }
 

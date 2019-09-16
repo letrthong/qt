@@ -19,8 +19,8 @@ Item {
 
     TextField {
         text:  backend.getUserName
-        anchors.verticalCenterOffset: 122
-        anchors.horizontalCenterOffset: -49
+        anchors.verticalCenterOffset: 199
+        anchors.horizontalCenterOffset: 9
         placeholderText: qsTr("User name")
         anchors.centerIn: parent
 
@@ -29,7 +29,13 @@ Item {
 
     BackButton_160_80 {
         id: backButton_160_801
+        x: 89
+        y: 305
+    }
+
+    ListView_250_250 {
+        id: listView_250_2501
         x: 48
-        y: 172
+        y: 89
     }
 }

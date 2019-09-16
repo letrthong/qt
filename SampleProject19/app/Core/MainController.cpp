@@ -13,6 +13,7 @@ MainController::MainController(InfoStore *pInfoStor )
 {
     _pQuickView = new QQuickView;
 
+    //https://doc.qt.io/qt-5/qtqml-cppintegration-contextproperties.html
     _pQuickView->rootContext()->setContextProperty("currentDateTime", QDateTime::currentDateTime());
 
     _pInfoStore = pInfoStor;

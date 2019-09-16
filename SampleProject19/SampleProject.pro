@@ -87,7 +87,9 @@ DISTFILES += \
     qrc/Scenes/BackButton_160_80.qml \
     qrc/Scenes/PushButton_250_50 .qml \ 
     qrc/Scenes/PushButton_160_80.qml \
-    qrc/Scenes/PushButton_250_50.qml
+    qrc/Scenes/PushButton_250_50.qml \
+    qrc/Scenes/ListView_250_250.qml \
+    qrc/Scenes/ListEleement_250_250.qml
  
  
 
