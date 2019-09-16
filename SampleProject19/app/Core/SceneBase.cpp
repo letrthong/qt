@@ -66,8 +66,17 @@ void  SceneBase::createScene(const QString & screenName){
 
     if(_pQQuickListView != NULL)
     {
-           QVariant* pvalue = _pQQuickListView->property("delegate")  ;
-           qInfo()<<pvalue->toString();
+        const QMetaObject *meta = _pQQuickListView->metaObject();
+
+           QHash<QString, QVariant> list;
+           for (int i = 0; i < meta->propertyCount(); i++)
+           {
+               QMetaProperty property = meta->property(i);
+               const char* name = property.name();
+               QVariant value = item->property(name);
+               list[name] = value;
+               qInfo() <<"name="<< name;
+           }
 
     }
 }
