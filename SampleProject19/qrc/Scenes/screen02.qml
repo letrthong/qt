@@ -10,6 +10,9 @@ Item {
 
     signal qmlSignalButton(int sendTo, string msg)
 
+    Text { x: 23; y: 35; text: currentDateTime }
+
+
     BackEnd {
         id: backend
     }
@@ -25,8 +28,8 @@ Item {
     }
 
     BackButton_160_80 {
-        id: backButton_160_80
-        x: 33
-        y: 26
+        id: backButton_160_801
+        x: 48
+        y: 172
     }
 }

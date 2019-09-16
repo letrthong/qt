@@ -15,18 +15,15 @@
 
 class SceneBase  : public QObject, public ISceneBase
 {
-      Q_OBJECT
+    Q_OBJECT
   public:
     explicit SceneBase( QQuickView * pQuickView);
     virtual ~SceneBase();
-      void  createScene(const QString & screenName);
-      void  viewScene(const QString & screenName);
-      void  hideScene(const QString & screenName);
-      void  destroyScene(const QString & screenName);
+    void  createScene(const QString & screenName);
 
-    
-     void onClickListener(const std::string& from)  override;
-     void onChangedListener(int id)  override;
+
+    void onClickListener(const std::string& from)  override;
+    void onChangedListener(int id)  override;
 
   protected:
      virtual void onClick(const std::string& from);

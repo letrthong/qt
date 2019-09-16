@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-
+#include <QCoreApplication>
 #include "todolist.h"
 #include "todomodel.h"
 

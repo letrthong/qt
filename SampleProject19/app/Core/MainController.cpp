@@ -6,32 +6,36 @@ using namespace std;
 #include "SceneBase.h"
 #include "screen01Handler.h"
 #include "infostore.h"
-
+#include <QDateTime>
+#include <QQmlContext>
 
 MainController::MainController(InfoStore *pInfoStor )
 {
     _pQuickView = new QQuickView;
-    _pScreen = NULL;
-    _pInfoStore = pInfoStor;
-    isRuning = true;
-    pTimer =  new QTimer(this);
-    connect(pTimer, SIGNAL(timeout()), this, SLOT(update()));
-    pTimer->start(100);
-    screenIndex = 1;
 
-    //_pQuickView->setGeometry(RectF(10,10,30,80));
+    _pQuickView->rootContext()->setContextProperty("currentDateTime", QDateTime::currentDateTime());
+
+    _pInfoStore = pInfoStor;
+
+    _pCurrentScreen = NULL;
+
+    _pTimer =  new QTimer(this);
+    connect(_pTimer, SIGNAL(timeout()), this, SLOT(onTimeoutSlot()));
+    _pTimer->start(100);
+    screenIndex = 1;
 }
 
 MainController::~MainController(){
+    _pInfoStore = NULL;
 
-
-
-    isRuning = false;
+    _pTimer->destroyed();
+    delete _pTimer;
+    _pTimer = NULL;
 }
 
-void MainController::update()
+void MainController::onTimeoutSlot()
 {
-    pTimer->start(20);
+    _pTimer->start(100);
     if( screenIndex> 0)
     {
         screenIndex = 0;
@@ -54,20 +58,20 @@ void MainController::onControllerSlot(QVariant id){
 
 void MainController::loadScreen( )
 {
-    if(_pScreen != NULL){
-        delete  _pScreen;
-        _pScreen = NULL;
+    if(_pCurrentScreen != NULL){
+        delete  _pCurrentScreen;
+        _pCurrentScreen = NULL;
     }
 
    static bool flag = true;
     if(flag == true){
-        _pScreen = new screen01Handler( _pQuickView);
-        _pScreen->createScene("./qrc/Scenes/screen01.qml");
+        _pCurrentScreen = new screen01Handler( _pQuickView);
+        _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
         flag = false;
     }
     else{
-        _pScreen = new screen01Handler( _pQuickView);
-        _pScreen->createScene("./qrc/Scenes/screen02.qml");
+        _pCurrentScreen = new screen01Handler( _pQuickView);
+        _pCurrentScreen->createScene("./qrc/Scenes/screen02.qml");
          flag = true;
     }
 }

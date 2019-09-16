@@ -21,16 +21,16 @@ public slots:
       void onControllerSlot(QVariant id);
      void eventClickCppSlot(int sendTo, const QString &msg) ;
 
-      void update();
+      void onTimeoutSlot();
 private:
 
      void loadScreen( );
 private:
-      SceneBase *_pScreen ;
+      SceneBase *_pCurrentScreen ;
       InfoStore *_pInfoStore;
       QQuickView * _pQuickView;
-      bool isRuning;
-      QTimer *pTimer;
+
+      QTimer *_pTimer;
 
       int  screenIndex;
 

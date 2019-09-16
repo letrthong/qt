@@ -13,7 +13,7 @@
 #include <QtGui>
 #include <QtQuick>
 
-SceneBase::SceneBase( QQuickView * pQuickView  ){
+SceneBase::SceneBase(QQuickView * pQuickView ){
      qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
     _pQuickView  = pQuickView;
@@ -21,11 +21,14 @@ SceneBase::SceneBase( QQuickView * pQuickView  ){
 
 SceneBase::~SceneBase()
 {
-    QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
-    QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
+    if(_pSignalManager)
+    {
+        QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
+        QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
 
-    delete _pSignalManager; 
-    _pSignalManager = NULL;
+        delete _pSignalManager;
+        _pSignalManager = NULL;
+    }
 }
 
 
@@ -33,12 +36,10 @@ void  SceneBase::createScene(const QString & screenName){
        qmlRegisterType<BackEnd>("io.qt.examples.backend", 1, 0,  "BackEnd");
 
     _pQuickView->setSource(QUrl(screenName));
-      _pQuickView->show();
+    _pQuickView->show();
 
     //QML to C++
-    // SignalManager signalManager;
     _pMainScreen = _pQuickView->rootObject();
-
 
 
     QObject::connect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
@@ -75,15 +76,7 @@ void  SceneBase::onClick(const std::string& from){
 void SceneBase::onChanged(int id){
 }
 
-void  SceneBase::viewScene(const QString & screenName){
-}
 
-void  SceneBase::hideScene(const QString & screenName){
-}
-
-void  SceneBase::destroyScene(const QString & screenName){
-
-}
 
 void SceneBase::onInfoStoreSlot(QVariant id)
 {
