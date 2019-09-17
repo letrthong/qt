@@ -54,19 +54,25 @@ void  SceneBase::createScene(const QString & screenName){
          QString  QclassName = child->metaObject()->className();
           std::string className = QclassName.toStdString();
 
+
+
           qInfo() <<"SceneBase::className="<<QclassName;
           if(className.find("PushButton") != std::string::npos){
               qInfo() <<"SceneBase::PushButton" ;
                 _vecButton.push_back(child);
           }
-          else if(className.find("QQuickListView") != std::string::npos){
+          else if(className.find("ListView") != std::string::npos){
               _pQQuickListView = child;
           }
     }
 
     if(_pQQuickListView != NULL)
     {
-        const QMetaObject *meta = _pQQuickListView->metaObject();
+		
+		 qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
+		 
+		 
+        /*const QMetaObject *meta = _pQQuickListView->metaObject();
 
            QHash<QString, QVariant> list;
            for (int i = 0; i < meta->propertyCount(); i++)
@@ -76,7 +82,7 @@ void  SceneBase::createScene(const QString & screenName){
                QVariant value = item->property(name);
                list[name] = value;
                qInfo() <<"name="<< name;
-           }
+           }*/
 
     }
 }

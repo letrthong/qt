@@ -12,7 +12,9 @@ ListView {
     contentWidth: 1
     flickableDirection: Flickable.HorizontalFlick
     highlightRangeMode: ListView.StrictlyEnforceRange
-    delegate: Item {
+	
+    property string listModelType: "string int"
+	delegate: Item {
         x: 5
         width: 80
         height: 40
@@ -32,6 +34,7 @@ ListView {
             spacing: 10
         }
     }
+	
     model: ListModel {
         ListElement {
             name: "Grey"
