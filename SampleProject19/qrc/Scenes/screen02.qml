@@ -34,6 +34,7 @@ Item {
     }
 
     ListView_250_250 {
+        listId: 100
         id: listView_250_2501
         x: 48
         y: 89

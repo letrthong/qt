@@ -16,8 +16,11 @@
 SceneBase::SceneBase(QQuickView * pQuickView ){
      qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
+
     _pQuickView  = pQuickView;
+
     _pQQuickListView = NULL;
+    _pQmlContext = NULL;
 }
 
 SceneBase::~SceneBase()
@@ -68,22 +71,16 @@ void  SceneBase::createScene(const QString & screenName){
 
     if(_pQQuickListView != NULL)
     {
-		
+        _pQmlContext =_pQuickView->rootContext();
 		 qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
-		 
-		 
-        /*const QMetaObject *meta = _pQQuickListView->metaObject();
+          qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listId");
 
-           QHash<QString, QVariant> list;
-           for (int i = 0; i < meta->propertyCount(); i++)
-           {
-               QMetaProperty property = meta->property(i);
-               const char* name = property.name();
-               QVariant value = item->property(name);
-               list[name] = value;
-               qInfo() <<"name="<< name;
-           }*/
-
+          QStringList dataList;
+         dataList.append("Item 1");
+         dataList.append("Item 2");
+         dataList.append("Item 3");
+         dataList.append("Item 4");
+         _pQmlContext->setContextProperty("myModel", QVariant::fromValue(dataList));
     }
 }
 

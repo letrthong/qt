@@ -38,6 +38,7 @@ public slots:
       SignalManager*  _pSignalManager;
 
       QQuickView * _pQuickView;
+      QQmlContext* _pQmlContext;
       QObject*  _pMainScreen;
 
       std::vector<QQuickItem*> _vecButton;

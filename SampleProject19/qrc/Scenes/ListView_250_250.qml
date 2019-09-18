@@ -14,20 +14,16 @@ ListView {
     highlightRangeMode: ListView.StrictlyEnforceRange
 	
     property string listModelType: "string int"
+    property int   listId: 0
+
 	delegate: Item {
         x: 5
         width: 80
         height: 40
         Row {
-            id: row1
-            Rectangle {
-                width: 40
-                height: 40
-                color: model.colorCode
-            }
-
+            id: id_row
             Text {
-                text: model.name
+                text: model.modelData
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -35,25 +31,14 @@ ListView {
         }
     }
 	
-    model: ListModel {
-        ListElement {
-            name: "Grey"
-            colorCode: "grey"
-        }
+    model: myModel
 
-        ListElement {
-            name: "Red"
-            colorCode: "red"
-        }
 
-        ListElement {
-            name: "Blue"
-            colorCode: "blue"
-        }
+    function resetElement(id_list){
+        for(var i = 0; i < id_list.contentItem.children.length; i++) {
+            var listItem = id_list.contentItem.children[i];
+            listItem.listId = 0
 
-        ListElement {
-            name: "Green"
-            colorCode: "green"
         }
     }
 }
