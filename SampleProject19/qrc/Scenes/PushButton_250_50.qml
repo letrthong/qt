@@ -1,10 +1,10 @@
 import QtQuick 2.0
 
 Rectangle { // size controlled by height
-    id: root
+    id: id_PushButton_250_50
 
 // public
-    property string text: 'text'
+    property string textId: 'text'
 
     property string buttonName: "pushButton"
 
@@ -14,13 +14,13 @@ Rectangle { // size controlled by height
 
 // private
     width: 250;  height: 50 // default size
-    border.width: 0.05 * root.height
-    radius:       0.5  * root.height
+    border.width: 0.05 * id_PushButton_250_50.height
+    radius:       0.5  * id_PushButton_250_50.height
     opacity:      enabled? 1: 0.3 // disabled state
 
     Text {
-        text: root.text
-        font.pixelSize: 0.5 * root.height
+        text: id_PushButton_250_50.textId
+        font.pixelSize: 0.5 * id_PushButton_250_50.height
         anchors.centerIn: parent
     }
 
@@ -29,6 +29,8 @@ Rectangle { // size controlled by height
         onPressed:  parent.opacity = 0.5 // down state
         onReleased: parent.opacity = 1
         onCanceled: parent.opacity = 1
-        onClicked:    qmlSignalButton(0, getButtonName()) // emit
+        onClicked: {
+               qmlSignalButton(0, getButtonName()) // emit
+        }
     }
 }

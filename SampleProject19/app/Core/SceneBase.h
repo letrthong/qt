@@ -19,6 +19,7 @@ class SceneBase  : public QObject, public ISceneBase
   public:
     explicit SceneBase( QQuickView * pQuickView);
     virtual ~SceneBase();
+
     void  createScene(const QString & screenName);
 
 
@@ -28,6 +29,7 @@ class SceneBase  : public QObject, public ISceneBase
   protected:
      virtual void onClick(const std::string& from);
      virtual void onChanged(int id);
+    virtual  void  getListDataProvider();
 
      void setVisibleButton(const std::string& buttonName, bool visible);
 

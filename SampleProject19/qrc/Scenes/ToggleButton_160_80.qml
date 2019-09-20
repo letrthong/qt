@@ -2,13 +2,13 @@ import QtQuick 2.0
 import QtQuick.Controls  1.2
 
 Item {
-    id: id_push_button
+    id: id_toggle_button
     x: 0
     y: 0
     width: 160
     height: 80
 
-    property string buttonName: "unknow"
+    property string buttonName: ""
     function getButtonName(){
            return  "pushButton/" + buttonName;
     }

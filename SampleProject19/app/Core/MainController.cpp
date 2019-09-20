@@ -5,6 +5,7 @@ using namespace std;
 
 #include "SceneBase.h"
 #include "screen01Handler.h"
+#include "screen02Handler.h"
 #include "infostore.h"
 #include <QDateTime>
 #include <QQmlContext>
@@ -18,7 +19,7 @@ MainController::MainController(InfoStore *pInfoStor )
 
     _pInfoStore = pInfoStor;
 
-    _pCurrentScreen = NULL;
+    _pCurrentScreen = nullptr;
 
     _pTimer =  new QTimer(this);
     connect(_pTimer, SIGNAL(timeout()), this, SLOT(onTimeoutSlot()));
@@ -27,11 +28,11 @@ MainController::MainController(InfoStore *pInfoStor )
 }
 
 MainController::~MainController(){
-    _pInfoStore = NULL;
+    _pInfoStore = nullptr;
 
     _pTimer->destroyed();
     delete _pTimer;
-    _pTimer = NULL;
+    _pTimer = nullptr;
 }
 
 void MainController::onTimeoutSlot()
@@ -59,9 +60,9 @@ void MainController::onControllerSlot(QVariant id){
 
 void MainController::loadScreen( )
 {
-    if(_pCurrentScreen != NULL){
+    if(_pCurrentScreen != nullptr){
         delete  _pCurrentScreen;
-        _pCurrentScreen = NULL;
+        _pCurrentScreen = nullptr;
     }
 
    static bool flag = true;
@@ -71,7 +72,7 @@ void MainController::loadScreen( )
         flag = false;
     }
     else{
-        _pCurrentScreen = new screen01Handler( _pQuickView);
+        _pCurrentScreen = new screen02Handler( _pQuickView);
         _pCurrentScreen->createScene("./qrc/Scenes/screen02.qml");
          flag = true;
     }

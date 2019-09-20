@@ -32,7 +32,6 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
       emit actionButton(1, "state machine");
   }
 
-
   handleSubmitTextField("C++ to Qml");
 }
 

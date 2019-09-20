@@ -19,8 +19,8 @@ SceneBase::SceneBase(QQuickView * pQuickView ){
 
     _pQuickView  = pQuickView;
 
-    _pQQuickListView = NULL;
-    _pQmlContext = NULL;
+    _pQQuickListView = nullptr;
+    _pQmlContext = nullptr;
 }
 
 SceneBase::~SceneBase()
@@ -30,8 +30,15 @@ SceneBase::~SceneBase()
         QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
         QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
 
-        delete _pSignalManager;
-        _pSignalManager = NULL;
+        if(_pSignalManager != nullptr){
+            delete _pSignalManager;
+            _pSignalManager = nullptr;
+        }
+
+        if(_pQmlContext != nullptr)
+        {
+            _pQmlContext = nullptr;
+        }
     }
 }
 
@@ -40,7 +47,7 @@ void  SceneBase::createScene(const QString & screenName){
        qmlRegisterType<BackEnd>("io.qt.examples.backend", 1, 0,  "BackEnd");
 
     _pQuickView->setSource(QUrl(screenName));
-    _pQuickView->show();
+     qInfo() <<"SceneBase::createScene setSource="<< screenName;
 
     //QML to C++
     _pMainScreen = _pQuickView->rootObject();
@@ -69,7 +76,7 @@ void  SceneBase::createScene(const QString & screenName){
           }
     }
 
-    if(_pQQuickListView != NULL)
+    if(_pQQuickListView != nullptr)
     {
         _pQmlContext =_pQuickView->rootContext();
 		 qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
@@ -82,6 +89,8 @@ void  SceneBase::createScene(const QString & screenName){
          dataList.append("Item 4");
          _pQmlContext->setContextProperty("myModel", QVariant::fromValue(dataList));
     }
+
+     _pQuickView->show();
 }
 
 void SceneBase::onClickListener(const std::string& from){
@@ -100,6 +109,8 @@ void  SceneBase::onClick(const std::string& from){
 void SceneBase::onChanged(int id){
 }
 
+void  SceneBase::getListDataProvider(){
+}
 
 
 void SceneBase::onInfoStoreSlot(QVariant id)

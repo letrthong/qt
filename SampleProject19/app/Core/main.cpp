@@ -14,10 +14,7 @@
 
 int main(int argc, char *argv[])
 {
-    //QGuiApplication app(argc, argv);
     QGuiApplication app(argc,argv);
-
-
     InfoStore* pInfoStore = new InfoStore();
     pInfoStore->startThread();
 
@@ -25,7 +22,7 @@ int main(int argc, char *argv[])
 
     Singleton::getSingle()->setPointerOfController(pController);
 
-     QObject::connect(pInfoStore, SIGNAL(sendControllerSignal(QVariant)),  pController,SLOT(onControllerSlot(QVariant)));
+    QObject::connect(pInfoStore, SIGNAL(sendControllerSignal(QVariant)),  pController,SLOT(onControllerSlot(QVariant)));
 
     return app.exec();
 } 

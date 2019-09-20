@@ -50,14 +50,14 @@ Item {
         y: 387
     }
 
-    PushButton_160_80 {
+    ToggleButton_160_80 {
         id: pushButton
         x: 50
         y: 181
         buttonName: "button01"
     }
 
-    PushButton_160_80 {
+    ToggleButton_160_80 {
         id: pushButton1
         x: 27
         y: 260

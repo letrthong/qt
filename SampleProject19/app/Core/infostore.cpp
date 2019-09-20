@@ -11,7 +11,7 @@ InfoStore::InfoStore(SceneBase* pSceneBase){
 
  InfoStore::InfoStore( )
  {
-     _pSceneBase = NULL;
+     _pSceneBase = nullptr;
  }
 
 InfoStore::~InfoStore()
@@ -21,7 +21,7 @@ InfoStore::~InfoStore()
     }
 
     if(_pSceneBase){
-        _pSceneBase = NULL;
+        _pSceneBase = nullptr;
     }
 }
 void InfoStore::setText(const std::string& text){
@@ -46,7 +46,7 @@ void  InfoStore::run(){
         cin>> index;
         //this->sendUpdated(index);
 
-        if(_pSceneBase != NULL) {
+        if(_pSceneBase != nullptr) {
              emit sendInfoStoreSignal(index);
         }
         else {
@@ -58,7 +58,7 @@ void  InfoStore::run(){
 void InfoStore::startThread(){
 
     _isRunning = true;
-    if(_pSceneBase != NULL) {
+    if(_pSceneBase != nullptr) {
           QObject::connect(this, SIGNAL(sendInfoStoreSignal(QVariant)),  _pSceneBase,SLOT(onInfoStoreSlot(QVariant)));
     }
     QThread::start();

@@ -35,6 +35,7 @@ CONFIG += c++11
 SOURCES += \
     app/Core/MainController.cpp \
     app/Core/main.cpp \
+    app/Core/screen02Handler.cpp \
     app/Core/singleton.cpp \
     qmlbase/QmlBackButton.cpp \
     app/Core/SignalManager.cpp \
@@ -48,6 +49,7 @@ SOURCES += \
 HEADERS +=  qmlbase/QmlBackButton.h \
     app/Core/MainController.h \
     app/Core/SignalManager.h \
+    app/Core/screen02Handler.h \
     app/Core/singleton.h \
     app/DataModel/BackEnd.h \
     SM/ScreenController.h \
@@ -76,7 +78,9 @@ STATECHARTS += \
     SM/myState.scxml
 
 DISTFILES += \
+    qrc/Scenes/Enumeration.qml \
     qrc/Scenes/ScrollBar.qml \
+    qrc/Scenes/ToggleButton_160_80.qml \
     qrc/Scenes/screen01.qml \
     build.sh \
     ReadMe.txt \
@@ -87,7 +91,6 @@ DISTFILES += \
     qrc/images/backButton.png \
     qrc/Scenes/BackButton_160_80.qml \
     qrc/Scenes/PushButton_250_50 .qml \ 
-    qrc/Scenes/PushButton_160_80.qml \
     qrc/Scenes/PushButton_250_50.qml \
     qrc/Scenes/ListView_250_250.qml \
     qrc/Scenes/ListEleement_250_250.qml
