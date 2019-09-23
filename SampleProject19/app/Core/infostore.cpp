@@ -32,6 +32,14 @@ std::string InfoStore::getText(){
     return  this->_text;
 }
 
+void InfoStore::setBool(bool flag){
+    _isEnable = flag;
+}
+
+bool InfoStore::getBool(){
+    return _isEnable;
+}
+
 void InfoStore::sendUpdated(int id){
     if(_pSceneBase){
          _pSceneBase->onChangedListener(id);

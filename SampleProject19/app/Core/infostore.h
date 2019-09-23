@@ -16,6 +16,10 @@ public:
     void setText(const std::string& text);
     std::string getText();
 
+
+    void setBool(bool flag);
+    bool getBool();
+
     void sendUpdated(int id);
    void startThread();
 private:
@@ -23,6 +27,7 @@ private:
 
 private:
         std::string _text;
+        bool _isEnable;
         SceneBase* _pSceneBase;
         bool _isRunning;
 

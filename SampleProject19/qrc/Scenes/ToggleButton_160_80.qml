@@ -9,8 +9,19 @@ Item {
     height: 80
 
     property string toggleButtonName: "ToggleButton"
+    property bool  isChecked: true
+
     function getButtonName(){
            return  "ToggleButton/" + toggleButtonName;
+    }
+
+    function getChecked(){
+        if(isChecked == true){
+            return  "ON"
+        }
+        else{
+            return "OFF"
+        }
     }
 
     Rectangle {
@@ -29,7 +40,7 @@ Item {
 
             Text {
                 id: id_text
-                text: "ON"
+                text: getChecked()
                 font.family: "Helvetica"
                 font.pointSize: 18
                 color: "red"
@@ -38,11 +49,10 @@ Item {
             onClicked: {
                 qmlSignalButton(1, getButtonName())
                 id_rectangle.color= "lightsteelblue"
-                if(id_text.text == "ON"){
-                    id_text.text=   "OFF"
-                }
-                else{
-                id_text.text =  "ON"
+                if( isChecked == true){
+                    isChecked = false
+                } else{
+                  isChecked = true
                 }
             }
 

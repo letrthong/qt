@@ -20,8 +20,8 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
 
   if(1 == sendTo){
        qDebug()<<"onclickCppSlot::sendTo Model";
-       if(msg == "pushButton/button01") {
-           emit setProperrtyCpp("pushButton/button02");
+       if(msg == "PushButton/button01") {
+           emit setProperrtyCpp("PushButton/button02");
            qDebug() << "onclickCppSlot::emit setProperrtyCpp";
        }
 

@@ -138,3 +138,18 @@ void SceneBase::setTextViewText(const std::string& TextVievName, const std::stri
         }
     }
 }
+
+
+void SceneBase::initToggleButtonValue(const std::string& toggleButtonName, bool isOn){
+    for (auto i = _vecToggleButton.begin(); i != _vecToggleButton.end(); ++i){
+        std::string name =(*i)->property("toggleButtonName").toString().toStdString();
+        if(toggleButtonName == name ) {
+            (*i)->setProperty("isChecked", isOn);
+            break;
+        }
+    }
+}
+
+void SceneBase::disableToggleButton(const std::string& toggleButtonName, bool isEnable){
+
+}

@@ -24,6 +24,7 @@ class screen01Handler :public SceneBase
       */
      void onPropertyChange(int id) override;
   private:
+      void initScene() override;
      void testApi();
       InfoStore *_pInfoStore;
 

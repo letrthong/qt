@@ -35,6 +35,9 @@ class SceneBase :public QObject, public ISceneBase
 
         void setTextViewText(const std::string& TextVievName, const std::string& text);
 
+        void initToggleButtonValue(const std::string& toggleButtonName, bool isOn);
+        void disableToggleButton(const std::string& toggleButtonName, bool isEnable);
+
 public slots:
         void onInfoStoreSlot(QVariant id);
 
