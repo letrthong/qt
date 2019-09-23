@@ -57,6 +57,7 @@ HEADERS += \
 		app/DataModel/screen02Handler.h \
 		app/DataModel/screen01Handler.h \
 		SM/ScreenController.h \
+		qmlbase/DefComposite.h \
 		qmlbase/EditTextBase.h 
    
 

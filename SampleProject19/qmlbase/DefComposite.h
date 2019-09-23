@@ -1,0 +1,12 @@
+#ifndef DEF_COMPOSITE_H_
+#define DEF_COMPOSITE_H_
+
+enum COMPOSITE_TYPES{
+    TYPE_PUSH_BUTTON = 0,
+    TYPE_TOGGLE_BUTTON,
+    TYPE_UNKNOW
+};
+
+
+
+#endif // DEF_COMPOSITE_H_

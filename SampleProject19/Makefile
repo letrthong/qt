@@ -205,6 +205,7 @@ DIST          = qrc/Scenes/EditText_250_50.qml \
 		app/DataModel/screen02Handler.h \
 		app/DataModel/screen01Handler.h \
 		SM/ScreenController.h \
+		qmlbase/DefComposite.h \
 		qmlbase/EditTextBase.h app/Core/MainController.cpp \
 		app/Core/main.cpp \
 		app/Core/SignalManager.cpp \
@@ -461,7 +462,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents app/Core/MainController.h app/Core/SignalManager.h app/Core/ISceneBase.h app/Core/infostore.h app/Core/SceneBase.h app/Core/singleton.h app/DataModel/screen02Handler.h app/DataModel/screen01Handler.h SM/ScreenController.h qmlbase/EditTextBase.h $(DISTDIR)/
+	$(COPY_FILE) --parents app/Core/MainController.h app/Core/SignalManager.h app/Core/ISceneBase.h app/Core/infostore.h app/Core/SceneBase.h app/Core/singleton.h app/DataModel/screen02Handler.h app/DataModel/screen01Handler.h SM/ScreenController.h qmlbase/DefComposite.h qmlbase/EditTextBase.h $(DISTDIR)/
 	$(COPY_FILE) --parents app/Core/MainController.cpp app/Core/main.cpp app/Core/SignalManager.cpp app/Core/singleton.cpp app/Core/SceneBase.cpp app/Core/infostore.cpp app/DataModel/screen02Handler.cpp app/DataModel/screen01Handler.cpp qmlbase/EditTextBase.cpp SM/ScreenController.cpp $(DISTDIR)/
 
 
@@ -1545,7 +1546,8 @@ SignalManager.o: app/Core/SignalManager.cpp app/Core/SignalManager.h \
 		app/Core/infostore.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QTimer \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qtimer.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbasictimer.h
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbasictimer.h \
+		qmlbase/DefComposite.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SignalManager.o app/Core/SignalManager.cpp
 
 singleton.o: app/Core/singleton.cpp app/Core/singleton.h \
@@ -2132,7 +2134,8 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qsgtexture.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qsgtextureprovider.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qsgvertexcolormaterial.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qtquickversion.h
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qtquickversion.h \
+		qmlbase/DefComposite.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SceneBase.o app/Core/SceneBase.cpp
 
 infostore.o: app/Core/infostore.cpp app/Core/infostore.h \

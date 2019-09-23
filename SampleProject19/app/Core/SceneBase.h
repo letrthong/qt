@@ -23,10 +23,11 @@ class SceneBase :public QObject, public ISceneBase
 
         void  createScene(const QString & screenName);
 
-        void onClickListener(const std::string& from)  override;
+        void onClickListener(unsigned int type,  const std::string& from)  override;
         void onChangedListener(int id)  override;
   protected:
-        virtual void onButtonClick(const std::string& from);
+        virtual void onPushButtonClick(const std::string& from);
+        virtual void onToggleButtonClick(const std::string& from);
         virtual void onPropertyChange(int id);
         virtual void getListDataProvider();
         virtual void initScene();

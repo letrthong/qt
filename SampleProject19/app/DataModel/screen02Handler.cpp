@@ -7,7 +7,7 @@ screen02Handler::screen02Handler(QQuickView * pQuickView,InfoStore *pInfoStore )
     _pInfoStore =pInfoStore;
 }
 
-void  screen02Handler::onButtonClick(const std::string& from){
+void  screen02Handler::onToggleButtonClick(const std::string& from){
     qInfo() << "screen02Handler.cpp::onButtonClick" << from.c_str();
 
     testApi();

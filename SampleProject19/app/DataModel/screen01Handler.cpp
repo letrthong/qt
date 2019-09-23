@@ -8,13 +8,12 @@ screen01Handler::screen01Handler(QQuickView * pQuickView,InfoStore *pInfoStore )
      _pInfoStore =pInfoStore;
 }
 
-void  screen01Handler::onButtonClick(const std::string& from){
-    qInfo() << "screen01Handler.cpp::onButtonClick=" << from.c_str();
-    if(from == "ToggleButton/button01"){
+void  screen01Handler::onToggleButtonClick(const std::string& from){
+    qInfo() << "screen01Handler.cpp::onToggleButtonClick=" << from.c_str();
+    if(from.find("button01") != std::string::npos){
         bool preState =   _pInfoStore->getBool();
         _pInfoStore->setBool(preState^true);
     }
-
 
     testApi();
 }
@@ -39,5 +38,5 @@ void screen01Handler::testApi(){
 
 
 void screen01Handler::initScene(){
-   initToggleButtonValue("button01",_pInfoStore->getBool() );
+   initToggleButtonValue("button01", _pInfoStore->getBool() );
 }

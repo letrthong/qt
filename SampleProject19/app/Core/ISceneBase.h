@@ -4,7 +4,7 @@
 
 class ISceneBase{
 public:
-   virtual void onClickListener(const std::string& from) = 0;
+   virtual void onClickListener(unsigned int type, const std::string& from) = 0;
    virtual void onChangedListener(int id) = 0;
 
     virtual ~ISceneBase(){}

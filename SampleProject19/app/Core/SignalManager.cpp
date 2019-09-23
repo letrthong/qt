@@ -1,7 +1,7 @@
 #include "SignalManager.h"
 #include <QDebug>
 #include "singleton.h"
-
+#include "DefComposite.h"
 
 SignalManager::SignalManager(ISceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
@@ -19,13 +19,20 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
   qDebug() << "onclickCppSlot::Called the C++ slot with message:" << msg <<" count="<<  count;
 
   if(1 == sendTo){
+      unsigned int type = TYPE_UNKNOW;
+      std::string  name = msg.toStdString();
        qDebug()<<"onclickCppSlot::sendTo Model";
-       if(msg == "PushButton/button01") {
+
+       if( name.find("PushButton") != std::string::npos) {
            emit setProperrtyCpp("PushButton/button02");
            qDebug() << "onclickCppSlot::emit setProperrtyCpp";
+           type = TYPE_PUSH_BUTTON;
+       }
+       else if( name.find("ToggleButton") != std::string::npos){
+            type = TYPE_TOGGLE_BUTTON;
        }
 
-       _pSceneBase->onClickListener(msg.toStdString());
+       _pSceneBase->onClickListener(type , msg.toStdString());
   }
   else {
       qDebug()<<"onclickCppSlot::sendTo Controlller";

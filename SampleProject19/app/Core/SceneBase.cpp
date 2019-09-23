@@ -13,6 +13,8 @@
 #include <QtGui>
 #include <QtQuick>
 
+#include "DefComposite.h"
+
 SceneBase::SceneBase(QQuickView * pQuickView  ){
      qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
@@ -92,9 +94,21 @@ void  SceneBase::createScene(const QString & screenName){
      initScene();
 }
 
-void SceneBase::onClickListener(const std::string& from){
+void SceneBase::onClickListener(unsigned int type, const std::string& from){
      qInfo() << "SceneBase::onClickListener" << from.c_str();
-     this->onButtonClick(from);
+     switch (type) {
+          case TYPE_TOGGLE_BUTTON:{
+             this->onToggleButtonClick(from);
+             break;
+          }
+          case TYPE_PUSH_BUTTON:{
+             this->onPushButtonClick(from);
+             break;
+           }
+          default:{
+             break;
+          }
+     }
 }
 
 void SceneBase::onChangedListener(int id) {
@@ -102,8 +116,12 @@ void SceneBase::onChangedListener(int id) {
     this->onPropertyChange(id);
 }
 
-void  SceneBase::onButtonClick(const std::string& from){
+void SceneBase::onPushButtonClick(const std::string& from){
 }
+
+void SceneBase::onToggleButtonClick(const std::string& from){
+}
+
 
 void SceneBase::onPropertyChange(int id){
 }

@@ -16,7 +16,7 @@ class screen01Handler :public SceneBase
      /*
       * when Clicking on button from QML
       */
-     void onButtonClick(const std::string& from) override;
+     void onToggleButtonClick(const std::string& from) override;
 
 
      /*
