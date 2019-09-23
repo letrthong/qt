@@ -1,6 +1,6 @@
 #include "SceneBase.h"
 #include <QDebug>
-#include "BackEnd.h"
+#include "EditTextBase.h"
 #include "SignalManager.h"
 #include <QQmlEngine>
 #include <QQuickWindow>
@@ -13,10 +13,9 @@
 #include <QtGui>
 #include <QtQuick>
 
-SceneBase::SceneBase(QQuickView * pQuickView ){
+SceneBase::SceneBase(QQuickView * pQuickView  ){
      qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
-
     _pQuickView  = pQuickView;
 
     _pQQuickListView = nullptr;
@@ -25,8 +24,7 @@ SceneBase::SceneBase(QQuickView * pQuickView ){
 
 SceneBase::~SceneBase()
 {
-    if(_pSignalManager)
-    {
+    if(_pSignalManager){
         QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
         QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
 
@@ -35,8 +33,7 @@ SceneBase::~SceneBase()
             _pSignalManager = nullptr;
         }
 
-        if(_pQmlContext != nullptr)
-        {
+        if(_pQmlContext != nullptr){
             _pQmlContext = nullptr;
         }
     }
@@ -44,7 +41,7 @@ SceneBase::~SceneBase()
 
 
 void  SceneBase::createScene(const QString & screenName){
-       qmlRegisterType<BackEnd>("io.qt.examples.backend", 1, 0,  "BackEnd");
+       qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
 
     _pQuickView->setSource(QUrl(screenName));
      qInfo() <<"SceneBase::createScene setSource="<< screenName;
@@ -60,19 +57,19 @@ void  SceneBase::createScene(const QString & screenName){
 
     QQuickItem *item = _pQuickView->rootObject();
     foreach (QQuickItem *child, item->childItems()) {
-         qInfo() <<"SceneBase::buttonName="<< child->property("buttonName");
+         qInfo() <<"SceneBase::childItems="<< child->property("pushButtonName");
          QString  QclassName = child->metaObject()->className();
-          std::string className = QclassName.toStdString();
-
-
+         std::string className = QclassName.toStdString();
 
           qInfo() <<"SceneBase::className="<<QclassName;
           if(className.find("PushButton") != std::string::npos){
-              qInfo() <<"SceneBase::PushButton" ;
-                _vecButton.push_back(child);
-          }
-          else if(className.find("ListView") != std::string::npos){
-              _pQQuickListView = child;
+            _vecPushButton.push_back(child);
+          }else if(className.find("ToggleButton") != std::string::npos){
+            _vecToggleButton.push_back(child);
+          }else if(className.find("ListView") != std::string::npos){
+            _pQQuickListView = child;
+          }else if(className.find("TextView") != std::string::npos){
+             _vecTextView.push_back(child);
           }
     }
 
@@ -91,45 +88,53 @@ void  SceneBase::createScene(const QString & screenName){
     }
 
      _pQuickView->show();
+
+     initScene();
 }
 
 void SceneBase::onClickListener(const std::string& from){
      qInfo() << "SceneBase::onClickListener" << from.c_str();
-     this->onClick(from);
+     this->onButtonClick(from);
 }
 
 void SceneBase::onChangedListener(int id) {
     qInfo() << "SceneBase::onChangedListener" << id;
-    this->onChanged(id);
+    this->onPropertyChange(id);
 }
 
-void  SceneBase::onClick(const std::string& from){
+void  SceneBase::onButtonClick(const std::string& from){
 }
 
-void SceneBase::onChanged(int id){
+void SceneBase::onPropertyChange(int id){
 }
 
 void  SceneBase::getListDataProvider(){
 }
 
+void SceneBase::initScene(){
+}
 
-void SceneBase::onInfoStoreSlot(QVariant id)
-{
+void SceneBase::onInfoStoreSlot(QVariant id){
      qInfo() << "SceneBase::onInfoStoreSlot" << id;
      onChangedListener(1);
 }
 
-void SceneBase::setVisibleButton(const std::string& buttonName, bool visible){
-
-    qInfo() << "SceneBase::setVisibleButton buttonName="<< buttonName.c_str();
-    for (auto i = _vecButton.begin(); i != _vecButton.end(); ++i){
-        std::string name =(*i)->property("buttonName").toString().toStdString();
-          qInfo() << "SceneBase::setVisibleButton name=" << name.c_str();
+void SceneBase::setPushButtonVisible(const std::string& buttonName, bool visible){
+    for (auto i = _vecPushButton.begin(); i != _vecPushButton.end(); ++i){
+        std::string name =(*i)->property("pushButtonName").toString().toStdString();
         if(buttonName == name ) {
             (*i)->setProperty("visible", visible);
-             qInfo() << "SceneBase::setVisibleButton done visiable="<< visible;
             break;
         }
     }
+}
 
+void SceneBase::setTextViewText(const std::string& TextVievName, const std::string& text){
+    for (auto i = _vecTextView.begin(); i != _vecTextView.end(); ++i){
+        std::string name =(*i)->property("textVievName").toString().toStdString();
+        if(TextVievName == name ) {
+            (*i)->setProperty("textViewText", text.c_str());
+            break;
+        }
+    }
 }

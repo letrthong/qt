@@ -16,6 +16,7 @@ INCLUDEPATH += .
 INCLUDEPATH += ./app/Core
 INCLUDEPATH += ./app/DataModel
 INCLUDEPATH += ./SM
+INCLUDEPATH += ./qmlbase
 
 DEPENDPATH += ./
 
@@ -33,33 +34,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    app/Core/MainController.cpp \
-    app/Core/main.cpp \
-    app/Core/screen02Handler.cpp \
-    app/Core/singleton.cpp \
-    qmlbase/QmlBackButton.cpp \
-    app/Core/SignalManager.cpp \
-    app/DataModel/BackEnd.cpp \
-    SM/ScreenController.cpp \
-    app/Core/SceneBase.cpp \
-    app/Core/screen01Handler.cpp \
-    app/Core/infostore.cpp
+		app/Core/MainController.cpp \
+		app/Core/main.cpp \
+		app/Core/SignalManager.cpp \
+		app/Core/singleton.cpp \
+		app/Core/SceneBase.cpp \
+		app/Core/infostore.cpp \
+		app/DataModel/screen02Handler.cpp \
+		app/DataModel/screen01Handler.cpp \
+		qmlbase/EditTextBase.cpp \
+		SM/ScreenController.cpp 
+   
 
 
-HEADERS +=  qmlbase/QmlBackButton.h \
-    app/Core/MainController.h \
-    app/Core/SignalManager.h \
-    app/Core/screen02Handler.h \
-    app/Core/singleton.h \
-    app/DataModel/BackEnd.h \
-    SM/ScreenController.h \
-    app/Core/SceneBase.h \
-    app/Core/screen01Handler.h \
-    app/Core/ISceneBase.h \
-    app/Core/infostore.h
-
-
-      
+HEADERS += \
+		app/Core/MainController.h \
+		app/Core/SignalManager.h \
+		app/Core/ISceneBase.h \
+		app/Core/infostore.h \
+		app/Core/SceneBase.h \
+		app/Core/singleton.h \
+		app/DataModel/screen02Handler.h \
+		app/DataModel/screen01Handler.h \
+		SM/ScreenController.h \
+		qmlbase/EditTextBase.h 
+   
 
 qml.files = *.qml  
 qml.path = ./qrc 
@@ -78,8 +77,9 @@ STATECHARTS += \
     SM/myState.scxml
 
 DISTFILES += \
-    qrc/Scenes/Enumeration.qml \
+    qrc/Scenes/EditText_250_50.qml \
     qrc/Scenes/ScrollBar.qml \
+    qrc/Scenes/TextView_250_50.qml \
     qrc/Scenes/ToggleButton_160_80.qml \
     qrc/Scenes/screen01.qml \
     build.sh \
@@ -90,7 +90,6 @@ DISTFILES += \
     qrc/Scenes/screen03.qml \
     qrc/images/backButton.png \
     qrc/Scenes/BackButton_160_80.qml \
-    qrc/Scenes/PushButton_250_50 .qml \ 
     qrc/Scenes/PushButton_250_50.qml \
     qrc/Scenes/ListView_250_250.qml \
     qrc/Scenes/ListEleement_250_250.qml

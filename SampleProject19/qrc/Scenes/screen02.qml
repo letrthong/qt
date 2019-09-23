@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls  1.2
-import io.qt.examples.backend 1.0
 
 Item {
     id: id_screen1
@@ -12,25 +11,17 @@ Item {
 
     Text { x: 23; y: 35; text: currentDateTime }
 
+    EditText_250_50{
+        x: 15
+        y: 346
 
-    BackEnd {
-        id: backend
     }
 
-    TextField {
-        text:  backend.getUserName
-        anchors.verticalCenterOffset: 199
-        anchors.horizontalCenterOffset: 9
-        placeholderText: qsTr("User name")
-        anchors.centerIn: parent
-
-        onTextChanged: backend.getUserName = text
-    }
 
     BackButton_160_80 {
         id: backButton_160_801
-        x: 89
-        y: 305
+        x: 70
+        y: 229
     }
 
     ListView_250_250 {
@@ -38,5 +29,11 @@ Item {
         id: listView_250_2501
         x: 48
         y: 89
+    }
+
+    TextView_250_50 {
+        id: textView_250_50
+        x: 15
+        y: 409
     }
 }

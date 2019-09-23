@@ -7,7 +7,7 @@
 
 #include "ISceneBase.h"
 
-class SignalManager : public QObject
+class SignalManager :public QObject
 {
   Q_OBJECT
   public slots:

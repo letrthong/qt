@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls  1.2
-import io.qt.examples.backend 1.0
 
 Item {
     id: id_screen1
@@ -15,18 +14,11 @@ Item {
         console.log("screen1.qml::setTextField: " + text)
     }
 
-    BackEnd {
-        id: backend
-    }
 
-    TextField {
-        text:  backend.getUserName
-        anchors.verticalCenterOffset: 122
-        anchors.horizontalCenterOffset: -49
-        placeholderText: qsTr("User name")
-        anchors.centerIn: parent
+    EditText_250_50{
+        x: 15
+        y: 346
 
-        onTextChanged: backend.getUserName = text
     }
 
     Button {
@@ -54,21 +46,21 @@ Item {
         id: pushButton
         x: 50
         y: 181
-        buttonName: "button01"
+        toggleButtonName: "button01"
     }
 
     ToggleButton_160_80 {
         id: pushButton1
         x: 27
         y: 260
-        buttonName: "button02"
+        toggleButtonName: "button02"
     }
 
     PushButton_250_50 {
         id: pushButton_250_50
         x: 27
         y: 79
-        buttonName: "button01"
+       pushButtonName: "button01"
     }
 
 }

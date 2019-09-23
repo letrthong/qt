@@ -4,12 +4,12 @@ Rectangle { // size controlled by height
     id: id_PushButton_250_50
 
 // public
-    property string textId: 'text'
+    property string textId: 'PushButton'
 
-    property string buttonName: "pushButton"
+    property string pushButtonName: "PushButton"
 
     function getButtonName(name){
-         return  "pushButton/" + buttonName;
+         return  "PushButton/" + pushButtonName;
     }
 
 // private

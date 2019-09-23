@@ -1,5 +1,5 @@
-#ifndef INTERFACE_SCENEBASE_H
-#define INTERFACE_SCENEBASE_H
+#ifndef INTERFACE_SCENE_BASE_H
+#define INTERFACE_SCENE_BASE_H
 #include <string>
 
 class ISceneBase{
@@ -10,4 +10,4 @@ public:
     virtual ~ISceneBase(){}
 };
 
-#endif // INTERFACE_SCENEBASE_H
+#endif // INTERFACE_SCENE_BASE_H

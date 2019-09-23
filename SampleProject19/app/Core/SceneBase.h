@@ -7,44 +7,49 @@
 #include <QMainWindow>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
+#include <QQuickView>
+
+#include <vector>
+
 #include "SignalManager.h"
 #include "ISceneBase.h"
-#include <vector>
-#include <QQuickView>
-#include <QQuickItem>
 
-class SceneBase  : public QObject, public ISceneBase
+class SceneBase :public QObject, public ISceneBase
 {
     Q_OBJECT
   public:
-    explicit SceneBase( QQuickView * pQuickView);
-    virtual ~SceneBase();
+        explicit SceneBase( QQuickView * pQuickView);
+        virtual ~SceneBase();
 
-    void  createScene(const QString & screenName);
+        void  createScene(const QString & screenName);
 
-
-    void onClickListener(const std::string& from)  override;
-    void onChangedListener(int id)  override;
-
+        void onClickListener(const std::string& from)  override;
+        void onChangedListener(int id)  override;
   protected:
-     virtual void onClick(const std::string& from);
-     virtual void onChanged(int id);
-    virtual  void  getListDataProvider();
+        virtual void onButtonClick(const std::string& from);
+        virtual void onPropertyChange(int id);
+        virtual void getListDataProvider();
+        virtual void initScene();
 
-     void setVisibleButton(const std::string& buttonName, bool visible);
+        void setPushButtonVisible(const std::string& pushButtonName, bool visible);
+
+        void setTextViewText(const std::string& TextVievName, const std::string& text);
 
 public slots:
-      void onInfoStoreSlot(QVariant id);
+        void onInfoStoreSlot(QVariant id);
 
   private:
-      SignalManager*  _pSignalManager;
+        SignalManager*  _pSignalManager;
 
-      QQuickView * _pQuickView;
-      QQmlContext* _pQmlContext;
-      QObject*  _pMainScreen;
+        QQuickView * _pQuickView;
+        QQmlContext* _pQmlContext;
+        QObject*  _pMainScreen;
 
-      std::vector<QQuickItem*> _vecButton;
+        std::vector<QQuickItem*> _vecPushButton;
+        std::vector<QQuickItem*> _vecToggleButton;
 
-      QQuickItem* _pQQuickListView;
+        std::vector<QQuickItem*> _vecTextView;
+        std::vector<QQuickItem*> _vecEditText;
+        QQuickItem* _pQQuickListView;
 };
 #endif // SCENE_BASE_H_

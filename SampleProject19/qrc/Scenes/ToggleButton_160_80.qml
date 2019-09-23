@@ -8,9 +8,9 @@ Item {
     width: 160
     height: 80
 
-    property string buttonName: ""
+    property string toggleButtonName: "ToggleButton"
     function getButtonName(){
-           return  "pushButton/" + buttonName;
+           return  "ToggleButton/" + toggleButtonName;
     }
 
     Rectangle {

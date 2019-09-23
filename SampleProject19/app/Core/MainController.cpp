@@ -67,12 +67,12 @@ void MainController::loadScreen( )
 
    static bool flag = true;
     if(flag == true){
-        _pCurrentScreen = new screen01Handler( _pQuickView);
+        _pCurrentScreen = new screen01Handler( _pQuickView, _pInfoStore);
         _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
         flag = false;
     }
     else{
-        _pCurrentScreen = new screen02Handler( _pQuickView);
+        _pCurrentScreen = new screen02Handler( _pQuickView, _pInfoStore);
         _pCurrentScreen->createScene("./qrc/Scenes/screen02.qml");
          flag = true;
     }

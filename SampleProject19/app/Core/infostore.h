@@ -10,7 +10,7 @@ class InfoStore  :public  QThread
    Q_OBJECT
 public:
     InfoStore(SceneBase* pSceneBase);
-      InfoStore( );
+    InfoStore( );
     ~InfoStore();
 
     void setText(const std::string& text);
