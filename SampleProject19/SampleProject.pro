@@ -34,12 +34,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+		app/Core/Infostore.cpp \
 		app/Core/MainController.cpp \
 		app/Core/main.cpp \
 		app/Core/SignalManager.cpp \
 		app/Core/singleton.cpp \
 		app/Core/SceneBase.cpp \
-		app/Core/infostore.cpp \
 		app/DataModel/screen02Handler.cpp \
 		app/DataModel/screen01Handler.cpp \
 		qmlbase/EditTextBase.cpp \
@@ -48,10 +48,10 @@ SOURCES += \
 
 
 HEADERS += \
+		app/Core/Infostore.h \
 		app/Core/MainController.h \
 		app/Core/SignalManager.h \
 		app/Core/ISceneBase.h \
-		app/Core/infostore.h \
 		app/Core/SceneBase.h \
 		app/Core/singleton.h \
 		app/DataModel/screen02Handler.h \

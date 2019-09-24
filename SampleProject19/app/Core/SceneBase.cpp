@@ -95,6 +95,7 @@ void  SceneBase::createScene(const QString & screenName){
 }
 
 void SceneBase::onClickListener(unsigned int type, const std::string& from){
+
      qInfo() << "SceneBase::onClickListener" << from.c_str();
      switch (type) {
           case TYPE_TOGGLE_BUTTON:{
@@ -109,6 +110,7 @@ void SceneBase::onClickListener(unsigned int type, const std::string& from){
              break;
           }
      }
+
 }
 
 void SceneBase::onChangedListener(int id) {
@@ -161,6 +163,9 @@ void SceneBase::setTextViewText(const std::string& TextVievName, const std::stri
 void SceneBase::initToggleButtonValue(const std::string& toggleButtonName, bool isOn){
     for (auto i = _vecToggleButton.begin(); i != _vecToggleButton.end(); ++i){
         std::string name =(*i)->property("toggleButtonName").toString().toStdString();
+
+         qInfo() << "SceneBase::initToggleButtonValue name=" << name.c_str() <<" "<<toggleButtonName.c_str();
+
         if(toggleButtonName == name ) {
             (*i)->setProperty("isChecked", isOn);
             break;

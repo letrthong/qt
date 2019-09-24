@@ -24,7 +24,7 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
        qDebug()<<"onclickCppSlot::sendTo Model";
 
        if( name.find("PushButton") != std::string::npos) {
-           emit setProperrtyCpp("PushButton/button02");
+           emit setProperrtyCpp( msg);
            qDebug() << "onclickCppSlot::emit setProperrtyCpp";
            type = TYPE_PUSH_BUTTON;
        }

@@ -22,7 +22,7 @@ void screen02Handler::onPropertyChange(int id){
 void screen02Handler::testApi(){
      qInfo() << "screen02Handler.cpp::testApi" ;
     static bool flag = true;
-    if(flag== true){
+    if(flag == true){
        setPushButtonVisible("button02", true) ;
        flag = false;
     }else {

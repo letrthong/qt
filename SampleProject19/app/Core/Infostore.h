@@ -4,7 +4,6 @@
 #include  "SceneBase.h"
 #include  <QThread>
 
-
 class InfoStore  :public  QThread
 {
    Q_OBJECT
@@ -30,7 +29,6 @@ private:
         bool _isEnable;
         SceneBase* _pSceneBase;
         bool _isRunning;
-
 
   signals:
       void sendInfoStoreSignal(QVariant id);

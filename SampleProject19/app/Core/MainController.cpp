@@ -6,7 +6,7 @@ using namespace std;
 #include "SceneBase.h"
 #include "screen01Handler.h"
 #include "screen02Handler.h"
-#include "infostore.h"
+#include "Infostore.h"
 #include <QDateTime>
 #include <QQmlContext>
 

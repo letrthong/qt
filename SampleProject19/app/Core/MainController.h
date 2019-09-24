@@ -5,7 +5,7 @@
 #include  <QObject>
 #include  <QThread>
 
-#include  "infostore.h"
+#include  "Infostore.h"
 #include <QQuickView>
 #include <QTimer>
 

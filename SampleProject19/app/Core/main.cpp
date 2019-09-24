@@ -8,7 +8,7 @@
 
 #include "SceneBase.h"
 #include "screen01Handler.h"
-#include "infostore.h"
+#include "Infostore.h"
 #include "singleton.h"
 
 

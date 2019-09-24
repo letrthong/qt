@@ -55,5 +55,7 @@ public slots:
         std::vector<QQuickItem*> _vecTextView;
         std::vector<QQuickItem*> _vecEditText;
         QQuickItem* _pQQuickListView;
+
+
 };
 #endif // SCENE_BASE_H_

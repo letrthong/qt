@@ -12,7 +12,11 @@ void  screen01Handler::onToggleButtonClick(const std::string& from){
     qInfo() << "screen01Handler.cpp::onToggleButtonClick=" << from.c_str();
     if(from.find("button01") != std::string::npos){
         bool preState =   _pInfoStore->getBool();
-        _pInfoStore->setBool(preState^true);
+        if( true == preState){
+            _pInfoStore->setBool(false);
+        }else {
+            _pInfoStore->setBool(true);
+        }
     }
 
     testApi();
@@ -27,16 +31,16 @@ void screen01Handler::onPropertyChange (int id){
 void screen01Handler::testApi(){
      qInfo() << "screen01Handler.cpp::testApi" ;
     static bool flag = true;
-    if(flag== true){
-       setPushButtonVisible("button02", true) ;
+    if( true == flag){
+       setPushButtonVisible("button01", true) ;
        flag = false;
     }else {
-       setPushButtonVisible("button02", false);
+       setPushButtonVisible("button01", false);
        flag = true;
     }
 }
 
 
 void screen01Handler::initScene(){
-   initToggleButtonValue("button01", _pInfoStore->getBool() );
+   initToggleButtonValue("button01", _pInfoStore->getBool());
 }

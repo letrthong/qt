@@ -1,4 +1,4 @@
-#include "infostore.h"
+#include "Infostore.h"
 #include <QDebug>
 #include  <iostream>
 using namespace std;
@@ -7,6 +7,7 @@ using namespace std;
 InfoStore::InfoStore(SceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
     _isRunning = false;
+    _isEnable = false;
 }
 
  InfoStore::InfoStore( )

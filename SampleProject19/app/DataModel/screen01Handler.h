@@ -5,7 +5,7 @@
 #include <QVariant>
 #include <QString>
 #include <QQuickView>
-#include "infostore.h"
+#include "Infostore.h"
 #include "SceneBase.h"
 
 class screen01Handler :public SceneBase
