@@ -15,6 +15,7 @@ Item {
         x: 89
         y: 305
     }
+       Switch { x: 23; y: 420; width: 54; height: 25; checked: true }
 
     ListView_250_250 {
         listId: 100
@@ -24,8 +25,9 @@ Item {
         width: 239
         height: 177
         delegate: ListView_Item_Text_CheckBox_250_50{
-            itemText : model.description
-            itemCheckBox: model.done
+            itemText : model.getText
+            itemCheckBox: model.getCheckBox
         }
+        ScrollBar{}
     }
 }

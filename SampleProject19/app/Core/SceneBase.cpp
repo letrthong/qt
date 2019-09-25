@@ -1,7 +1,6 @@
-#include "SceneBase.h"
+
 #include <QDebug>
-#include "EditTextBase.h"
-#include "SignalManager.h"
+
 #include <QQmlEngine>
 #include <QQuickWindow>
 
@@ -14,6 +13,11 @@
 #include <QtQuick>
 
 #include "DefComposite.h"
+#include "SceneBase.h"
+#include "EditTextBase.h"
+#include "SignalManager.h"
+#include "ItemCheckBoxText.h"
+#include "singleton.h"
 
 SceneBase::SceneBase(QQuickView * pQuickView  ){
      qInfo() << "SceneBase::constructor" ;
@@ -22,15 +26,18 @@ SceneBase::SceneBase(QQuickView * pQuickView  ){
 
     _pQQuickListView = nullptr;
     _pQmlContext = nullptr;
+
+      Singleton::getSingle()->setPointerOfSignalManager(_pSignalManager);
+
 }
 
-SceneBase::~SceneBase()
-{
+SceneBase::~SceneBase(){
     if(_pSignalManager){
         QObject::disconnect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
         QObject::disconnect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
 
         if(_pSignalManager != nullptr){
+            Singleton::getSingle()->setPointerOfSignalManager(nullptr);
             delete _pSignalManager;
             _pSignalManager = nullptr;
         }
@@ -44,6 +51,8 @@ SceneBase::~SceneBase()
 
 void  SceneBase::createScene(const QString & screenName){
        qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
+       qmlRegisterType<ItemCheckBoxText>("io.qt.examples.backend", 1, 0, "ListViewBackEnd");
+
 
        if(0 != getListId()) {
             _pQmlContext =_pQuickView->rootContext();
@@ -60,7 +69,6 @@ void  SceneBase::createScene(const QString & screenName){
     QObject::connect(_pMainScreen, SIGNAL(qmlSignalButton(int, QString)),  _pSignalManager,SLOT(onclickCppSlot(int,QString)));
     //C++ to QML
     QObject::connect( _pSignalManager, SIGNAL(setTextFieldCpp(QVariant)),_pMainScreen, SLOT(setTextField(QVariant)));
-
 
     QQuickItem *item = _pQuickView->rootObject();
     foreach (QQuickItem *child, item->childItems()) {
@@ -119,6 +127,9 @@ void SceneBase::onPushButtonClick(const std::string& from){
 void SceneBase::onToggleButtonClick(const std::string& from){
 }
 
+void SceneBase::onListItemClick(){
+
+}
 unsigned int SceneBase::getListId(){
     return  0;
 }

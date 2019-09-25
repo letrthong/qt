@@ -25,9 +25,6 @@ public:
 
     QString getEditText();
     void setEditText(const QString &text);
-
-
-
 signals:
     /*
      * Send a signal to Qml file to sync databinding

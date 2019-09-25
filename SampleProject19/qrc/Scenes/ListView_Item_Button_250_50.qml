@@ -5,6 +5,9 @@ MouseArea  {
     width: 250
     height: 50
     property string itemText: "n.a"
+
+
+
     Text {
         id: element
         x: 34
@@ -22,7 +25,7 @@ MouseArea  {
         x: 17
         y: 41
         width: 230
-        height: 5
+        height: 2
         color: "#828798"
     }
     onClicked: {

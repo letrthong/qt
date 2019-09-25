@@ -9,36 +9,49 @@ Item {
 
     signal qmlSignalButton(int sendTo, string msg)
 
-    Text { x: 23; y: 35; text: currentDateTime }
+    Text { x: 23; y: 17; text: currentDateTime }
 
     EditText_250_50{
         x: 15
-        y: 368
+        y: 382
 
     }
 
 
     BackButton_160_80 {
         id: backButton_160_801
-        x: 127
-        y: 296
+        x: 123
+        y: 315
     }
 
-    ListView_250_250 {
-        listId: 100
-        id: listView_250_2501
-        x: 23
-        y: 89
-        width: 239
-        height: 177
-        delegate: ListView_Item_Button_250_50{
-            itemText : model.modelData
-        }
-    }
 
     TextView_250_50 {
         id: textView_250_50
-        x: 15
-        y: 409
+        x: 23
+        y: 430
+    }
+
+    Background_ListView_250_250 {
+        id: background_ListView_250_250
+        x: 23
+        y: 54
+
+        ListView_250_250 {
+            listId: 100
+            id: listView_250_250
+            x: 0
+            y: 0
+            width: 239
+            height: 240
+            interactive: true
+            listModelType: "string int"
+            boundsBehavior: Flickable.DragOverBounds
+            clip: true
+            highlightRangeMode: ListView.ApplyRange
+            spacing: 2
+            delegate: ListView_Item_Button_250_50{
+                itemText : model.modelData
+            }
+        }
     }
 }

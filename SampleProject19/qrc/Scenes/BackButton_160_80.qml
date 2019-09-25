@@ -37,6 +37,7 @@ Item {
             }
 
             onClicked: {
+                // 0 -> send to state machine
                  qmlSignalButton(0, getButtonName())
                  id_rectangle.color= "lightsteelblue"
             }

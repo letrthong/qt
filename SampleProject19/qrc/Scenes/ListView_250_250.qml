@@ -6,13 +6,12 @@ ListView {
     id: listView1
     x: 8
     y: 8
-    width: 151
-    height: 165
-    //boundsBehavior: Flickable.StopAtBounds
+    width: 240
+    height: 240
+
     contentWidth: 1
      flickableDirection: Flickable.VerticalFlick
-   // highlightRangeMode: ListView.StrictlyEnforceRange
-	
+
     property string listModelType: "string int"
     property int   listId: 0
 
@@ -22,7 +21,6 @@ ListView {
         for(var i = 0; i < id_list.contentItem.children.length; i++) {
             var listItem = id_list.contentItem.children[i];
             listItem.listId = 0
-
         }
     }
 }

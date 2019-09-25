@@ -33,6 +33,7 @@ Item {
         y: 7
 
         text: "NextPage"
+        // 1 -> send model
         onClicked: id_screen1.qmlSignalButton(1, "screen1/netpage")
     }
 

@@ -39,37 +39,59 @@
   **
   ****************************************************************************/
 
-  #ifndef DATAOBJECT_H
-  #define DATAOBJECT_H
+#include <QDebug>
+#include "ItemCheckBoxText.h"
+#include "singleton.h"
 
-  #include <QObject>
+ItemCheckBoxText::ItemCheckBoxText(QObject *parent)
+  : QObject(parent)
+{
+     SignalManager* pSignalManager= Singleton::getSingle()->getPointerOfSignalManager();
+     if(pSignalManager){
+            QObject::connect(this, SIGNAL(sendListViewSignal(int,bool)),  pSignalManager,SLOT(onItemClickcppSlot(int,bool)));
+     }
+}
 
-  class DataObject : public QObject
-  {
-      Q_OBJECT
+ItemCheckBoxText::ItemCheckBoxText(const bool &done, const QString &description, QObject *parent)
+  : QObject(parent), m_description(description), m_done(done)
+{
+}
 
-      Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
-      Q_PROPERTY(bool done READ done WRITE setDone NOTIFY doneChanged)
+QString ItemCheckBoxText::getText() const
+{
+  return m_description;
+}
 
-  public:
-      DataObject(QObject *parent=0);
-      DataObject(const bool &done, const QString &description, QObject *parent=0);
+void ItemCheckBoxText::setDescription(const QString &text){
+  if (text != m_description) {
+      m_description = text;
+      emit descriptionChanged();
+  }
+}
 
-      QString description() const;
-      void setDescription(const QString &text);
+bool ItemCheckBoxText::getCheckBox() const{
+  return m_done;
+}
 
-      bool done() const;
-      void setDone(const bool &color);
+void ItemCheckBoxText::setCheckBox(const bool &state){
+  if (state != m_done) {
+      m_done = state;
+      emit checkBoxChanged();
+  }
+  qInfo() << "DataObject::setDone="<< state  <<" index=" << m_index;
 
-  signals:
-      void descriptionChanged();
-      void  doneChanged();
+  emit sendListViewSignal(m_index, state);
+}
 
-  private:
-      QString m_description;
-      bool m_done;
-  };
 
-  #endif // DATAOBJECT_H
 
-  //https://stuff.mit.edu/afs/athena/software/texmaker_v5.0.2/qt57/doc/qtquick/qtquick-models-objectlistmodel-example.html
+int ItemCheckBoxText::getIndex() const{
+  return  m_index;
+}
+
+void ItemCheckBoxText::setIndex(int &index ){
+  if (m_index != index) {
+      m_index = index;
+      emit indexChanged();
+  }
+}

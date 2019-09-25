@@ -1,6 +1,6 @@
 #include "screen03Handler.h"
 #include <QDebug>
-#include  "dataobject.h"
+#include "ItemCheckBoxText.h"
 
 screen03Handler::screen03Handler(QQuickView * pQuickView,InfoStore *pInfoStore )
     :SceneBase (pQuickView){
@@ -36,11 +36,16 @@ unsigned int screen03Handler::getListId(){
 }
 
 
-
  QVariant screen03Handler::getListDataProvider(){
     QList<QObject*> dataList;
-    dataList.append(new DataObject(true, "red"));
-    dataList.append(new DataObject( false, "green"));
+    dataList.append(new ItemCheckBoxText(true, "red"));
+    dataList.append(new ItemCheckBoxText( false, "green"));
+    dataList.append(new ItemCheckBoxText( false, "green"));
+    dataList.append(new ItemCheckBoxText( false, "green"));
+    dataList.append(new ItemCheckBoxText( false, "3"));
+    dataList.append(new ItemCheckBoxText( true, "5"));
+    dataList.append(new ItemCheckBoxText( false, "7"));
+    dataList.append(new ItemCheckBoxText( false, "9"));
 
     QVariant variant = QVariant::fromValue(dataList);
     return variant;

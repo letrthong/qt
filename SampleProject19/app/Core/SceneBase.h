@@ -29,6 +29,7 @@ class SceneBase :public QObject, public ISceneBase
         virtual void onPushButtonClick(const std::string& from);
         virtual void onToggleButtonClick(const std::string& from);
         virtual void onPropertyChange(int id);
+        virtual void onListItemClick();
 
         virtual void initScene();
 

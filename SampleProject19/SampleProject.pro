@@ -45,7 +45,7 @@ SOURCES += \
 		app/DataModel/screen03Handler.cpp \
 		qmlbase/EditTextBase.cpp \
 		SM/ScreenController.cpp  \
-		qmlbase/dataobject.cpp
+		qmlbase/ItemCheckBoxText.cpp
    
 
 
@@ -62,7 +62,7 @@ HEADERS += \
 		app/DataModel/screen03Handler.h \
 		qmlbase/DefComposite.h \
 		qmlbase/EditTextBase.h  \
-		qmlbase/dataobject.h
+		qmlbase/ItemCheckBoxText.h
    
 
 qml.files = *.qml  
@@ -82,6 +82,8 @@ STATECHARTS += \
     SM/myState.scxml
 
 DISTFILES += \
+    qrc/Scenes/Background_250_50.qml \
+    qrc/Scenes/Background_ListView_250_250.qml \
     qrc/Scenes/EditText_250_50.qml \
     qrc/Scenes/ListView_Item_Button_250_50.qml \
     qrc/Scenes/ListView_Item_Text_CheckBox_250_50.qml \

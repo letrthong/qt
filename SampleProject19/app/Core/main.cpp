@@ -1,13 +1,9 @@
 #include <QGuiApplication>
-
 #include <QQmlApplicationEngine>
 #include <QDebug>
 
 #include "MainController.h"
-
-
 #include "SceneBase.h"
-#include "screen01Handler.h"
 #include "Infostore.h"
 #include "singleton.h"
 

@@ -11,3 +11,11 @@ https://www.ics.com/blog/integrating-c-qml
 
 
 https://stackoverflow.com/questions/46978665/qtcreator-designer-how-can-i-see-custom-object-in-qml-types
+
+
+
+drop-drap
+https://github.com/agateau/listviewdragitem/tree/2-drag-scroll
+
+
+https://doc.qt.io/qt-5/qtquick-controls-qmlmodule.html

@@ -12,6 +12,7 @@ class SignalManager :public QObject
   Q_OBJECT
   public slots:
         void onclickCppSlot(int sendTo, const QString &msg);
+        void onItemClickcppSlot(int index, bool state);
 
   signals:
         void setTextFieldCpp(QVariant text);
