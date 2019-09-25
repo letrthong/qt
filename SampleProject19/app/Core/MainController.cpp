@@ -6,6 +6,7 @@ using namespace std;
 #include "SceneBase.h"
 #include "screen01Handler.h"
 #include "screen02Handler.h"
+#include "screen03Handler.h"
 #include "Infostore.h"
 #include <QDateTime>
 #include <QQmlContext>
@@ -58,22 +59,29 @@ void MainController::onControllerSlot(QVariant id){
     loadScreen();
 }
 
-void MainController::loadScreen( )
-{
+void MainController::loadScreen(){
     if(_pCurrentScreen != nullptr){
         delete  _pCurrentScreen;
         _pCurrentScreen = nullptr;
     }
 
-   static bool flag = true;
-    if(flag == true){
-        _pCurrentScreen = new screen01Handler( _pQuickView, _pInfoStore);
-        _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
-        flag = false;
+   static int indexScreen = 0;
+
+   if(0 == indexScreen){
+       _pCurrentScreen = new screen01Handler(_pQuickView, _pInfoStore);
+       _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
+   }else  if(1== indexScreen){
+       _pCurrentScreen = new screen02Handler(_pQuickView, _pInfoStore);
+       _pCurrentScreen->createScene("./qrc/Scenes/screen02.qml");
+   }else if( 2== indexScreen) {
+       _pCurrentScreen = new screen03Handler(_pQuickView, _pInfoStore);
+       _pCurrentScreen->createScene("./qrc/Scenes/screen03.qml");
     }
-    else{
-        _pCurrentScreen = new screen02Handler( _pQuickView, _pInfoStore);
-        _pCurrentScreen->createScene("./qrc/Scenes/screen02.qml");
-         flag = true;
-    }
+
+   indexScreen++;
+   if(indexScreen>  2){
+       indexScreen = 0;
+   }
 }
+
+

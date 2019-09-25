@@ -8,31 +8,15 @@ ListView {
     y: 8
     width: 151
     height: 165
-    boundsBehavior: Flickable.StopAtBounds
+    //boundsBehavior: Flickable.StopAtBounds
     contentWidth: 1
-    flickableDirection: Flickable.HorizontalFlick
-    highlightRangeMode: ListView.StrictlyEnforceRange
+     flickableDirection: Flickable.VerticalFlick
+   // highlightRangeMode: ListView.StrictlyEnforceRange
 	
     property string listModelType: "string int"
     property int   listId: 0
 
-	delegate: Item {
-        x: 5
-        width: 80
-        height: 40
-        Row {
-            id: id_row
-            Text {
-                text: model.modelData
-                font.bold: true
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            spacing: 10
-        }
-    }
-	
     model: myModel
-
 
     function resetElement(id_list){
         for(var i = 0; i < id_list.contentItem.children.length; i++) {

@@ -42,8 +42,10 @@ SOURCES += \
 		app/Core/SceneBase.cpp \
 		app/DataModel/screen02Handler.cpp \
 		app/DataModel/screen01Handler.cpp \
+		app/DataModel/screen03Handler.cpp \
 		qmlbase/EditTextBase.cpp \
-		SM/ScreenController.cpp 
+		SM/ScreenController.cpp  \
+		qmlbase/dataobject.cpp
    
 
 
@@ -57,8 +59,10 @@ HEADERS += \
 		app/DataModel/screen02Handler.h \
 		app/DataModel/screen01Handler.h \
 		SM/ScreenController.h \
+		app/DataModel/screen03Handler.h \
 		qmlbase/DefComposite.h \
-		qmlbase/EditTextBase.h 
+		qmlbase/EditTextBase.h  \
+		qmlbase/dataobject.h
    
 
 qml.files = *.qml  
@@ -79,6 +83,8 @@ STATECHARTS += \
 
 DISTFILES += \
     qrc/Scenes/EditText_250_50.qml \
+    qrc/Scenes/ListView_Item_Button_250_50.qml \
+    qrc/Scenes/ListView_Item_Text_CheckBox_250_50.qml \
     qrc/Scenes/ScrollBar.qml \
     qrc/Scenes/TextView_250_50.qml \
     qrc/Scenes/ToggleButton_160_80.qml \
@@ -92,8 +98,7 @@ DISTFILES += \
     qrc/images/backButton.png \
     qrc/Scenes/BackButton_160_80.qml \
     qrc/Scenes/PushButton_250_50.qml \
-    qrc/Scenes/ListView_250_250.qml \
-    qrc/Scenes/ListEleement_250_250.qml
+    qrc/Scenes/ListView_250_250.qml
  
  
 

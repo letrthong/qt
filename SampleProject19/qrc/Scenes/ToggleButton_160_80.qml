@@ -9,7 +9,8 @@ Item {
     height: 80
 
     property string toggleButtonName: "ToggleButton"
-    property bool  isChecked: true
+    property bool isChecked: true
+    property bool enabledButton: true
 
     function getButtonName(){
            return  "ToggleButton/" + toggleButtonName;
@@ -21,6 +22,13 @@ Item {
         }
         else{
             return "OFF"
+        }
+    }
+
+    function sendSingal(){
+        if(enabledButton == true){
+            qmlSignalButton(1, getButtonName())
+        }else{
         }
     }
 
@@ -47,7 +55,7 @@ Item {
             }
 
             onClicked: {
-                qmlSignalButton(1, getButtonName())
+               sendSingal()
                 id_rectangle.color= "lightsteelblue"
                 if( isChecked == true){
                     isChecked = false

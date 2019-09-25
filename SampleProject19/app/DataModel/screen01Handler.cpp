@@ -4,7 +4,6 @@
 
 screen01Handler::screen01Handler(QQuickView * pQuickView,InfoStore *pInfoStore )
     :SceneBase (pQuickView  ){
-
      _pInfoStore =pInfoStore;
 }
 

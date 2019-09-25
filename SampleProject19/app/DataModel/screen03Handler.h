@@ -1,5 +1,5 @@
-#ifndef SCREEN_02_HANDLER_H_
-#define SCREEN_02_HANDLER_H_
+#ifndef SCREEN_03_HANDLER_H_
+#define SCREEN_03_HANDLER_H_
 
 #include <QObject>
 #include <QVariant>
@@ -9,10 +9,10 @@
 #include "SceneBase.h"
 
 
-class screen02Handler :public SceneBase
+class screen03Handler :public SceneBase
 {
   public:
-     explicit screen02Handler(QQuickView * pQuickView, InfoStore *pInfoStore);
+     explicit screen03Handler(QQuickView * pQuickView, InfoStore *pInfoStore);
 
     /*
      * when Clicking on button from QML
@@ -24,11 +24,11 @@ class screen02Handler :public SceneBase
       */
      void onPropertyChange(int id) override;
   private:
-     void initScene() override;
+
      unsigned int getListId() override;
      QVariant  getListDataProvider() override;
 
      void testApi();
       InfoStore *_pInfoStore;
 };
-#endif // SCREEN_02_HANDLER_H_
+#endif // SCREEN_03_HANDLER_H_

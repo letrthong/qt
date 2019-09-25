@@ -18,7 +18,6 @@ void screen02Handler::onPropertyChange(int id){
     testApi();
 }
 
-
 void screen02Handler::testApi(){
      qInfo() << "screen02Handler.cpp::testApi" ;
     static bool flag = true;
@@ -33,4 +32,21 @@ void screen02Handler::testApi(){
 
  void screen02Handler::initScene(){
     setTextViewText("TextView", "Hello ThongLT !!!");
+ }
+
+ unsigned int screen02Handler::getListId(){
+     return  1;
+ }
+
+ QVariant screen02Handler::getListDataProvider(){
+    QStringList dataList;
+    dataList.append("Item 1");
+    dataList.append("Item 2");
+    dataList.append("Item 3");
+    dataList.append("Item 4");
+    dataList.append("Item 5");
+    dataList.append("Item 6");
+    dataList.append("Item 7");
+    QVariant variant = QVariant::fromValue(dataList);
+    return variant;
  }

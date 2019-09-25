@@ -9,7 +9,6 @@ Item {
 
     signal qmlSignalButton(int sendTo, string msg)
 
-    Text { x: 23; y: 35; text: currentDateTime }
 
     BackButton_160_80 {
         id: backButton_160_801
@@ -18,8 +17,15 @@ Item {
     }
 
     ListView_250_250 {
+        listId: 100
         id: listView_250_2501
-        x: 48
+        x: 23
         y: 89
+        width: 239
+        height: 177
+        delegate: ListView_Item_Text_CheckBox_250_50{
+            itemText : model.description
+            itemCheckBox: model.done
+        }
     }
 }

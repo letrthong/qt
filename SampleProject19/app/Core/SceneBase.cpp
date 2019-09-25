@@ -45,6 +45,11 @@ SceneBase::~SceneBase()
 void  SceneBase::createScene(const QString & screenName){
        qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
 
+       if(0 != getListId()) {
+            _pQmlContext =_pQuickView->rootContext();
+            _pQmlContext->setContextProperty("myModel", getListDataProvider());
+       }
+
     _pQuickView->setSource(QUrl(screenName));
      qInfo() <<"SceneBase::createScene setSource="<< screenName;
 
@@ -75,20 +80,10 @@ void  SceneBase::createScene(const QString & screenName){
           }
     }
 
-    if(_pQQuickListView != nullptr)
-    {
-        _pQmlContext =_pQuickView->rootContext();
-		 qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
+      if(_pQQuickListView != nullptr){
+          qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
           qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listId");
-
-          QStringList dataList;
-         dataList.append("Item 1");
-         dataList.append("Item 2");
-         dataList.append("Item 3");
-         dataList.append("Item 4");
-         _pQmlContext->setContextProperty("myModel", QVariant::fromValue(dataList));
-    }
-
+      }
      _pQuickView->show();
 
      initScene();
@@ -124,11 +119,17 @@ void SceneBase::onPushButtonClick(const std::string& from){
 void SceneBase::onToggleButtonClick(const std::string& from){
 }
 
+unsigned int SceneBase::getListId(){
+    return  0;
+}
+
 
 void SceneBase::onPropertyChange(int id){
 }
 
-void  SceneBase::getListDataProvider(){
+QVariant   SceneBase::getListDataProvider(){
+   QVariant variant;
+   return variant;
 }
 
 void SceneBase::initScene(){
@@ -159,11 +160,9 @@ void SceneBase::setTextViewText(const std::string& TextVievName, const std::stri
     }
 }
 
-
 void SceneBase::initToggleButtonValue(const std::string& toggleButtonName, bool isOn){
     for (auto i = _vecToggleButton.begin(); i != _vecToggleButton.end(); ++i){
         std::string name =(*i)->property("toggleButtonName").toString().toStdString();
-
          qInfo() << "SceneBase::initToggleButtonValue name=" << name.c_str() <<" "<<toggleButtonName.c_str();
 
         if(toggleButtonName == name ) {

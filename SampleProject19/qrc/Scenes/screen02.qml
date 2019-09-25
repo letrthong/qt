@@ -13,22 +13,27 @@ Item {
 
     EditText_250_50{
         x: 15
-        y: 346
+        y: 368
 
     }
 
 
     BackButton_160_80 {
         id: backButton_160_801
-        x: 70
-        y: 229
+        x: 127
+        y: 296
     }
 
     ListView_250_250 {
         listId: 100
         id: listView_250_2501
-        x: 48
+        x: 23
         y: 89
+        width: 239
+        height: 177
+        delegate: ListView_Item_Button_250_50{
+            itemText : model.modelData
+        }
     }
 
     TextView_250_50 {

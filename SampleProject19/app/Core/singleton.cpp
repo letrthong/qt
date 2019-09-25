@@ -1,16 +1,16 @@
 #include "singleton.h"
 
-Singleton *Singleton::m_singleton = NULL;
+Singleton *Singleton::m_singleton = nullptr;
 
 
 Singleton::Singleton()
 {
-    m_singleton = NULL;
+    m_singleton = nullptr;
 }
 
 Singleton *Singleton::getSingle()
 {
-    if (m_singleton == NULL)
+    if (m_singleton == nullptr)
     {
         m_singleton = new Singleton;
     }

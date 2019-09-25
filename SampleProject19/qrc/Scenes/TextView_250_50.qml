@@ -15,6 +15,4 @@ Item {
          text: qsTr(textViewText)
          font.pixelSize: 25
      }
-
-
 }

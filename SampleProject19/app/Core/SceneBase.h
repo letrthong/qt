@@ -29,8 +29,11 @@ class SceneBase :public QObject, public ISceneBase
         virtual void onPushButtonClick(const std::string& from);
         virtual void onToggleButtonClick(const std::string& from);
         virtual void onPropertyChange(int id);
-        virtual void getListDataProvider();
+
         virtual void initScene();
+
+        virtual unsigned int getListId();
+        virtual QVariant   getListDataProvider();
 
         void setPushButtonVisible(const std::string& pushButtonName, bool visible);
 
@@ -55,7 +58,5 @@ public slots:
         std::vector<QQuickItem*> _vecTextView;
         std::vector<QQuickItem*> _vecEditText;
         QQuickItem* _pQQuickListView;
-
-
 };
 #endif // SCENE_BASE_H_
