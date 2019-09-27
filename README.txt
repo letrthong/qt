@@ -16,9 +16,12 @@
 	SampleProject14
 	SampleProject15
 	SampleProject16
-3 The state machine
+3 hall code 
 	SampleProject17
 
-
+4 The state machine
+	SampleProject23
+	
+	
 Expanding Delegate
 https://doc.qt.io/archives/qt-4.8/qt-declarative-modelviews-listview-expandingdelegates-example.html
