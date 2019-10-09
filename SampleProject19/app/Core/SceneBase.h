@@ -22,6 +22,7 @@ class SceneBase :public QObject, public ISceneBase
         virtual ~SceneBase();
 
         void  createScene(const QString & screenName);
+        void   destroyScreen();
 
         void onClickListener(unsigned int type,  const std::string& from)  override;
         void onChangedListener(int id)  override;

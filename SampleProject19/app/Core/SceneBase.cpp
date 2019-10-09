@@ -46,6 +46,8 @@ SceneBase::~SceneBase(){
             _pQmlContext = nullptr;
         }
     }
+
+    //destroyScreen();
 }
 
 
@@ -95,6 +97,12 @@ void  SceneBase::createScene(const QString & screenName){
      _pQuickView->show();
 
      initScene();
+}
+
+void   SceneBase::destroyScreen()
+{
+    _pQuickView->hide();
+    _pQuickView->destroy();
 }
 
 void SceneBase::onClickListener(unsigned int type, const std::string& from){
