@@ -41,6 +41,7 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
 
 void SignalManager::onItemClickcppSlot(int index, bool state){
     qDebug() << "SignalManager::onItemClickcppSlot: index="<< index <<" state="<<  state;
+    _pSceneBase->onClickItemOfList(index, state );
 }
 
 void SignalManager::handleSubmitTextField(const QString &in){

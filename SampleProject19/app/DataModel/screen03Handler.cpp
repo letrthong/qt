@@ -36,17 +36,24 @@ unsigned int screen03Handler::getListId(){
 }
 
 
- QVariant screen03Handler::getListDataProvider(){
+QVariant screen03Handler::getListDataProvider(){
     QList<QObject*> dataList;
-    dataList.append(new ItemCheckBoxText(true, "red"));
-    dataList.append(new ItemCheckBoxText( false, "green"));
-    dataList.append(new ItemCheckBoxText( false, "green"));
-    dataList.append(new ItemCheckBoxText( false, "green"));
-    dataList.append(new ItemCheckBoxText( false, "3"));
-    dataList.append(new ItemCheckBoxText( true, "5"));
-    dataList.append(new ItemCheckBoxText( false, "7"));
-    dataList.append(new ItemCheckBoxText( false, "9"));
+     std::map<int, struct itemOfList> mapList = _pInfoStore->getItemOfList();
+
+     if(mapList.empty()){
+         qInfo() << "screen03Handler::getListDataProvider is empty";
+     }else{
+         qInfo() << "screen03Handler::getListDataProvider size=" << mapList.size();
+         for (std::map<int, struct itemOfList>::iterator it=mapList.begin(); it!=mapList.end(); ++it){
+               dataList.append(new ItemCheckBoxText(it->second.status, it->second.text.c_str() ));
+         }
+     }
 
     QVariant variant = QVariant::fromValue(dataList);
     return variant;
+ }
+
+ void screen03Handler::onListItemClick(int index, bool status){
+     qInfo() << "screen03Handler::onListItemClick";
+     _pInfoStore->updateItemOfList(index, status);
  }

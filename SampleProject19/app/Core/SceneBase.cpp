@@ -121,6 +121,10 @@ void SceneBase::onChangedListener(int id) {
     this->onPropertyChange(id);
 }
 
+void SceneBase::onClickItemOfList(int index, bool status) {
+   this->onListItemClick(index, status);
+}
+
 void SceneBase::onPushButtonClick(const std::string& from){
 }
 
@@ -128,6 +132,9 @@ void SceneBase::onToggleButtonClick(const std::string& from){
 }
 
 void SceneBase::onListItemClick(){
+}
+
+void SceneBase::onListItemClick(int index, bool status){
 
 }
 unsigned int SceneBase::getListId(){

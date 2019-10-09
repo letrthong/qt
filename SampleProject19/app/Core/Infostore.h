@@ -3,6 +3,13 @@
 
 #include  "SceneBase.h"
 #include  <QThread>
+#include <map>
+#include <string>
+
+struct itemOfList{
+    bool status;
+    std::string text;
+};
 
 class InfoStore  :public  QThread
 {
@@ -15,6 +22,9 @@ public:
     void setText(const std::string& text);
     std::string getText();
 
+
+    void updateItemOfList(int index, bool status);
+    std::map<int, struct itemOfList>  getItemOfList();
 
     void setBool(bool flag);
     bool getBool();
@@ -29,6 +39,7 @@ private:
         bool _isEnable;
         SceneBase* _pSceneBase;
         bool _isRunning;
+        std::map<int, struct itemOfList> _mapList;
 
   signals:
       void sendInfoStoreSignal(QVariant id);

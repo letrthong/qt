@@ -8,10 +8,18 @@ InfoStore::InfoStore(SceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
     _isRunning = false;
     _isEnable = false;
+
+    _mapList.insert({0, {false, "text00"} });
+    _mapList.insert({1, {false, "text01"} });
+    _mapList.insert({2, {false, "text02"} });
+     qInfo() << "InfoStore::constructure";
 }
 
  InfoStore::InfoStore( )
  {
+     _mapList.insert({0, {false, "text00"} });
+     _mapList.insert({1, {false, "text01"} });
+     _mapList.insert({2, {false, "text02"} });
      _pSceneBase = nullptr;
  }
 
@@ -71,4 +79,15 @@ void InfoStore::startThread(){
           QObject::connect(this, SIGNAL(sendInfoStoreSignal(QVariant)),  _pSceneBase,SLOT(onInfoStoreSlot(QVariant)));
     }
     QThread::start();
+}
+
+void InfoStore::updateItemOfList(int index, bool status){
+     std::map<int, struct itemOfList>::iterator it = _mapList.find(index);
+
+     if (it != _mapList.end()){
+        it->second.status = status;
+     }
+}
+std::map<int, struct itemOfList>  InfoStore::getItemOfList(){
+    return _mapList;
 }

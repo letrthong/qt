@@ -25,11 +25,14 @@ class SceneBase :public QObject, public ISceneBase
 
         void onClickListener(unsigned int type,  const std::string& from)  override;
         void onChangedListener(int id)  override;
+        void onClickItemOfList(int index, bool status) override;
   protected:
         virtual void onPushButtonClick(const std::string& from);
         virtual void onToggleButtonClick(const std::string& from);
         virtual void onPropertyChange(int id);
         virtual void onListItemClick();
+        virtual void onListItemClick(int index, bool status);
+
 
         virtual void initScene();
 

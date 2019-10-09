@@ -7,6 +7,8 @@ public:
    virtual void onClickListener(unsigned int type, const std::string& from) = 0;
    virtual void onChangedListener(int id) = 0;
 
+    virtual void onClickItemOfList(int index, bool status) = 0;
+
     virtual ~ISceneBase(){}
 };
 
