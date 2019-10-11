@@ -44,7 +44,6 @@ Item {
             width: 239
             height: 240
             interactive: true
-            listModelType: "string int"
             boundsBehavior: Flickable.DragOverBounds
             clip: true
             highlightRangeMode: ListView.ApplyRange

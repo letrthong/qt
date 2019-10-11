@@ -27,7 +27,7 @@ class screen03Handler :public SceneBase
 
      unsigned int getListId() override;
      QVariant  getListDataProvider() override;
-     void onListItemClick(int index, bool status) override;
+     void onListItemClick(int index, std::string status) override;
 
      void testApi();
       InfoStore *_pInfoStore;

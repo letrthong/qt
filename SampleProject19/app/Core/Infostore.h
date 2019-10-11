@@ -7,8 +7,10 @@
 #include <string>
 
 struct itemOfList{
-    bool status;
+    std::string value;
     std::string text;
+    std::string type;
+    std::string icon;
 };
 
 class InfoStore  :public  QThread
@@ -23,7 +25,7 @@ public:
     std::string getText();
 
 
-    void updateItemOfList(int index, bool status);
+    void updateItemOfList(int index,  std::string status);
     std::map<int, struct itemOfList>  getItemOfList();
 
     void setBool(bool flag);

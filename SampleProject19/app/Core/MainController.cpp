@@ -11,8 +11,7 @@ using namespace std;
 #include <QDateTime>
 #include <QQmlContext>
 
-MainController::MainController(InfoStore *pInfoStor )
-{
+MainController::MainController(InfoStore *pInfoStor ){
     _pQuickView = new QQuickView;
 
     //https://doc.qt.io/qt-5/qtqml-cppintegration-contextproperties.html
@@ -36,25 +35,20 @@ MainController::~MainController(){
     _pTimer = nullptr;
 }
 
-void MainController::onTimeoutSlot()
-{
+void MainController::onTimeoutSlot(){
     _pTimer->start(100);
-    if( screenIndex> 0)
-    {
+    if( screenIndex> 0){
         screenIndex = 0;
         loadScreen();
     }
 }
 
-void MainController::eventClickCppSlot(int sendTo, const QString &msg)
-{
+void MainController::eventClickCppSlot(int sendTo, const QString &msg){
     screenIndex = screenIndex+ 1;
-     qInfo() << "\n MainController::eventClickCppSlot"  <<  screenIndex++;
-
+    qInfo() << "\n MainController::eventClickCppSlot"  <<  screenIndex++;
 }
 
 void MainController::onControllerSlot(QVariant id){
-
     qInfo() << "\n MainController::onControllerSlot"  ;
     loadScreen();
 }

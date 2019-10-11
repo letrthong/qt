@@ -9,17 +9,19 @@ InfoStore::InfoStore(SceneBase* pSceneBase){
     _isRunning = false;
     _isEnable = false;
 
-    _mapList.insert({0, {false, "text00"} });
-    _mapList.insert({1, {false, "text01"} });
-    _mapList.insert({2, {false, "text02"} });
+    _mapList.insert({0, {"false", "text00", "text", "" } });
+    _mapList.insert({1, {"false", "text01", "checkbox", "" } });
+    _mapList.insert({2, {"false", "text02", "checkbox", "../images/icon01.jpg" } });
+    _mapList.insert({3, {"false", "text03", "switch" , "" } });
      qInfo() << "InfoStore::constructure";
 }
 
  InfoStore::InfoStore( )
  {
-     _mapList.insert({0, {false, "text00"} });
-     _mapList.insert({1, {false, "text01"} });
-     _mapList.insert({2, {false, "text02"} });
+     _mapList.insert({0, {"false", "text00", "text", "" } });
+     _mapList.insert({1, {"false", "text01", "checkbox", "" } });
+     _mapList.insert({2, {"false", "text02", "checkbox", "../images/icon01.jpg" } });
+     _mapList.insert({3, {"false", "text03", "switch" , "" } });
      _pSceneBase = nullptr;
  }
 
@@ -81,11 +83,11 @@ void InfoStore::startThread(){
     QThread::start();
 }
 
-void InfoStore::updateItemOfList(int index, bool status){
+void InfoStore::updateItemOfList(int index,  std::string status){
      std::map<int, struct itemOfList>::iterator it = _mapList.find(index);
 
      if (it != _mapList.end()){
-        it->second.status = status;
+        it->second.value = status;
      }
 }
 std::map<int, struct itemOfList>  InfoStore::getItemOfList(){

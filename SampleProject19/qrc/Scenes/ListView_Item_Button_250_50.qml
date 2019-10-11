@@ -29,6 +29,6 @@ MouseArea  {
         color: "#828798"
     }
     onClicked: {
-             console.log("ListView_Item_Button_250_50 index=" + index)
+         console.log("ListView_Item_Button_250_50 index=" + index)
     }
 }

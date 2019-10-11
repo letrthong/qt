@@ -52,9 +52,8 @@ SceneBase::~SceneBase(){
 
 
 void  SceneBase::createScene(const QString & screenName){
-       qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
-       qmlRegisterType<ItemCheckBoxText>("io.qt.examples.backend", 1, 0, "ListViewBackEnd");
-
+    qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
+    qmlRegisterType<ItemCheckBoxText>("io.qt.examples.backend", 1, 0, "ListViewBackEnd");
 
        if(0 != getListId()) {
             _pQmlContext =_pQuickView->rootContext();
@@ -91,7 +90,6 @@ void  SceneBase::createScene(const QString & screenName){
     }
 
       if(_pQQuickListView != nullptr){
-          qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listModelType");
           qInfo() <<"SceneBase::ListViewModel="<< _pQQuickListView->property("listId");
       }
      _pQuickView->show();
@@ -129,7 +127,7 @@ void SceneBase::onChangedListener(int id) {
     this->onPropertyChange(id);
 }
 
-void SceneBase::onClickItemOfList(int index, bool status) {
+void SceneBase::onClickItemOfList(int index,  std::string status) {
    this->onListItemClick(index, status);
 }
 
@@ -142,7 +140,7 @@ void SceneBase::onToggleButtonClick(const std::string& from){
 void SceneBase::onListItemClick(){
 }
 
-void SceneBase::onListItemClick(int index, bool status){
+void SceneBase::onListItemClick(int index, std::string status){
 
 }
 unsigned int SceneBase::getListId(){

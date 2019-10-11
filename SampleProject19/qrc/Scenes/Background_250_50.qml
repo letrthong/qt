@@ -11,14 +11,14 @@ Item {
         y: 0
         width: 250
         height: 50
-        color: "#aaff7f"
+        color: "#daf5ce"
 
          Rectangle {
              id: rectangle1
              x: 8
              y: 38
              width: 234
-             height: 5
+             height: 1
              color: "#ffffff"
          }
      }

@@ -45,7 +45,8 @@ QVariant screen03Handler::getListDataProvider(){
      }else{
          qInfo() << "screen03Handler::getListDataProvider size=" << mapList.size();
          for (std::map<int, struct itemOfList>::iterator it=mapList.begin(); it!=mapList.end(); ++it){
-               dataList.append(new ItemCheckBoxText(it->second.status, it->second.text.c_str() ));
+            qInfo() << "screen03Handler::getListDataProvider " << it->second.value.c_str() <<" " << it->second.text.c_str();
+            dataList.append(new ItemCheckBoxText(it->second.value.c_str(), it->second.text.c_str(),  it->second.type.c_str(),  it->second.icon.c_str()  ));
          }
      }
 
@@ -53,7 +54,7 @@ QVariant screen03Handler::getListDataProvider(){
     return variant;
  }
 
- void screen03Handler::onListItemClick(int index, bool status){
-     qInfo() << "screen03Handler::onListItemClick";
+ void screen03Handler::onListItemClick(int index, std::string status){
+     qInfo() << "screen03Handler::onListItemClick status="<< status.c_str();
      _pInfoStore->updateItemOfList(index, status);
  }

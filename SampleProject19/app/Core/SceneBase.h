@@ -10,6 +10,7 @@
 #include <QQuickView>
 
 #include <vector>
+#include <string>
 
 #include "SignalManager.h"
 #include "ISceneBase.h"
@@ -26,13 +27,13 @@ class SceneBase :public QObject, public ISceneBase
 
         void onClickListener(unsigned int type,  const std::string& from)  override;
         void onChangedListener(int id)  override;
-        void onClickItemOfList(int index, bool status) override;
+        void onClickItemOfList(int index, std::string status) override;
   protected:
         virtual void onPushButtonClick(const std::string& from);
         virtual void onToggleButtonClick(const std::string& from);
         virtual void onPropertyChange(int id);
         virtual void onListItemClick();
-        virtual void onListItemClick(int index, bool status);
+        virtual void onListItemClick(int index, std::string status);
 
 
         virtual void initScene();

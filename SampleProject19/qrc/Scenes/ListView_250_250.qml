@@ -10,9 +10,8 @@ ListView {
     height: 240
 
     contentWidth: 1
-     flickableDirection: Flickable.VerticalFlick
+    flickableDirection: Flickable.VerticalFlick
 
-    property string listModelType: "string int"
     property int   listId: 0
 
     model: myModel

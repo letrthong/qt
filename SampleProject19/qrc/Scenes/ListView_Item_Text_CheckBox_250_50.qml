@@ -6,8 +6,16 @@ MouseArea  {
     id: name
     width: 250
     height: 50
-    property string itemText: ""
+
     property bool itemCheckBox: false
+
+    property string itemType: "text"
+    property string itemText: "N/A"
+    property string itemIcon: ""
+    property string itemRange: "[0:1]"
+    property string itemFormula: "1x"
+    property string itemValue: "true"
+
 
     ListViewBackEnd {
         id: backend
@@ -21,43 +29,108 @@ MouseArea  {
         height: 50
         color: "#eef0e6"
 
-
-
         Background_250_50 {
             id: background_250_50
 
             Text {
                 x: 56
                 y: 8
-                width: 186
+                width: 128
                 height: 34
                 text: itemText
+                horizontalAlignment: Text.AlignHCenter
                 font.bold: true
                 font.pointSize: 19
                 // onEditingFinished: itemText = text
             }
 
             CheckBox {
+                id: id_check_box
+                visible: false
                 x: 25
                 y: 10
                 width: 40
                 height: 32
+                clip: true
                 transformOrigin: Item.Center
-                checked: itemCheckBox
+                checked:  getValueBool()
                 onClicked: {
-                    itemCheckBox = checked
-                    backend.getCheckBox = checked
-                     console.log("backend.done index=" + index + " "  + checked)
+
+                    if(checked == true){
+                        itemValue = "true"
+                    }else{
+                         itemValue = "false"
+                    }
+                    backend.getValue = itemValue
+                    console.log("backend.done index=" + index + " "  + checked)
                 }
+            }
+
+            Switch {
+                  id: id_switch
+                  x: 2
+                  y: 17
+                  height: 20
+                  visible: false
+                   checked:  getValueBool()
+                   onClicked: {
+
+                       if(checked == true){
+                           itemValue = "true"
+                       }else{
+                            itemValue = "false"
+                       }
+                       backend.getValue = itemValue
+                       console.log("backend.done index=" + index + " "  + checked)
+                   }
+            }
+
+            Image {
+                id: id_image
+                 visible: false
+                x: 202
+                y: 2
+                width: 35
+                height: 35
+                opacity: 0.2
+                source:  getIconPath()
+                fillMode: Image.PreserveAspectFit
             }
         }
     }
 
-
-    onClicked: {
-        console.log("ListView_Item_Button_250_50 index=" + index)
-
+    function getValueBool(){
+        if( itemValue === "true"){
+             return  true
+        }
+        return false;
     }
+
+    function getIconPath(){
+        return itemIcon;
+    }
+
+   Component.onCompleted: {
+       console.log("onCompleted  itemType=" + itemType)
+        if(itemType == "text" ){
+
+        }else  if(itemType == "checkbox" ) {
+            id_check_box.visible = true
+        }else  if(itemType == "switch" ) {
+            id_switch.visible = true
+        }
+
+        if(getIconPath() === ""){
+
+        }
+        else{
+            id_image.visible = true
+        }
+   }
+
+   onClicked: {
+        console.log("backend.done onClicked on Text index=" + index )
+   }
 }
 
 

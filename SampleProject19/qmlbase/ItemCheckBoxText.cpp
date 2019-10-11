@@ -48,41 +48,62 @@ ItemCheckBoxText::ItemCheckBoxText(QObject *parent)
 {
      SignalManager* pSignalManager= Singleton::getSingle()->getPointerOfSignalManager();
      if(pSignalManager){
-            QObject::connect(this, SIGNAL(sendListViewSignal(int,bool)),  pSignalManager,SLOT(onItemClickcppSlot(int,bool)));
+            QObject::connect(this, SIGNAL(sendListViewSignal(int,QString)),  pSignalManager,SLOT(onItemClickcppSlot(int,QString)));
      }
 }
 
-ItemCheckBoxText::ItemCheckBoxText(const bool &done, const QString &description, QObject *parent)
-  : QObject(parent), m_description(description), m_done(done)
+ItemCheckBoxText::ItemCheckBoxText(const QString &value, const QString &text,const QString &type, const QString &icon, QObject *parent)
+  : QObject(parent), m_text(text), m_value(value), m_type(type), m_icon(icon)
 {
 }
 
 QString ItemCheckBoxText::getText() const
 {
-  return m_description;
+  return m_text;
 }
 
 void ItemCheckBoxText::setDescription(const QString &text){
-  if (text != m_description) {
-      m_description = text;
+  if (text != m_text) {
+      m_text = text;
       emit descriptionChanged();
   }
 }
 
-bool ItemCheckBoxText::getCheckBox() const{
-  return m_done;
+QString ItemCheckBoxText::getValue() const{
+    qInfo() << "ItemCheckBoxText::getValue"<< m_value ;
+  return m_value;
 }
 
-void ItemCheckBoxText::setCheckBox(const bool &state){
-  if (state != m_done) {
-      m_done = state;
-      emit checkBoxChanged();
+void ItemCheckBoxText::setValue(const QString &state){
+  if (state != m_value) {
+      m_value = state;
+      emit valueChanged();
   }
-  qInfo() << "DataObject::setDone="<< state  <<" index=" << m_index;
+  qInfo() << "ItemCheckBoxText::setValue"<< state  <<" index=" << m_index;
 
   emit sendListViewSignal(m_index, state);
 }
 
+QString ItemCheckBoxText::getType() const{
+    return m_type;
+}
+void ItemCheckBoxText::setType(const QString &type){
+    if (type != m_type) {
+        m_type = type;
+        emit typeChanged();
+    }
+}
+
+QString ItemCheckBoxText::getIcon() const{
+    return  m_icon;
+}
+
+void ItemCheckBoxText::setIcon(const QString &path){
+    if (path != m_icon) {
+        m_icon = path;
+        emit iconChanged();
+    }
+}
 
 
 int ItemCheckBoxText::getIndex() const{
