@@ -18,7 +18,7 @@
 #define SETTING_ELEMENT_SELECT_ALL      "SELECT * FROM settingElement "
 
 
-typedef  enum PROGRAM_IDS{
+typedef enum PROGRAM_IDS{
     PROGRAM_ID_SETTING = 2,
     PROGRAM_ID_01 ,
     PROGRAM_ID_02 ,

@@ -49,6 +49,26 @@ void TestDb::testProgramTable04(){
     delete pDb;
 }
 
+void TestDb::testProgramTable05(){
+    BshDb* pDb = new BshDb("./testProgramTable05.db");
+    pDb->initDb();
+
+    pDb->setProgramTable({ PROGRAM_IDS::PROGRAM_ID_01, "abc", "fdsfadfd", 123, 567 });
+    pDb->setProgramTable({ PROGRAM_IDS::PROGRAM_ID_02, "abc12", "zyz", 456356, 567 });
+
+
+    std::vector<struct Program>  vProgram;
+
+     pDb->getProgramTable( vProgram);
+
+
+    int oSize = vProgram.size();
+
+    QCOMPARE(2, oSize);
+
+    delete pDb;
+}
+
 void TestDb::testSettingElementTable01(){
     BshDb* pDb = new BshDb("./abt.db");
     pDb->initDb();

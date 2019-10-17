@@ -28,10 +28,12 @@ public:
     int createTables();
 
     int setProgramTable(programId id, const std::string& modeName);
-    int setProgramTable(const struct Program&  program);
     bool getProgramTable(programId id, std::string& modeName);
+    int setProgramTable(const struct Program&  program);
+    int getProgramTable( std::vector<struct Program>& vProgram );
     bool deleteProgramTable(programId id);
     int getSizeOfProgramTable() const ;
+
 
     int setSettingElementTable(programId id, const struct SettingElement& settingElemment);
     int getSettingElementTable(programId id, std::vector<struct SettingElement>& vSettingElement);

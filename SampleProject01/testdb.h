@@ -13,6 +13,7 @@ private slots:
     void testProgramTable02();
     void testProgramTable03();
     void testProgramTable04();
+    void testProgramTable05();
 
     void testSettingElementTable01();
     void testSettingElementTable02();

@@ -160,6 +160,37 @@ bool BshDb::getProgramTable(programId id, std::string& modeName){
     return ret;
 }
 
+int BshDb::getProgramTable( std::vector<struct Program>& vProgram ){
+    int ret = 0;
+    QSqlQuery query;
+
+    vProgram.clear();
+    query.prepare( PROGRAM_SELECT_ALL);
+
+
+    if(!query.exec()){
+        qWarning() << "getSizeOfProgramTable- ERROR: " << query.lastError().text();
+    }else{
+        int idProgramId = query.record().indexOf("programId");
+        int idModeName = query.record().indexOf("modeName");
+        int idProgramName = query.record().indexOf("programName");
+        int idIsFavorite = query.record().indexOf("isFavorite");
+        int idIsOrder = query.record().indexOf("isOrder");
+        while (query.next()){
+            struct Program  item;
+            item.mProgramId =(programId) query.value(idProgramId).toInt();
+            item.mModeName = query.value(idModeName).toString().toStdString();
+            item.mProgramName = query.value(idProgramName).toString().toStdString();
+            item.mIsFavorite = query.value(idIsFavorite).toInt();
+            item.mOrder = query.value(idIsOrder).toInt();
+
+            vProgram.push_back(item);
+        }
+    }
+
+     return ret;
+}
+
 bool BshDb::deleteProgramTable(programId id){
     QSqlQuery query;
     bool ret = false;
