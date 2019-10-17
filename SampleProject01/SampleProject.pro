@@ -5,6 +5,22 @@
 TEMPLATE = app
 TARGET = qt.out
 INCLUDEPATH += .
-QT += gui widgets
+#QT +=   widgets
+QT += core testlib
+QT += sql
+
+
+CONFIG   += console
+#CONFIG   -= app_bundle
+CONFIG   += testcase
+
+
 # Input
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    bshdb.cpp \
+    testqstring.cpp
+
+HEADERS += \
+    bshdb.h \
+    defbshdb.h \
+    testqstring.h
