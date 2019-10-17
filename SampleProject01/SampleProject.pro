@@ -18,9 +18,11 @@ CONFIG   += testcase
 # Input
 SOURCES += main.cpp \
     bshdb.cpp \
+    testdb.cpp \
     testqstring.cpp
 
 HEADERS += \
     bshdb.h \
     defbshdb.h \
+    testdb.h \
     testqstring.h

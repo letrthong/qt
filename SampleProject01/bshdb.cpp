@@ -1,17 +1,18 @@
 #include "bshdb.h"
 #include <QDebug>
-
-
 #include <QSqlDriver>
 #include <QSqlError>
 #include <QSqlQuery>
-
-#include <QSqlError>
 #include <string>
 #include <QFileInfo>
 #include <QSqlRecord>
 
+
 BshDb::BshDb(const std::string dbName):_dbName(dbName){
+}
+
+BshDb::~BshDb(){
+    _sqlDatabase.close();
 }
 
 int BshDb::initDb(){
@@ -21,9 +22,12 @@ int BshDb::initDb(){
     if(QSqlDatabase::isDriverAvailable(DRIVER)){
         _sqlDatabase = QSqlDatabase::addDatabase(DRIVER);
         _sqlDatabase.setDatabaseName( _dbName.c_str());
-        if(!_sqlDatabase.open()){
-             qWarning() << "initDb:: - ERROR: " << _sqlDatabase.lastError().text();
-             ret  = 1;
+
+        if( !_sqlDatabase.isOpen()){
+            if(!_sqlDatabase.open()){
+                 qWarning() << "initDb:: - ERROR: " << _sqlDatabase.lastError().text();
+                 ret  = 1;
+            }
         }
     }
     else{
@@ -91,18 +95,17 @@ int BshDb::createTables(){
 }
 
 
-int BshDb::setProgramTable(enum PROGRAM_IDS programId, const std::string& modeName){
+int BshDb::setProgramTable(programId id, const std::string& modeName){
     QSqlQuery query;
     int ret = 0;
-    bool hasId = hasProgramTable(programId);
+    bool hasId = hasProgramTable(id);
     char commandLine[256] ;
     if(false == hasId){
-         sprintf(commandLine, PROGRAM_INSERT_MODE_NAME,programId,modeName.c_str() );
+         sprintf(commandLine, PROGRAM_INSERT_MODE_NAME,id,modeName.c_str() );
     }else {
-         sprintf(commandLine, PROGRAM_UPDATE_MODE_NAME,modeName.c_str(),programId );
+         sprintf(commandLine, PROGRAM_UPDATE_MODE_NAME,modeName.c_str(),id );
     }
 
-    qInfo()<< "setProgramTable::commandLine=[" <<commandLine <<"]";
     if(!query.exec(commandLine)){
         qWarning() << "setProgramTable - ERROR01: " << query.lastError().text();
         ret=  1;
@@ -130,9 +133,6 @@ int BshDb::setProgramTable(const struct Program&  program){
                                                         program.mProgramId );
     }
 
-
-
-    qInfo()<< "setProgramTable::commandLine=[" << commandLine<<"]";;
     if(!query.exec(commandLine)){
         qWarning() << "setProgramTable::struct Program  error->" << query.lastError().text();
         ret=  1;
@@ -141,10 +141,10 @@ int BshDb::setProgramTable(const struct Program&  program){
     return ret;
 }
 
-bool BshDb::getProgramTable(enum PROGRAM_IDS  programId, std::string& modeName){
+bool BshDb::getProgramTable(programId id, std::string& modeName){
     QSqlQuery query;
     bool ret = false;
-    std::string commandLine = "SELECT modeName FROM Program WHERE programId = " + QString::number(programId).toStdString();
+    std::string commandLine = "SELECT modeName FROM Program WHERE programId = " + QString::number(id).toStdString();
     query.prepare(commandLine.c_str());
     if(!query.exec()){
         qWarning()<< commandLine.c_str();
@@ -160,12 +160,12 @@ bool BshDb::getProgramTable(enum PROGRAM_IDS  programId, std::string& modeName){
     return ret;
 }
 
-bool BshDb::DeleteProgramTable(enum PROGRAM_IDS programId){
+bool BshDb::deleteProgramTable(programId id){
     QSqlQuery query;
     bool ret = false;
     char commandLine[256] ;
-    sprintf(commandLine, PROGRAM_DELETE_ID,programId);
-    qInfo()<< "DeleteProgramTable::commandLine=[" << commandLine<<"]";;
+    sprintf(commandLine, PROGRAM_DELETE_ID,id);
+
     query.prepare(commandLine);
     if(!query.exec()){
       qWarning() << "hasProgramTable- ERROR: " << query.lastError().text();
@@ -175,93 +175,129 @@ bool BshDb::DeleteProgramTable(enum PROGRAM_IDS programId){
     return ret;
 }
 
-bool BshDb::hasProgramTable(enum PROGRAM_IDS programId){
+bool BshDb::hasProgramTable(programId id){
     bool ret = false;
     QSqlQuery query;
     char commandLine[256] ;
-    sprintf(commandLine, PROGRAM_FIND_ID,programId);
-    qInfo()<< "hasProgramTable::commandLine=[" << commandLine<<"]";;
+    sprintf(commandLine, PROGRAM_FIND_ID,id);
 
     query.prepare(commandLine);
     if(!query.exec()){
         qWarning() << "hasProgramTable- ERROR: " << query.lastError().text();
     }else{
-        int idModeNamee = query.record().indexOf("modeName");
         if(query.first()){
-          qWarning() <<"hasProgramTable modeName="<< query.value(idModeNamee).toString();
           ret = true;
         }
     }
     return ret;
 }
 
-int BshDb::selectProgramTable(){
+int BshDb::getSizeOfProgramTable() const{
     QSqlQuery query;
-    //query.prepare("SELECT name FROM Program WHERE id = 1");
-    query.prepare("SELECT * FROM Program");
+    query.prepare( PROGRAM_SELECT_ALL);
+
+    int size= 0;
     if(!query.exec()){
-        qWarning() << "MainWindow::OnSearchClicked - ERROR: " << query.lastError().text();
+        qWarning() << "getSizeOfProgramTable- ERROR: " << query.lastError().text();
     }else{
-        /*if(query.first()){
-            qWarning()<<query.value(0).toString();
-        }*/
-        int idName = query.record().indexOf("modeName");
-        int i = 0;
-        while (query.next())
-        {
-           QString name = query.value(idName).toString();
-           qDebug() <<"selectTable="<< name <<" i="<< i++;
+        while (query.next()){
+            size ++;
         }
     }
-     return 0;
+     return size;
 }
 
+int BshDb::getSizeOfSettingElementTable() const{
+    QSqlQuery query;
+    query.prepare( SETTING_ELEMENT_SELECT_ALL);
 
+    int size= 0;
+    if(!query.exec()){
+        qWarning() << "getSizeOfProgramTable- ERROR: " << query.lastError().text();
+    }else{
+        while (query.next()){
+            size ++;
+        }
+    }
+     return size;
+}
 
-
- int BshDb::setSettingElementTable(enum PROGRAM_IDS programId, const struct SettingElement&  settingElemment){
+int BshDb::setSettingElementTable(programId id, const struct SettingElement&  settingElemment){
      QSqlQuery query;
      int ret = 0;
-     bool hasId =  hasSettingElementTable(programId);
-     char commandLine[256] ;
+     bool hasId =  hasSettingElementTable(id, settingElemment.name);
+     char commandLine[256] = {0};
      if(false == hasId){
-          sprintf(commandLine, SETTING_ELEMENT_INSERT_ALL,programId, \
-                                             settingElemment.iconUrl.c_str(), \
-                                             settingElemment.name.c_str(),\
-                                             settingElemment.value,\
-                                             settingElemment.valueType.c_str());
+          sprintf(commandLine, SETTING_ELEMENT_INSERT_ALL,\
+                                id, \
+                                settingElemment.iconUrl.c_str(), \
+                                settingElemment.name.c_str(),\
+                                settingElemment.value,\
+                                settingElemment.valueType.c_str());
      }else{
-         /* sprintf(commandLine, PROGRAM_UPDATE_ALL,program.mModeName.c_str(),\
-                                                         program.mProgramName.c_str(),\
-                                                         program.mIsFavorite,\
-                                                         program.mOrder,\
-                                                         program.mProgramId );*/
+          sprintf(commandLine, SETTING_ELEMENT_UPDATE_ALL, \
+                                settingElemment.iconUrl.c_str(), \
+                                settingElemment.value,\
+                                settingElemment.valueType.c_str(),\
+                                id,\
+                                settingElemment.name.c_str() );
      }
 
-
-     qInfo()<< "setSettingElementTable::commandLine=[" << commandLine<<"]";;
      if(!query.exec(commandLine)){
          qWarning() << "setProgramTable::struct Program  error->" << query.lastError().text();
+         qInfo()<< "BshDb::setSettingElementTable::commandLine=[" << commandLine<<"]";
          ret=  1;
      }
 
      return ret;
  }
 
- bool BshDb::hasSettingElementTable(enum PROGRAM_IDS programId){
+int BshDb::getSettingElementTable(programId id, std::vector<struct SettingElement>& vSettingElement){
+    int ret = 0;
+    vSettingElement.clear();
+    char commandLine[256] ;
+    sprintf(commandLine, SETTING_ELEMENT_FIND_ID, id );
+    QSqlQuery query;
+
+     query.prepare(commandLine);
+
+     if(!query.exec()){
+         qWarning() << "getSettingElementTable- ERROR: " << query.lastError().text();
+         qInfo()<< "getSettingElementTable::commandLine=[" << commandLine<<"]";;
+     }else{
+
+         int idName = query.record().indexOf("name");
+         int idIconUrl = query.record().indexOf("iconUrl");
+         int idValue = query.record().indexOf("value");
+         int idvalueType = query.record().indexOf("valueType");
+
+         while (query.next()){
+
+             struct SettingElement  item;
+             item.name = query.value(idName).toString().toStdString();
+             item.iconUrl = query.value(idIconUrl).toString().toStdString();
+             item.valueType = query.value(idvalueType).toString().toStdString();
+             item.value = query.value(idValue).toInt();
+
+             vSettingElement.push_back(item);
+         }
+     }
+    return ret;
+ }
+
+
+ bool BshDb::hasSettingElementTable(programId id, const std::string& name){
      bool ret = false;
      QSqlQuery query;
      char commandLine[256] ;
-     sprintf(commandLine, SETTING_ELEMENT_FIND_ID, programId);
-     qInfo()<< "hasSettingElementTable::commandLine=[" << commandLine<<"]";;
+     sprintf(commandLine, SETTING_ELEMENT_FIND_ID_NAME, id, name.c_str());
 
      query.prepare(commandLine);
      if(!query.exec()){
          qWarning() << "hasProgramTable- ERROR: " << query.lastError().text();
+         qInfo()<< "hasSettingElementTable::commandLine=[" << commandLine<<"]";
      }else{
-         int idModeNamee = query.record().indexOf("name");
          if(query.first()){
-           qWarning() <<"hasSettingElementTable name="<< query.value(idModeNamee).toString();
            ret = true;
          }
      }
