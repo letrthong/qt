@@ -17,12 +17,16 @@ CONFIG   += testcase
 
 # Input
 SOURCES += main.cpp \
-    bshdb.cpp \
-    testdb.cpp \
+    BshBb.cpp \
+    DbIntegerIntervalOption.cpp \
+    DbOptionBase.cpp \
+    testDb.cpp \
     testqstring.cpp
 
 HEADERS += \
-    bshdb.h \
-    defbshdb.h \
-    testdb.h \
+    BshBb.h \
+    DbIntegerIntervalOption.h \
+    DbOptionBase.h \
+    DefBshBb.h \
+    testDb.h \
     testqstring.h

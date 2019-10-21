@@ -14,9 +14,10 @@
 #define BSH_DB_H
 #include <string>
 #include <QSqlDatabase>
-#include "defbshdb.h"
+#include "DefBshBb.h"
 #include <vector>
 
+#include "DbIntegerIntervalOption.h"
 
 class BshDb
 {
@@ -25,6 +26,7 @@ public:
     ~BshDb();
 
     int initDb();
+    int intDefaulValues();
     int createTables();
 
     int setProgramTable(programId id, const std::string& modeName);
@@ -35,8 +37,8 @@ public:
     int getSizeOfProgramTable() const ;
 
 
-    int setSettingElementTable(programId id, const struct SettingElement& settingElemment);
-    int getSettingElementTable(programId id, std::vector<struct SettingElement>& vSettingElement);
+    int setSettingElementTable(programId id, const DbIntegerIntervalOption& settingElemment);
+    int getSettingElementTable(programId id, std::vector<DbIntegerIntervalOption>& vSettingElement);
     int getSizeOfSettingElementTable() const ;
 
 private:

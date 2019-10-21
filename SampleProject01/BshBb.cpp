@@ -1,4 +1,4 @@
-#include "bshdb.h"
+#include "BshBb.h"
 #include <QDebug>
 #include <QSqlDriver>
 #include <QSqlError>
@@ -6,7 +6,6 @@
 #include <string>
 #include <QFileInfo>
 #include <QSqlRecord>
-
 
 BshDb::BshDb(const std::string dbName):_dbName(dbName){
 }
@@ -38,17 +37,28 @@ int BshDb::initDb(){
     //Create tables
    createTables();
 
+   intDefaulValues();
     return  ret;
+}
+
+int BshDb::intDefaulValues(){
+
+    int size = getSizeOfProgramTable();
+    if(size <1 ){
+        setProgramTable({ PROGRAM_IDS::PROGRAM_ID_01, "abc", "/path01", "fdsfadfd", 1, 1 });
+
+        setSettingElementTable(PROGRAM_IDS::PROGRAM_ID_01, {"name01", "iconUrl01" , 1 ,4 ,5, 30} );
+        setSettingElementTable(PROGRAM_IDS::PROGRAM_ID_01, {"name02", "iconUrl02" , 1 ,4 ,5, 30} );
+        setSettingElementTable(PROGRAM_IDS::PROGRAM_ID_01, {"name03", "iconUrl03" , 1 ,4 ,5, 30} );
+        setSettingElementTable(PROGRAM_IDS::PROGRAM_ID_01, {"name04", "iconUrl04" , 1 ,4 ,5, 30} );
+        setSettingElementTable(PROGRAM_IDS::PROGRAM_ID_01, {"name05", "iconUrl05" , 1 ,4 ,5, 30} );
+    }
 }
 
 int BshDb::createTables(){
 
     //Program
-    QSqlQuery queryProgram("CREATE TABLE  IF NOT EXISTS Program (programId INTEGER PRIMARY KEY,\
-                                                                         modeName TEXT,\
-                                                                         programName TEXT,\
-                                                                         isFavorite INTEGER,\
-                                                                         isOrder INTEGER );" );
+    QSqlQuery queryProgram( PROGRAM_CREATE_TABLE );
 
     if(!queryProgram.isActive()){
          qWarning() << "createTables - ERROR: " << queryProgram.lastError().text();
@@ -56,39 +66,9 @@ int BshDb::createTables(){
 
 
     //SettingElement
-    QSqlQuery querySettingElement("CREATE TABLE  IF NOT EXISTS settingElement (id INTEGER PRIMARY KEY,\
-                                                                        programId INTEGER,\
-                                                                        iconUrl TEXT,\
-                                                                        name TEXT,\
-                                                                        value INTEGER,\
-                                                                        valueType TEXT);" );
+    QSqlQuery querySettingElement( INTEGER_INTERVAL_OPTION_CREATE_TABLE );
     if(!querySettingElement.isActive()){
          qWarning() << "createTables - ERROR: " << querySettingElement.lastError().text();
-    }
-
-
-    //SettingOptionElement
-    QSqlQuery querySettingOptionElement("CREATE TABLE  IF NOT EXISTS SettingOptionElement (id INTEGER PRIMARY KEY,\
-                                                                        programId INTEGER,\
-                                                                        iconUrl TEXT,\
-                                                                        name TEXT,\
-                                                                        value INTEGER,\
-                                                                        template INTEGER,\
-                                                                        valueType TEXT);" );
-    if(!querySettingOptionElement.isActive()){
-         qWarning() << "createTables- ERROR: " << querySettingOptionElement.lastError().text();
-    }
-
-
-    //SettingStainElement
-    QSqlQuery querySettingStainElement("CREATE TABLE  IF NOT EXISTS SettingStainElement (id INTEGER PRIMARY KEY,\
-                                                                        programId INTEGER,\
-                                                                        iconUrl TEXT,\
-                                                                        name TEXT,\
-                                                                        value INTEGER,\
-                                                                        valueType TEXT);" );
-    if(!querySettingStainElement.isActive()){
-         qWarning() << "createTables - ERROR: " << querySettingStainElement.lastError().text();
     }
 
     return 0;
@@ -122,15 +102,17 @@ int BshDb::setProgramTable(const struct Program&  program){
     if(false == hasId){
          sprintf(commandLine, PROGRAM_INSERT_ALL,program.mProgramId, \
                                             program.mModeName.c_str(), \
+                                            program.mTileImageUrl.c_str(), \
                                             program.mProgramName.c_str(),\
                                             program.mIsFavorite,\
                                             program.mOrder);
     }else{
-         sprintf(commandLine, PROGRAM_UPDATE_ALL,program.mModeName.c_str(),\
-                                                        program.mProgramName.c_str(),\
-                                                        program.mIsFavorite,\
-                                                        program.mOrder,\
-                                                        program.mProgramId );
+         sprintf(commandLine, PROGRAM_UPDATE_ALL,program.mProgramName.c_str(),\
+                                                program.mTileImageUrl.c_str(),\
+                                                program.mModeName.c_str(),\
+                                                program.mIsFavorite,\
+                                                program.mOrder,\
+                                                program.mProgramId );
     }
 
     if(!query.exec(commandLine)){
@@ -140,6 +122,8 @@ int BshDb::setProgramTable(const struct Program&  program){
 
     return ret;
 }
+
+//programName='%s', tileImageUrl='%s', modeName ='%s', isFavorite
 
 bool BshDb::getProgramTable(programId id, std::string& modeName){
     QSqlQuery query;
@@ -240,7 +224,7 @@ int BshDb::getSizeOfProgramTable() const{
 
 int BshDb::getSizeOfSettingElementTable() const{
     QSqlQuery query;
-    query.prepare( SETTING_ELEMENT_SELECT_ALL);
+    query.prepare( INTEGER_INTERVAL_OPTION_SELECT_ALL);
 
     int size= 0;
     if(!query.exec()){
@@ -253,25 +237,34 @@ int BshDb::getSizeOfSettingElementTable() const{
      return size;
 }
 
-int BshDb::setSettingElementTable(programId id, const struct SettingElement&  settingElemment){
+int BshDb::setSettingElementTable(programId id, const DbIntegerIntervalOption&  settingElemment){
      QSqlQuery query;
      int ret = 0;
-     bool hasId =  hasSettingElementTable(id, settingElemment.name);
+
+
+     bool hasId =  hasSettingElementTable(id,  settingElemment.getName());
      char commandLine[256] = {0};
      if(false == hasId){
-          sprintf(commandLine, SETTING_ELEMENT_INSERT_ALL,\
+           qInfo()<< "BshDb::setSettingElementTable::Insert"  ;
+          sprintf(commandLine, INTEGER_INTERVAL_OPTION_INSERT_ALL,\
                                 id, \
-                                settingElemment.iconUrl.c_str(), \
-                                settingElemment.name.c_str(),\
-                                settingElemment.value,\
-                                settingElemment.valueType.c_str());
+                                settingElemment.getIconUrl().c_str(), \
+                                settingElemment.getName().c_str(),\
+                                settingElemment.getIntervalCount(),\
+                                settingElemment.getIntervalIndex(),\
+                                settingElemment.getStartingValue(),\
+                                settingElemment.getIntervalLength());
      }else{
-          sprintf(commandLine, SETTING_ELEMENT_UPDATE_ALL, \
-                                settingElemment.iconUrl.c_str(), \
-                                settingElemment.value,\
-                                settingElemment.valueType.c_str(),\
+          qInfo()<< "BshDb::setSettingElementTable::update"  ;
+          sprintf(commandLine, INTEGER_INTERVAL_OPTION_UPDATE_ALL, \
+                                settingElemment.getIconUrl().c_str(), \
+                                settingElemment.getIntervalCount(),\
+                                settingElemment.getIntervalIndex(),\
+                                settingElemment.getStartingValue(),\
+                                settingElemment.getIntervalLength(),\
                                 id,\
-                                settingElemment.name.c_str() );
+                                settingElemment.getName().c_str() );
+           qInfo()<< "BshDb::setSettingElementTable::commandLine=[" << commandLine<<"]";
      }
 
      if(!query.exec(commandLine)){
@@ -280,14 +273,16 @@ int BshDb::setSettingElementTable(programId id, const struct SettingElement&  se
          ret=  1;
      }
 
+
+
      return ret;
  }
 
-int BshDb::getSettingElementTable(programId id, std::vector<struct SettingElement>& vSettingElement){
+int BshDb::getSettingElementTable(programId id, std::vector<DbIntegerIntervalOption>& vSettingElement){
     int ret = 0;
     vSettingElement.clear();
     char commandLine[256] ;
-    sprintf(commandLine, SETTING_ELEMENT_FIND_ID, id );
+    sprintf(commandLine, INTEGER_INTERVAL_OPTION_FIND_ID, id );
     QSqlQuery query;
 
      query.prepare(commandLine);
@@ -299,16 +294,15 @@ int BshDb::getSettingElementTable(programId id, std::vector<struct SettingElemen
 
          int idName = query.record().indexOf("name");
          int idIconUrl = query.record().indexOf("iconUrl");
-         int idValue = query.record().indexOf("value");
-         int idvalueType = query.record().indexOf("valueType");
+        // int idValue = query.record().indexOf("value");
+        // int idvalueType = query.record().indexOf("valueType");
 
          while (query.next()){
-
-             struct SettingElement  item;
-             item.name = query.value(idName).toString().toStdString();
-             item.iconUrl = query.value(idIconUrl).toString().toStdString();
-             item.valueType = query.value(idvalueType).toString().toStdString();
-             item.value = query.value(idValue).toInt();
+             DbIntegerIntervalOption  item;
+             item.setName( query.value(idName).toString().toStdString());
+             item.setIconUrl(query.value(idIconUrl).toString().toStdString());
+            // item.valueType = query.value(idvalueType).toString().toStdString();
+            // item.value = query.value(idValue).toInt();
 
              vSettingElement.push_back(item);
          }
@@ -321,7 +315,7 @@ int BshDb::getSettingElementTable(programId id, std::vector<struct SettingElemen
      bool ret = false;
      QSqlQuery query;
      char commandLine[256] ;
-     sprintf(commandLine, SETTING_ELEMENT_FIND_ID_NAME, id, name.c_str());
+     sprintf(commandLine, INTEGER_INTERVAL_OPTION_FIND_ID_NAME, id, name.c_str());
 
      query.prepare(commandLine);
      if(!query.exec()){

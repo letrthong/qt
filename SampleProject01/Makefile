@@ -49,15 +49,19 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = main.cpp \
-		bshdb.cpp \
-		testdb.cpp \
-		testqstring.cpp moc_testdb.cpp \
+		BshBb.cpp \
+		DbIntegerIntervalOption.cpp \
+		DbOptionBase.cpp \
+		testDb.cpp \
+		testqstring.cpp moc_testDb.cpp \
 		moc_testqstring.cpp
 OBJECTS       = main.o \
-		bshdb.o \
-		testdb.o \
+		BshBb.o \
+		DbIntegerIntervalOption.o \
+		DbOptionBase.o \
+		testDb.o \
 		testqstring.o \
-		moc_testdb.o \
+		moc_testDb.o \
 		moc_testqstring.o
 DIST          = /opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/common/unix.conf \
@@ -164,12 +168,16 @@ DIST          = /opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/lex.prf \
-		SampleProject.pro bshdb.h \
-		defbshdb.h \
-		testdb.h \
+		SampleProject.pro BshBb.h \
+		DbIntegerIntervalOption.h \
+		DbOptionBase.h \
+		DefBshBb.h \
+		testDb.h \
 		testqstring.h main.cpp \
-		bshdb.cpp \
-		testdb.cpp \
+		BshBb.cpp \
+		DbIntegerIntervalOption.cpp \
+		DbOptionBase.cpp \
+		testDb.cpp \
 		testqstring.cpp
 QMAKE_TARGET  = qt.out
 DESTDIR       = 
@@ -417,8 +425,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents bshdb.h defbshdb.h testdb.h testqstring.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp bshdb.cpp testdb.cpp testqstring.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents BshBb.h DbIntegerIntervalOption.h DbOptionBase.h DefBshBb.h testDb.h testqstring.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp BshBb.cpp DbIntegerIntervalOption.cpp DbOptionBase.cpp testDb.cpp testqstring.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -445,10 +453,10 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_testdb.cpp moc_testqstring.cpp
+compiler_moc_header_make_all: moc_testDb.cpp moc_testqstring.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_testdb.cpp moc_testqstring.cpp
-moc_testdb.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
+	-$(DEL_FILE) moc_testDb.cpp moc_testqstring.cpp
+moc_testDb.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qnamespace.h \
@@ -699,8 +707,8 @@ moc_testdb.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QSizePolicy \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QMetaEnum \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qttestversion.h \
-		testdb.h
-	/opt/Qt5.6.3/5.6.3/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/linux-g++ -I/home/etr1hc/samba/view/qt/SampleProject01 -I/home/etr1hc/samba/view/qt/SampleProject01 -I/opt/Qt5.6.3/5.6.3/gcc_64/include -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore testdb.h -o moc_testdb.cpp
+		testDb.h
+	/opt/Qt5.6.3/5.6.3/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/linux-g++ -I/home/etr1hc/samba/view/qt/SampleProject01 -I/home/etr1hc/samba/view/qt/SampleProject01 -I/opt/Qt5.6.3/5.6.3/gcc_64/include -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore testDb.h -o moc_testDb.cpp
 
 moc_testqstring.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
@@ -1220,10 +1228,10 @@ main.o: main.cpp testqstring.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QSizePolicy \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QMetaEnum \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qttestversion.h \
-		testdb.h
+		testDb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-bshdb.o: bshdb.cpp bshdb.h \
+BshBb.o: BshBb.cpp BshBb.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/QSqlDatabase \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/qsqldatabase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstring.h \
@@ -1263,7 +1271,9 @@ bshdb.o: bshdb.cpp bshdb.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qarraydata.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstringbuilder.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/qsql.h \
-		defbshdb.h \
+		DefBshBb.h \
+		DbIntegerIntervalOption.h \
+		DbOptionBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdebug.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qalgorithms.h \
@@ -1307,9 +1317,16 @@ bshdb.o: bshdb.cpp bshdb.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/QSqlRecord \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/qsqlrecord.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bshdb.o bshdb.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BshBb.o BshBb.cpp
 
-testdb.o: testdb.cpp testdb.h \
+DbIntegerIntervalOption.o: DbIntegerIntervalOption.cpp DbIntegerIntervalOption.h \
+		DbOptionBase.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DbIntegerIntervalOption.o DbIntegerIntervalOption.cpp
+
+DbOptionBase.o: DbOptionBase.cpp DbOptionBase.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DbOptionBase.o DbOptionBase.cpp
+
+testDb.o: testDb.cpp testDb.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1560,8 +1577,16 @@ testdb.o: testdb.cpp testdb.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qtesttouch.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QSizePolicy \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QMetaEnum \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qttestversion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testdb.o testdb.cpp
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qttestversion.h \
+		BshBb.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/QSqlDatabase \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/qsqldatabase.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtSql/qsql.h \
+		DefBshBb.h \
+		DbIntegerIntervalOption.h \
+		DbOptionBase.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QtGlobal
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testDb.o testDb.cpp
 
 testqstring.o: testqstring.cpp testqstring.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
@@ -1817,8 +1842,8 @@ testqstring.o: testqstring.cpp testqstring.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtTest/qttestversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o testqstring.o testqstring.cpp
 
-moc_testdb.o: moc_testdb.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_testdb.o moc_testdb.cpp
+moc_testDb.o: moc_testDb.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_testDb.o moc_testDb.cpp
 
 moc_testqstring.o: moc_testqstring.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_testqstring.o moc_testqstring.cpp

@@ -1,7 +1,7 @@
 
 
 #include "testqstring.h"
-#include "testdb.h"
+#include "testDb.h"
 #include <QDebug>
 
 

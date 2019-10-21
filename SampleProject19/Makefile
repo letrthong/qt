@@ -59,12 +59,12 @@ SOURCES       = app/Core/infostore.cpp \
 		app/DataModel/screen03Handler.cpp \
 		qmlbase/EditTextBase.cpp \
 		SM/ScreenController.cpp \
-		qmlbase/dataobject.cpp moc_Infostore.cpp \
+		qmlbase/ItemCheckBoxText.cpp moc_Infostore.cpp \
 		moc_MainController.cpp \
 		moc_SignalManager.cpp \
 		moc_SceneBase.cpp \
 		moc_EditTextBase.cpp \
-		moc_dataobject.cpp
+		moc_ItemCheckBoxText.cpp
 OBJECTS       = infostore.o \
 		MainController.o \
 		main.o \
@@ -76,14 +76,16 @@ OBJECTS       = infostore.o \
 		screen03Handler.o \
 		EditTextBase.o \
 		ScreenController.o \
-		dataobject.o \
+		ItemCheckBoxText.o \
 		moc_Infostore.o \
 		moc_MainController.o \
 		moc_SignalManager.o \
 		moc_SceneBase.o \
 		moc_EditTextBase.o \
-		moc_dataobject.o
-DIST          = qrc/Scenes/EditText_250_50.qml \
+		moc_ItemCheckBoxText.o
+DIST          = qrc/Scenes/Background_250_50.qml \
+		qrc/Scenes/Background_ListView_250_250.qml \
+		qrc/Scenes/EditText_250_50.qml \
 		qrc/Scenes/ListView_Item_Button_250_50.qml \
 		qrc/Scenes/ListView_Item_Text_CheckBox_250_50.qml \
 		qrc/Scenes/ScrollBar.qml \
@@ -100,6 +102,7 @@ DIST          = qrc/Scenes/EditText_250_50.qml \
 		qrc/Scenes/BackButton_160_80.qml \
 		qrc/Scenes/PushButton_250_50.qml \
 		qrc/Scenes/ListView_250_250.qml \
+		qrc/images/icon01.jpg \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/common/linux.conf \
@@ -215,7 +218,7 @@ DIST          = qrc/Scenes/EditText_250_50.qml \
 		app/DataModel/screen03Handler.h \
 		qmlbase/DefComposite.h \
 		qmlbase/EditTextBase.h \
-		qmlbase/dataobject.h app/Core/infostore.cpp \
+		qmlbase/ItemCheckBoxText.h app/Core/infostore.cpp \
 		app/Core/MainController.cpp \
 		app/Core/main.cpp \
 		app/Core/SignalManager.cpp \
@@ -226,7 +229,7 @@ DIST          = qrc/Scenes/EditText_250_50.qml \
 		app/DataModel/screen03Handler.cpp \
 		qmlbase/EditTextBase.cpp \
 		SM/ScreenController.cpp \
-		qmlbase/dataobject.cpp
+		qmlbase/ItemCheckBoxText.cpp
 QMAKE_TARGET  = qt.out
 DESTDIR       = 
 TARGET        = qt.out
@@ -473,8 +476,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents app/Core/Infostore.h app/Core/MainController.h app/Core/SignalManager.h app/Core/ISceneBase.h app/Core/SceneBase.h app/Core/singleton.h app/DataModel/screen02Handler.h app/DataModel/screen01Handler.h SM/ScreenController.h app/DataModel/screen03Handler.h qmlbase/DefComposite.h qmlbase/EditTextBase.h qmlbase/dataobject.h $(DISTDIR)/
-	$(COPY_FILE) --parents app/Core/infostore.cpp app/Core/MainController.cpp app/Core/main.cpp app/Core/SignalManager.cpp app/Core/singleton.cpp app/Core/SceneBase.cpp app/DataModel/screen02Handler.cpp app/DataModel/screen01Handler.cpp app/DataModel/screen03Handler.cpp qmlbase/EditTextBase.cpp SM/ScreenController.cpp qmlbase/dataobject.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents app/Core/Infostore.h app/Core/MainController.h app/Core/SignalManager.h app/Core/ISceneBase.h app/Core/SceneBase.h app/Core/singleton.h app/DataModel/screen02Handler.h app/DataModel/screen01Handler.h SM/ScreenController.h app/DataModel/screen03Handler.h qmlbase/DefComposite.h qmlbase/EditTextBase.h qmlbase/ItemCheckBoxText.h $(DISTDIR)/
+	$(COPY_FILE) --parents app/Core/infostore.cpp app/Core/MainController.cpp app/Core/main.cpp app/Core/SignalManager.cpp app/Core/singleton.cpp app/Core/SceneBase.cpp app/DataModel/screen02Handler.cpp app/DataModel/screen01Handler.cpp app/DataModel/screen03Handler.cpp qmlbase/EditTextBase.cpp SM/ScreenController.cpp qmlbase/ItemCheckBoxText.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -499,9 +502,9 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_Infostore.cpp moc_MainController.cpp moc_SignalManager.cpp moc_SceneBase.cpp moc_EditTextBase.cpp moc_dataobject.cpp
+compiler_moc_header_make_all: moc_Infostore.cpp moc_MainController.cpp moc_SignalManager.cpp moc_SceneBase.cpp moc_EditTextBase.cpp moc_ItemCheckBoxText.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Infostore.cpp moc_MainController.cpp moc_SignalManager.cpp moc_SceneBase.cpp moc_EditTextBase.cpp moc_dataobject.cpp
+	-$(DEL_FILE) moc_Infostore.cpp moc_MainController.cpp moc_SignalManager.cpp moc_SceneBase.cpp moc_EditTextBase.cpp moc_ItemCheckBoxText.cpp
 moc_Infostore.cpp: app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
@@ -1076,7 +1079,7 @@ moc_EditTextBase.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		qmlbase/EditTextBase.h
 	/opt/Qt5.6.3/5.6.3/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/linux-g++ -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19/app/Core -I/home/etr1hc/samba/view/qt/SampleProject19/app/DataModel -I/home/etr1hc/samba/view/qt/SampleProject19/SM -I/home/etr1hc/samba/view/qt/SampleProject19/qmlbase -I/opt/Qt5.6.3/5.6.3/gcc_64/include -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore qmlbase/EditTextBase.h -o moc_EditTextBase.cpp
 
-moc_dataobject.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
+moc_ItemCheckBoxText.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qnamespace.h \
@@ -1131,8 +1134,8 @@ moc_dataobject.cpp: /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qcontainerfwd.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject_impl.h \
-		qmlbase/dataobject.h
-	/opt/Qt5.6.3/5.6.3/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/linux-g++ -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19/app/Core -I/home/etr1hc/samba/view/qt/SampleProject19/app/DataModel -I/home/etr1hc/samba/view/qt/SampleProject19/SM -I/home/etr1hc/samba/view/qt/SampleProject19/qmlbase -I/opt/Qt5.6.3/5.6.3/gcc_64/include -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore qmlbase/dataobject.h -o moc_dataobject.cpp
+		qmlbase/ItemCheckBoxText.h
+	/opt/Qt5.6.3/5.6.3/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.3/5.6.3/gcc_64/mkspecs/linux-g++ -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19 -I/home/etr1hc/samba/view/qt/SampleProject19/app/Core -I/home/etr1hc/samba/view/qt/SampleProject19/app/DataModel -I/home/etr1hc/samba/view/qt/SampleProject19/SM -I/home/etr1hc/samba/view/qt/SampleProject19/qmlbase -I/opt/Qt5.6.3/5.6.3/gcc_64/include -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork -I/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore qmlbase/ItemCheckBoxText.h -o moc_ItemCheckBoxText.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1610,7 +1613,6 @@ main.o: app/Core/main.cpp /opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QGuiApplicatio
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QTimer \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qtimer.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbasictimer.h \
-		app/DataModel/screen01Handler.h \
 		app/Core/singleton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o app/Core/main.cpp
 
@@ -1920,11 +1922,9 @@ singleton.o: app/Core/singleton.cpp app/Core/singleton.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o singleton.o app/Core/singleton.cpp
 
-SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qnamespace.h \
+SceneBase.o: app/Core/SceneBase.cpp /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qconfig.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfeatures.h \
@@ -1954,87 +1954,48 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qversiontagging.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qhash.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qchar.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qlist.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qrefcount.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qarraydata.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstringbuilder.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qlist.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qalgorithms.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qiterator.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qhashfunctions.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qpair.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstringbuilder.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstringlist.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qregexp.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qcoreevent.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qscopedpointer.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmetatype.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qcontainerfwd.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qobject_impl.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QVariant \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qvariant.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmap.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdebug.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qhash.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qtextstream.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qiodevice.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qvariant.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qshareddata.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qvector.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qpoint.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qset.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qcontiguouscache.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QString \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QMainWindow \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qmainwindow.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qwidget.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmargins.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpaintdevice.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qrect.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsize.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpalette.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcolor.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgb.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgba64.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qbrush.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qmatrix.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpolygon.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qregion.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdatastream.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qline.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtransform.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpainterpath.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qimage.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixelformat.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixmap.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfont.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontmetrics.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontinfo.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcursor.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qkeysequence.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlEngine \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlengine.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qurl.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qurlquery.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfile.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfiledevice.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qvector2d.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtouchdevice.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qtabwidget.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qicon.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlApplicationEngine \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlapplicationengine.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlengine.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qjsengine.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qjsvalue.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qtqmlglobal.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlerror.h \
@@ -2047,24 +2008,45 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qopengles2ext.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qopenglext.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindow.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QEvent \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QMargins \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmargins.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QRect \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsize.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qsurface.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qsurfaceformat.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qicon.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqml.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlprivate.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlparserstatus.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmllist.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmetaobject.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/QQuickView \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qquickview.h \
-		app/Core/SignalManager.h \
-		app/Core/ISceneBase.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
-		qmlbase/EditTextBase.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlEngine \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QtQml \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QtQmlDepends \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QtCore \
@@ -2180,7 +2162,9 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork/qabstractnetworkcache.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork/qnetworkrequest.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QSharedDataPointer \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QString \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QUrl \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork/qhttpmultipart.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QByteArray \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QIODevice \
@@ -2226,6 +2210,7 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtNetwork/qtnetworkversion.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qjsvalueiterator.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlapplicationengine.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlcomponent.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlcontext.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlexpression.h \
@@ -2242,6 +2227,8 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qtqmlversion.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QSurfaceFormat \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlComponent \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/QQuickView \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qquickview.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QtGuiDepends \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qaccessible.h \
@@ -2259,6 +2246,8 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpictureformatplugin.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixmapcache.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfont.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qclipboard.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qdrag.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qgenericplugin.h \
@@ -2275,6 +2264,7 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QPaintDevice \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QOpenGLContext \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/QImage \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpalette.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrasterwindow.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qscreen.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QSize \
@@ -2306,6 +2296,8 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpainter.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtextoption.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpen.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontmetrics.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpdfwriter.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtextlayout.h \
@@ -2353,7 +2345,23 @@ SceneBase.o: app/Core/SceneBase.cpp app/Core/SceneBase.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qsgtextureprovider.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qsgvertexcolormaterial.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qtquickversion.h \
-		qmlbase/DefComposite.h
+		qmlbase/DefComposite.h \
+		app/Core/SceneBase.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QMainWindow \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlApplicationEngine \
+		app/Core/SignalManager.h \
+		app/Core/ISceneBase.h \
+		qmlbase/EditTextBase.h \
+		qmlbase/ItemCheckBoxText.h \
+		app/Core/singleton.h \
+		app/Core/MainController.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QThread \
+		app/Core/Infostore.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QTimer
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SceneBase.o app/Core/SceneBase.cpp
 
 screen02Handler.o: app/DataModel/screen02Handler.cpp app/DataModel/screen02Handler.h \
@@ -2801,7 +2809,7 @@ screen03Handler.o: app/DataModel/screen03Handler.cpp app/DataModel/screen03Handl
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QThread \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qthread.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
-		qmlbase/dataobject.h
+		qmlbase/ItemCheckBoxText.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o screen03Handler.o app/DataModel/screen03Handler.cpp
 
 EditTextBase.o: qmlbase/EditTextBase.cpp qmlbase/EditTextBase.h \
@@ -2949,7 +2957,7 @@ ScreenController.o: SM/ScreenController.cpp SM/ScreenController.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ScreenController.o SM/ScreenController.cpp
 
-dataobject.o: qmlbase/dataobject.cpp /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
+ItemCheckBoxText.o: qmlbase/ItemCheckBoxText.cpp /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QDebug \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdebug.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qglobal.h \
@@ -3016,9 +3024,92 @@ dataobject.o: qmlbase/dataobject.cpp /opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QD
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qpoint.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qset.h \
 		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qcontiguouscache.h \
-		qmlbase/dataobject.h \
-		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataobject.o qmlbase/dataobject.cpp
+		qmlbase/ItemCheckBoxText.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QObject \
+		app/Core/singleton.h \
+		app/Core/MainController.h \
+		app/Core/SceneBase.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QVariant \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QString \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/QMainWindow \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qline.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qicon.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/QQmlApplicationEngine \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlapplicationengine.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlengine.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qjsengine.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qjsvalue.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qtqmlglobal.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlerror.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmldebug.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/QQuickWindow \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qquickwindow.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qtquickglobal.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qopengl.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qt_windows.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qopengles2ext.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qopenglext.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qwindow.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QEvent \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QMargins \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QRect \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qsurface.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtGui/qsurfaceformat.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqml.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlprivate.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlparserstatus.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQml/qqmllist.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qmetaobject.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/QQuickView \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtQuick/qquickview.h \
+		app/Core/SignalManager.h \
+		app/Core/ISceneBase.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QThread \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qthread.h \
+		app/Core/Infostore.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/QTimer \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qtimer.h \
+		/opt/Qt5.6.3/5.6.3/gcc_64/include/QtCore/qbasictimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ItemCheckBoxText.o qmlbase/ItemCheckBoxText.cpp
 
 moc_Infostore.o: moc_Infostore.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Infostore.o moc_Infostore.cpp
@@ -3035,8 +3126,8 @@ moc_SceneBase.o: moc_SceneBase.cpp
 moc_EditTextBase.o: moc_EditTextBase.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_EditTextBase.o moc_EditTextBase.cpp
 
-moc_dataobject.o: moc_dataobject.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dataobject.o moc_dataobject.cpp
+moc_ItemCheckBoxText.o: moc_ItemCheckBoxText.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ItemCheckBoxText.o moc_ItemCheckBoxText.cpp
 
 ####### Install
 
