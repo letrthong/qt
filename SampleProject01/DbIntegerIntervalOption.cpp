@@ -1,8 +1,12 @@
 #include "DbIntegerIntervalOption.h"
 
-DbIntegerIntervalOption::DbIntegerIntervalOption()
-{
-
+DbIntegerIntervalOption::DbIntegerIntervalOption(){
+    mIntervalCount = 0;
+    mIntervalIndex = 0;
+    mStartingValue = 0;
+    mIntervalLength = 0;
+    mName ="";
+    mIconURL = "";
 }
 
 DbIntegerIntervalOption::DbIntegerIntervalOption(const std::string& name,  const std::string& iconUrl, int count,int index, int value, int length){

@@ -1,5 +1,5 @@
-#ifndef DBOPTIONBASE_H
-#define DBOPTIONBASE_H
+#ifndef DB_OPTION_BASE_H
+#define DB_OPTION_BASE_H
 #include  <string>
 
 class DbOptionBase
@@ -23,4 +23,4 @@ protected:
      bool mIsDeactivated;
 };
 
-#endif // DBOPTIONBASE_H
+#endif // DB_OPTION_BASE_H

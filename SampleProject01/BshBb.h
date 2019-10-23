@@ -12,12 +12,16 @@
 
 #ifndef BSH_DB_H
 #define BSH_DB_H
+
 #include <string>
-#include <QSqlDatabase>
-#include "DefBshBb.h"
 #include <vector>
+#include <QSqlDatabase>
 
 #include "DbIntegerIntervalOption.h"
+#include "DbIntegerOption.h"
+#include "DbStringOption.h"
+#include "DbBooleanOption.h"
+#include "DefBshBb.h"
 
 class BshDb
 {
@@ -36,14 +40,24 @@ public:
     bool deleteProgramTable(programId id);
     int getSizeOfProgramTable() const ;
 
-
     int setSettingElementTable(programId id, const DbIntegerIntervalOption& settingElemment);
     int getSettingElementTable(programId id, std::vector<DbIntegerIntervalOption>& vSettingElement);
     int getSizeOfSettingElementTable() const ;
 
+    int setSettingElementTable(programId id, const DbIntegerOption& settingElemment);
+    int getSettingElementTable(programId id, std::vector<DbIntegerOption>& vSettingElement);
+
+    int setSettingElementTable(programId id, const DbStringOption& settingElemment);
+    int getSettingElementTable(programId id, std::vector<DbStringOption>& vSettingElement);
+
+    int setSettingElementTable(programId id, const DbBooleanOption& settingElemment);
+    int getSettingElementTable(programId id, std::vector<DbBooleanOption>& vSettingElement);
 private:
     bool hasProgramTable(programId id);
-    bool hasSettingElementTable(programId id, const std::string& name);
+    bool hasIntegerIntervalOption(programId id, const std::string& name);
+    bool hasIntegerOption(programId id, const std::string& name);
+    bool hasStringOption(programId id, const std::string& name);
+    bool hasBoolOption(programId id, const std::string& name);
 
     QSqlDatabase _sqlDatabase;
     std::string _dbName;

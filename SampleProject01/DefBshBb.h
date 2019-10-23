@@ -1,5 +1,5 @@
-#ifndef DEFBSHDB_H
-#define DEFBSHDB_H
+#ifndef DEF_BSH_DB_H
+#define DEF_BSH_DB_H
 #include <string>
 #include <vector>
 
@@ -37,12 +37,61 @@
 
 
 
+#define INTEGER_OPTION_INSERT_ALL      "INSERT INTO integerOption(programId,iconUrl,name,currentIdex ,arrayValues )\
+                                                 VALUES( %d, '%s','%s', %d, '%s');"
+
+#define INTEGER_OPTION_FIND_ID_NAME    "SELECT * FROM integerOption WHERE programId = %d AND  name='%s';"
+#define INTEGER_OPTION_FIND_ID         "SELECT * FROM integerOption WHERE programId = %d;"
+#define INTEGER_OPTION_UPDATE_ALL      "UPDATE integerOption SET iconUrl ='%s', currentIdex=%d, arrayValues='%s' WHERE programId = %d AND  name='%s';"
+#define INTEGER_OPTION_SELECT_ALL      "SELECT * FROM integerOption "
+#define INTEGER_OPTION_CREATE_TABLE    "CREATE TABLE  IF NOT EXISTS integerOption (id INTEGER PRIMARY KEY,\
+                                                                                    programId INTEGER,\
+                                                                                    iconUrl TEXT,\
+                                                                                    name TEXT,\
+                                                                                    currentIdex  INTEGER,\
+                                                                                    arrayValues TEXT);"
+
+
+#define STRING_OPTION_INSERT_ALL      "INSERT INTO stringOption(programId,iconUrl,name,currentIdex ,arrayValues )\
+                                                 VALUES( %d, '%s','%s', %d, '%s');"
+
+#define STRING_OPTION_FIND_ID_NAME    "SELECT * FROM stringOption WHERE programId = %d AND  name='%s';"
+#define STRING_OPTION_FIND_ID         "SELECT * FROM stringOption WHERE programId = %d;"
+#define STRING_OPTION_UPDATE_ALL      "UPDATE stringOption SET iconUrl ='%s', currentIdex=%d, arrayValues='%s' WHERE programId = %d AND  name='%s';"
+#define STRING_OPTION_SELECT_ALL      "SELECT * FROM stringOption "
+#define STRING_OPTION_CREATE_TABLE    "CREATE TABLE  IF NOT EXISTS stringOption (id INTEGER PRIMARY KEY,\
+                                                                                    programId INTEGER,\
+                                                                                    iconUrl TEXT,\
+                                                                                    name TEXT,\
+                                                                                    currentIdex  INTEGER,\
+                                                                                    arrayValues TEXT);"
+
+
+
+#define BOOLEAN_OPTION_INSERT_ALL      "INSERT INTO booleanOption(programId,iconUrl,name,currentIdex ,arrayValues )\
+                                                 VALUES( %d, '%s','%s', %d, '%s');"
+
+#define BOOLEAN_OPTION_FIND_ID_NAME    "SELECT * FROM booleanOption WHERE programId = %d AND  name='%s';"
+#define BOOLEAN_OPTION_FIND_ID         "SELECT * FROM booleanOption WHERE programId = %d;"
+#define BOOLEAN_OPTION_UPDATE_ALL      "UPDATE booleanOption SET iconUrl ='%s', currentIdex=%d, arrayValues='%s' WHERE programId = %d AND  name='%s';"
+#define BOOLEAN_OPTION_SELECT_ALL      "SELECT * FROM booleanOption "
+#define BOOLEAN_OPTION_CREATE_TABLE    "CREATE TABLE  IF NOT EXISTS booleanOption (id INTEGER PRIMARY KEY,\
+                                                                                    programId INTEGER,\
+                                                                                    iconUrl TEXT,\
+                                                                                    name TEXT,\
+                                                                                    currentIdex  INTEGER,\
+                                                                                    arrayValues TEXT);"
+
+
 typedef enum PROGRAM_IDS{
-    PROGRAM_ID_SETTING = 2,
-    PROGRAM_ID_01 ,
-    PROGRAM_ID_02 ,
+    PROGRAM_ID_JEANS = 0,
+    PROGRAM_ID_COTTON ,
+    PROGRAM_ID_EASY_CARE ,
+    PROGRAM_ID_MY_TIME ,
+    PROGRAM_ID_MIX ,
     PROGRAM_ID_UNKNOW
 }programId;
+
 
 
 struct Program{
@@ -56,4 +105,4 @@ struct Program{
 
 
 
-#endif // DEFBSHDB_H
+#endif // DEF_BSH_DB_H

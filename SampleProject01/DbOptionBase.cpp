@@ -1,12 +1,16 @@
 #include "DbOptionBase.h"
 
 DbOptionBase::DbOptionBase(){
+    mIsEnabled = true;
+    mIsDeactivated = false;
 }
 
 
 DbOptionBase::DbOptionBase(const std::string& name,  const std::string& iconUrl){
     mName= name;
     mIconURL =iconUrl;
+    mIsEnabled = true;
+    mIsDeactivated = false;
 }
 DbOptionBase::~DbOptionBase(){
 }

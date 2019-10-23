@@ -1,5 +1,5 @@
-#ifndef DBINTEGERINTERVALOPTION_H
-#define DBINTEGERINTERVALOPTION_H
+#ifndef DB_INTEGER_INTERVAL_OPTION_H
+#define DB_INTEGER_INTERVAL_OPTION_H
 
 #include "DbOptionBase.h"
 
@@ -28,4 +28,4 @@ private:
     int  mIntervalLength;
 };
 
-#endif // DBINTEGERINTERVALOPTION_H
+#endif // DB_INTEGER_INTERVAL_OPTION_H
