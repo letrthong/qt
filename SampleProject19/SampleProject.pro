@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 #CONFIG += qt plugin 
-QT       += core gui qml  quick
+QT += core gui qml quick xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

@@ -24,7 +24,8 @@ public slots:
       void onTimeoutSlot();
 private:
 
-     void loadScreen( );
+     void loadScreen();
+     int parseStateChart();
 private:
       SceneBase *_pCurrentScreen ;
       InfoStore *_pInfoStore;

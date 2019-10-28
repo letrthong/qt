@@ -1,4 +1,6 @@
 #include "MainController.h"
+
+#include <QDomDocument>
 #include <QDebug>
 #include  <iostream>
 using namespace std;
@@ -25,6 +27,8 @@ MainController::MainController(InfoStore *pInfoStor ){
     connect(_pTimer, SIGNAL(timeout()), this, SLOT(onTimeoutSlot()));
     _pTimer->start(100);
     screenIndex = 1;
+
+    parseStateChart();
 }
 
 MainController::~MainController(){
@@ -78,4 +82,76 @@ void MainController::loadScreen(){
    }
 }
 
+int MainController::parseStateChart(){
+    //https://www.lucidar.me/en/dev-c-cpp/reading-xml-files-with-qt/
+     qInfo() << "MainController::parseStateChart";
 
+      QDomDocument xmlBOM;
+      QFile f("./SM/myState.scxml");
+      if (!f.open(QIODevice::ReadOnly ))
+      {
+          // Error while loading file
+          std::cerr << "Error while loading file" << std::endl;
+          return 1;
+      }
+      // Set data into the QDomDocument before processing
+      xmlBOM.setContent(&f);
+      f.close();
+
+      QDomElement root=xmlBOM.documentElement();
+      // Get root names and attributes
+      QString Type=root.tagName();
+      QString name=root.attribute("name","unknow");
+      QString initial=root.attribute("initial","unknow");
+      //int Year=root.attribute("YEAR","1900").toInt();
+
+      // Display root data
+      std::cout << "Type  = " << Type.toStdString().c_str() << std::endl;
+      std::cout << "name = " << name.toStdString().c_str() << std::endl;
+      std::cout <<"initial = " << initial.toStdString().c_str() << std::endl;
+      std::cout << std::endl;
+
+      QDomElement Component=root.firstChild().toElement();
+
+      // Loop while there is a child
+      while(!Component.isNull()){
+          // Check if the child tag name is COMPONENT
+          if (Component.tagName()=="state"){
+              // Read and display the component ID
+              QString ID=Component.attribute("id","unknow id");
+
+              // Get the first child of the component
+              QDomElement Child=Component.firstChild().toElement();
+
+              // Display component data
+              std::cout << "Component " << ID.toStdString().c_str() << std::endl;
+              QString event;
+              QString target;
+              QString cond;
+              // Read each child of the component node
+              while (!Child.isNull()) {
+                  // Read Name and value
+                  if (Child.tagName()=="transition") {
+                      event=Child.attribute("event","unknow");
+                      target=Child.attribute("target","unknow");
+                       cond=Child.attribute("cond","unknow");
+
+                       std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
+                       std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
+                       std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
+                  }
+                  if (Child.tagName()=="VALUE") {
+                     // Value=Child.firstChild().toText().data().toDouble();
+                  }
+
+                  // Next child
+                  Child = Child.nextSibling().toElement();
+              }
+
+
+          }
+
+          // Next component
+          Component = Component.nextSibling().toElement();
+      }
+}
