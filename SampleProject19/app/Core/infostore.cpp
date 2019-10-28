@@ -9,19 +9,21 @@ InfoStore::InfoStore(SceneBase* pSceneBase){
     _isRunning = false;
     _isEnable = false;
 
-    _mapList.insert({0, {"false", "text00", "text", "" } });
+    _mapList.insert({0, {"", "text00", "text", "" } });
     _mapList.insert({1, {"false", "text01", "checkbox", "" } });
     _mapList.insert({2, {"false", "text02", "checkbox", "../images/icon01.jpg" } });
     _mapList.insert({3, {"false", "text03", "switch" , "" } });
+    _mapList.insert({4, {"1", "text04", "comboBox" , "" } });
      qInfo() << "InfoStore::constructure";
 }
 
  InfoStore::InfoStore( )
  {
-     _mapList.insert({0, {"false", "text00", "text", "" } });
+     _mapList.insert({0, {"", "text00", "text", "" } });
      _mapList.insert({1, {"false", "text01", "checkbox", "" } });
      _mapList.insert({2, {"false", "text02", "checkbox", "../images/icon01.jpg" } });
      _mapList.insert({3, {"false", "text03", "switch" , "" } });
+      _mapList.insert({4, {"1", "text04", "comboBox" , "" } });
      _pSceneBase = nullptr;
  }
 

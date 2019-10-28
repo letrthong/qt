@@ -33,7 +33,7 @@ MouseArea  {
             id: background_250_50
 
             Text {
-                x: 56
+                x: 109
                 y: 8
                 width: 128
                 height: 34
@@ -87,14 +87,30 @@ MouseArea  {
 
             Image {
                 id: id_image
-                 visible: false
-                x: 202
-                y: 2
+                visible: false
+                x: 77
+                y: 8
                 width: 35
                 height: 35
                 opacity: 0.2
                 source:  getIconPath()
                 fillMode: Image.PreserveAspectFit
+            }
+
+            ComboBox {
+                id: id_comboBox
+                visible: false
+                x: 2
+                y: 8
+                width: 101
+                height: 29
+                currentIndex: getValueIndex()
+                model: ["First", "Second", "Third"]
+
+                onCurrentIndexChanged: {
+                     console.log("onCurrentIndexChanged  currentIndex=" + currentIndex)
+                    backend.getValue = currentIndex.toString();
+                }
             }
         }
     }
@@ -110,14 +126,22 @@ MouseArea  {
         return itemIcon;
     }
 
+    function getValueIndex(){
+        return   parseInt(itemValue)
+    }
+
    Component.onCompleted: {
        console.log("onCompleted  itemType=" + itemType)
         if(itemType == "text" ){
-
         }else  if(itemType == "checkbox" ) {
             id_check_box.visible = true
         }else  if(itemType == "switch" ) {
             id_switch.visible = true
+        }else if(itemType == "comboBox" ) {
+            id_comboBox.visible = true
+
+        }else{
+
         }
 
         if(getIconPath() === ""){
