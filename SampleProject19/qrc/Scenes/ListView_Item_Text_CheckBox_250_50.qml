@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls  1.2
+import QtQuick.Controls 1.5
 import io.qt.examples.backend 1.0
 
 MouseArea  {
@@ -112,6 +112,24 @@ MouseArea  {
                     backend.getValue = currentIndex.toString();
                 }
             }
+
+            SpinBox {
+               id: id_spinBox
+                visible: false
+
+               value: 1 // "Medium"
+
+               property var items: ["Small", "Medium", "Large"]
+               x: 13
+               y: 8
+               width: 66
+               height: 29
+
+
+
+            }
+
+
         }
     }
 
@@ -139,7 +157,8 @@ MouseArea  {
             id_switch.visible = true
         }else if(itemType == "comboBox" ) {
             id_comboBox.visible = true
-
+        }else if(itemType == "spinBox" ) {
+            id_spinBox.visible = true
         }else{
 
         }
