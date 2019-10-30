@@ -49,7 +49,9 @@ void MainController::onTimeoutSlot(){
 
 void MainController::eventClickCppSlot(int sendTo, const QString &msg){
     screenIndex = screenIndex+ 1;
-    qInfo() << "\n MainController::eventClickCppSlot"  <<  screenIndex++;
+    qInfo() << "MainController::eventClickCppSlot screenIndex="  <<  screenIndex++;
+    qInfo() << "MainController::eventClickCppSlot screenIndex="  << sendTo;
+    qInfo() << "MainController::eventClickCppSlot msg="  << msg;
 }
 
 void MainController::onControllerSlot(QVariant id){

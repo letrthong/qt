@@ -32,6 +32,18 @@ MouseArea  {
         Background_250_50 {
             id: background_250_50
 
+            Rectangle {
+               id: id_rectangle_press
+               x: 10
+               y: 40
+               width: 234
+               height: 1
+               color: "#ab1414"
+               border.color: "#00000000"
+               border.width: 4
+               visible: name.pressed
+            }
+
             Text {
                 x: 109
                 y: 8
