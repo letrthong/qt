@@ -3,9 +3,12 @@ import QtQuick.Controls  1.2
 
 Item {
     id: id_screen1
+
     width: 300
     height: 480
     visible: true
+
+    property string screenName: "screen01"
 
     signal qmlSignalButton(int sendTo, string msg)
 

@@ -1,5 +1,6 @@
 #include "MainController.h"
-
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QDomDocument>
 #include <QDebug>
 #include  <iostream>
@@ -12,6 +13,8 @@ using namespace std;
 #include "Infostore.h"
 #include <QDateTime>
 #include <QQmlContext>
+
+QQueue<QString>  MainController::_qMessage;
 
 MainController::MainController(InfoStore *pInfoStor ){
     _pQuickView = new QQuickView;
@@ -42,7 +45,7 @@ MainController::~MainController(){
 void MainController::onTimeoutSlot(){
     _pTimer->start(100);
     if( screenIndex> 0){
-        screenIndex = 0;
+        screenIndex  = 0;
         loadScreen();
     }
 }
@@ -52,6 +55,7 @@ void MainController::eventClickCppSlot(int sendTo, const QString &msg){
     qInfo() << "MainController::eventClickCppSlot screenIndex="  <<  screenIndex++;
     qInfo() << "MainController::eventClickCppSlot screenIndex="  << sendTo;
     qInfo() << "MainController::eventClickCppSlot msg="  << msg;
+    _qMessage.enqueue(msg);
 }
 
 void MainController::onControllerSlot(QVariant id){
@@ -63,6 +67,18 @@ void MainController::loadScreen(){
     if(_pCurrentScreen != nullptr){
         delete  _pCurrentScreen;
         _pCurrentScreen = nullptr;
+    }
+
+    if(! _qMessage.isEmpty()){
+        QString msg = _qMessage.dequeue();
+         qInfo() << "MainController::onControllerSlot msg="  << msg;
+         //http://erickveil.github.io/2016/04/06/How-To-Manipulate-JSON-With-C++-and-Qt.html
+           QJsonDocument jsonResponse = QJsonDocument::fromJson(msg.toUtf8());
+
+          QJsonObject json_obj=jsonResponse.object();
+          QVariantMap json_map = json_obj.toVariantMap();
+         qDebug()<<"loadScreen name="<< json_map["name"].toString();
+
     }
 
    static int indexScreen = 0;
@@ -149,8 +165,6 @@ int MainController::parseStateChart(){
                   // Next child
                   Child = Child.nextSibling().toElement();
               }
-
-
           }
 
           // Next component

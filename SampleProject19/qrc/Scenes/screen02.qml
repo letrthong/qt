@@ -6,7 +6,7 @@ Item {
     width: 300
     height: 480
     visible: true
-
+    property string screenName: "screen02"
     signal qmlSignalButton(int sendTo, string msg)
 
     Text { x: 23; y: 17; text: currentDateTime }
@@ -37,7 +37,7 @@ Item {
         y: 54
 
         ListView_250_250 {
-            listId: 100
+            listviewId: 100
             id: listView_250_250
             x: 0
             y: 0

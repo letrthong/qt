@@ -4,7 +4,7 @@
 #include  "SceneBase.h"
 #include  <QObject>
 #include  <QThread>
-
+#include <QQueue>
 #include  "Infostore.h"
 #include <QQuickView>
 #include <QTimer>
@@ -35,7 +35,7 @@ private:
 
       int  screenIndex;
 
-
+      static QQueue<QString>  _qMessage;
 };
 
 #endif // MAIN_CONTROLLER_H

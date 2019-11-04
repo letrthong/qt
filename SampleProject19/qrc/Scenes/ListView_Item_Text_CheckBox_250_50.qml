@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 1.5
 import io.qt.examples.backend 1.0
 
+import "../js/my_button_impl.js" as MyScript
+
 MouseArea  {
     id: name
     width: 250
@@ -184,7 +186,8 @@ MouseArea  {
    }
 
    onClicked: {
-        console.log("backend.done onClicked on Text index=" + index )
+       var text = MyScript.clickOnItemOfList();
+       qmlSignalButton(0, text);
    }
 }
 

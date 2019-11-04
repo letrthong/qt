@@ -6,7 +6,8 @@ Item {
     width: 300
     height: 480
     visible: true
-
+    property string screenName: "screen03"
+    property int listId: 100
     signal qmlSignalButton(int sendTo, string msg)
 
 
@@ -17,7 +18,7 @@ Item {
     }
 
     ListView_250_250 {
-        listId: 100
+        listviewId: listId
         id: listView_250_2501
         x: 23
         y: 89

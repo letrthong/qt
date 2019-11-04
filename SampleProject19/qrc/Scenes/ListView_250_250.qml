@@ -12,7 +12,7 @@ ListView {
     contentWidth: 1
     flickableDirection: Flickable.VerticalFlick
 
-    property int   listId: 0
+    property int listviewId: 0
 
     model: myModel
 

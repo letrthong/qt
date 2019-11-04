@@ -3,6 +3,7 @@
 #include "singleton.h"
 #include "DefComposite.h"
 
+
 SignalManager::SignalManager(ISceneBase* pSceneBase){
     _pSceneBase = pSceneBase;
     QObject::connect(this, SIGNAL(actionButton(int, QString)),  Singleton::getSingle()->getPointerOfController(),SLOT(eventClickCppSlot(int,QString)));
@@ -35,7 +36,8 @@ void SignalManager::onclickCppSlot(int sendTo, const QString &msg){
   }
   else {
       qDebug()<<"onclickCppSlot::sendTo Controlller";
-      emit actionButton(1, "state machine");
+
+      emit actionButton(1,  msg);
   }
 }
 
