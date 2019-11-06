@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="myState" qt:editorversion="4.9.1" initial="Screen1">
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="myState" qt:editorversion="4.9.1" initial="screen01">
     <qt:editorinfo initialGeometry="5.62;136.86;-20;-20;40;40"/>
-    <state id="screen2">
-        <qt:editorinfo geometry="557.16;106.90;-36.37;-20.52;205.54;371.04" scenegeometry="557.16;106.90;520.79;86.38;205.54;371.04"/>
-        <transition type="external" event="goBack" target="Screen1">
-            <qt:editorinfo startTargetFactors="8.55;37" endTargetFactors="89.20;32.01"/>
+    <state id="screen02">
+        <qt:editorinfo scenegeometry="570.71;101.69;534.34;81.17;205.54;371.04" geometry="570.71;101.69;-36.37;-20.52;205.54;371.04"/>
+        <transition type="external" event="goBack" target="screen01">
+            <qt:editorinfo endTargetFactors="89.20;32.01" startTargetFactors="8.55;37"/>
         </transition>
     </state>
-    <state id="screen3">
-        <qt:editorinfo geometry="550.53;535.71;-26.55;-50;190.79;252.51" scenegeometry="550.53;535.71;523.98;485.71;190.79;252.51"/>
-        <transition type="external" event="GoBack" target="Screen1">
-            <qt:editorinfo movePoint="41.57;10.01" startTargetFactors="7.11;33.75" endTargetFactors="54.23;97.02" localGeometry="-299.05;-2.57"/>
+    <state id="screen03">
+        <qt:editorinfo scenegeometry="582.86;537.79;556.31;487.79;190.79;252.51" geometry="582.86;537.79;-26.55;-50;190.79;252.51"/>
+        <transition type="external" event="GoBack" target="screen01">
+            <qt:editorinfo endTargetFactors="54.23;97.02" startTargetFactors="7.11;33.75" localGeometry="-331.37;-4.65" movePoint="41.57;10.01"/>
         </transition>
     </state>
-    <state id="Screen1">
-        <qt:editorinfo geometry="268.39;173.99;-146.48;-77.23;214.99;378.87" scenegeometry="268.39;173.99;121.91;96.76;214.99;378.87"/>
-        <transition type="external" event="onClickIterm" target="screen2" cond="id == 1">
-            <qt:editorinfo movePoint="-1.04;6.24" startTargetFactors="94.49;51.73" endTargetFactors="5.72;55.84"/>
+    <state id="screen01">
+        <qt:editorinfo scenegeometry="268.39;173.99;169.41;236.19;120;100" geometry="268.39;173.99;-98.98;62.20;120;100"/>
+        <transition type="external" event="onClickIterm" target="screen02" cond="id == 1">
+            <qt:editorinfo endTargetFactors="5.72;55.84" startTargetFactors="94.49;51.73" movePoint="-1.04;6.24"/>
         </transition>
-        <transition type="external" event="onClickIterm" target="screen3" cond="id == 1">
-            <qt:editorinfo movePoint="64.97;95.43" startTargetFactors="24.58;97.91" endTargetFactors="4.59;48.85" localGeometry="0;141.93"/>
+        <transition type="external" event="onClickIterm" target="screen03" cond="id == 1">
+            <qt:editorinfo endTargetFactors="4.59;48.85" startTargetFactors="24.58;97.91" localGeometry="-24.15;274.98" movePoint="64.97;95.43"/>
         </transition>
         <onentry>
             <send event="eventFinsh" target="Screen3"/>
             <send event="eventDelay"/>
         </onentry>
+        <transition type="external" event="Transition_2"/>
+    </state>
+    <state id="screen04">
+        <qt:editorinfo scenegeometry="149.03;802.47;89.03;752.47;120;100" geometry="149.03;802.47;-60;-50;120;100"/>
     </state>
 </scxml>

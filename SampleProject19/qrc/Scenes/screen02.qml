@@ -7,6 +7,8 @@ Item {
     height: 480
     visible: true
     property string screenName: "screen02"
+    property int listId: 200
+
     signal qmlSignalButton(int sendTo, string msg)
 
     Text { x: 23; y: 17; text: currentDateTime }
@@ -17,13 +19,11 @@ Item {
 
     }
 
-
     BackButton_160_80 {
         id: backButton_160_801
         x: 123
         y: 315
     }
-
 
     TextView_250_50 {
         id: textView_250_50
@@ -37,7 +37,7 @@ Item {
         y: 54
 
         ListView_250_250 {
-            listviewId: 100
+            listviewId: listId
             id: listView_250_250
             x: 0
             y: 0

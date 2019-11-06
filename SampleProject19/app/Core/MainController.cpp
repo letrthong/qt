@@ -170,4 +170,5 @@ int MainController::parseStateChart(){
           // Next component
           Component = Component.nextSibling().toElement();
       }
+      return 0;
 }

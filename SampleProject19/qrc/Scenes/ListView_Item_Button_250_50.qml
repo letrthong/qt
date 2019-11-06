@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "../js/my_button_impl.js" as MyScript
+
 MouseArea  {
     id: name
     width: 250
@@ -30,5 +32,7 @@ MouseArea  {
     }
     onClicked: {
          console.log("ListView_Item_Button_250_50 index=" + index)
+        var text = MyScript.clickOnItemOfList();
+        qmlSignalButton(0, text);
     }
 }
