@@ -8,6 +8,7 @@
 #include  "Infostore.h"
 #include <QQuickView>
 #include <QTimer>
+#include <QDomElement>
 
 class MainController  :public QObject
 {
@@ -34,6 +35,9 @@ private:
       QTimer *_pTimer;
 
       int  screenIndex;
+
+       QDomElement _domElement;
+
 
       static QQueue<QString>  _qMessage;
 };

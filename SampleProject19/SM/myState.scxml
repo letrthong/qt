@@ -2,32 +2,46 @@
 <scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="myState" qt:editorversion="4.9.1" initial="screen01">
     <qt:editorinfo initialGeometry="5.62;136.86;-20;-20;40;40"/>
     <state id="screen02">
-        <qt:editorinfo scenegeometry="570.71;101.69;534.34;81.17;205.54;371.04" geometry="570.71;101.69;-36.37;-20.52;205.54;371.04"/>
+        <qt:editorinfo scenegeometry="428.98;114.20;435.38;229.20;120;100" geometry="428.98;114.20;6.40;115;120;100"/>
         <transition type="external" event="goBack" target="screen01">
-            <qt:editorinfo endTargetFactors="89.20;32.01" startTargetFactors="8.55;37"/>
+            <qt:editorinfo startTargetFactors="8.55;37" endTargetFactors="89.20;32.01" movePoint="5.21;-12.51"/>
+        </transition>
+        <transition type="external" event="OnClickItem" target="screen05">
+            <qt:editorinfo localGeometry="32.38;-0.27" startTargetFactors="89.63;35.75" endTargetFactors="10.19;42.78" movePoint="52.10;8.34"/>
         </transition>
     </state>
     <state id="screen03">
-        <qt:editorinfo scenegeometry="582.86;537.79;556.31;487.79;190.79;252.51" geometry="582.86;537.79;-26.55;-50;190.79;252.51"/>
+        <qt:editorinfo scenegeometry="160.49;489.64;163.83;515.89;131;100" geometry="160.49;489.64;3.34;26.25;131;100"/>
         <transition type="external" event="GoBack" target="screen01">
-            <qt:editorinfo endTargetFactors="54.23;97.02" startTargetFactors="7.11;33.75" localGeometry="-331.37;-4.65" movePoint="41.57;10.01"/>
+            <qt:editorinfo startTargetFactors="47.39;18.34" endTargetFactors="54.23;97.02" movePoint="41.57;10.01"/>
         </transition>
     </state>
     <state id="screen01">
-        <qt:editorinfo scenegeometry="268.39;173.99;169.41;236.19;120;100" geometry="268.39;173.99;-98.98;62.20;120;100"/>
-        <transition type="external" event="onClickIterm" target="screen02" cond="id == 1">
-            <qt:editorinfo endTargetFactors="5.72;55.84" startTargetFactors="94.49;51.73" movePoint="-1.04;6.24"/>
+        <qt:editorinfo scenegeometry="281.94;224.55;158.45;229.20;123;100" geometry="281.94;224.55;-123.49;4.65;123;100"/>
+        <transition type="external" event="onClickButton" target="screen02" cond="name == button02">
+            <qt:editorinfo startTargetFactors="94.49;51.73" endTargetFactors="5.72;55.84" movePoint="-6.25;38.55"/>
         </transition>
         <transition type="external" event="onClickIterm" target="screen03" cond="id == 1">
-            <qt:editorinfo endTargetFactors="4.59;48.85" startTargetFactors="24.58;97.91" localGeometry="-24.15;274.98" movePoint="64.97;95.43"/>
+            <qt:editorinfo startTargetFactors="24.58;97.91" endTargetFactors="16.54;35.52" movePoint="-42.37;-0.45"/>
         </transition>
         <onentry>
             <send event="eventFinsh" target="Screen3"/>
             <send event="eventDelay"/>
         </onentry>
-        <transition type="external" event="Transition_2"/>
+        <transition type="external" event="onClickButton()" target="screen04" cond="name == button01">
+            <qt:editorinfo endTargetFactors="46.17;11.37" movePoint="30.22;-2.08"/>
+        </transition>
     </state>
     <state id="screen04">
-        <qt:editorinfo scenegeometry="149.03;802.47;89.03;752.47;120;100" geometry="149.03;802.47;-60;-50;120;100"/>
+        <qt:editorinfo scenegeometry="495.38;553.38;435.38;503.38;120;100" geometry="495.38;553.38;-60;-50;120;100"/>
+        <transition type="external" event="goBack" target="screen01" cond="preSceen ==screen01">
+            <qt:editorinfo endTargetFactors="62.57;89.06"/>
+        </transition>
+    </state>
+    <state id="screen05">
+        <qt:editorinfo scenegeometry="720.14;270.97;660.14;220.97;120;100" geometry="720.14;270.97;-60;-50;120;100"/>
+        <transition type="external" event="goBack" target="screen02">
+            <qt:editorinfo startTargetFactors="9.42;70.43" endTargetFactors="88.89;59.23" movePoint="8.34;6.25"/>
+        </transition>
     </state>
 </scxml>

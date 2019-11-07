@@ -97,6 +97,8 @@ DISTFILES += \
     qrc/Scenes/List_T_3_2.qml \
     qrc/Scenes/screen02.qml \
     qrc/Scenes/screen03.qml \
+    qrc/Scenes/screen04.qml \
+    qrc/Scenes/screen05.qml \
     qrc/images/backButton.png \
     qrc/Scenes/BackButton_160_80.qml \
     qrc/Scenes/PushButton_250_50.qml \

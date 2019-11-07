@@ -1,15 +1,15 @@
 import QtQuick 2.0
+import "../js/my_button_impl.js" as MyScript
 
-Rectangle { // size controlled by height
+
+Rectangle {
     id: id_PushButton_250_50
-
-// public
     property string textId: 'PushButton'
 
     property string pushButtonName: "PushButton"
 
     function getButtonName(name){
-         return  "PushButton/" + pushButtonName;
+         return   pushButtonName;
     }
 
 // private
@@ -30,7 +30,8 @@ Rectangle { // size controlled by height
         onReleased: parent.opacity = 1
         onCanceled: parent.opacity = 1
         onClicked: {
-               qmlSignalButton(0, getButtonName()) // emit
+                 var text = MyScript.clickOnButton( getButtonName());
+               qmlSignalButton(0, text ) // emit
         }
     }
 }

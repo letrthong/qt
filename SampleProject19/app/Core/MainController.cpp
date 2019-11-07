@@ -69,6 +69,11 @@ void MainController::loadScreen(){
         _pCurrentScreen = nullptr;
     }
 
+    QString listViewId = "";
+    QString listItem = "";
+    QString  buttonName = "";
+    QString  sceneName ="";
+
     if(! _qMessage.isEmpty()){
         QString msg = _qMessage.dequeue();
          qInfo() << "MainController::onControllerSlot msg="  << msg;
@@ -77,7 +82,20 @@ void MainController::loadScreen(){
 
           QJsonObject json_obj=jsonResponse.object();
           QVariantMap json_map = json_obj.toVariantMap();
-         qDebug()<<"loadScreen name="<< json_map["name"].toString();
+          sceneName =   json_map["sceneName"].toString();
+          qDebug()<<"loadScreen name="<< sceneName;
+
+          listViewId  = json_map["listViewId"].toString();
+
+
+           if( !listViewId.isEmpty() && (listViewId != "0") ){
+                listItem =  json_map["ListItem"].toString();
+                 qDebug()<<"loadScreen listItem="<< listItem;
+                 qDebug()<<"loadScreen listViewId="<< listViewId;
+           }else {
+                buttonName =  json_map["buttonName"].toString();
+                qDebug()<<"loadScreen buttonName="<< buttonName;
+           }
 
     }
 
@@ -121,7 +139,6 @@ int MainController::parseStateChart(){
       QString Type=root.tagName();
       QString name=root.attribute("name","unknow");
       QString initial=root.attribute("initial","unknow");
-      //int Year=root.attribute("YEAR","1900").toInt();
 
       // Display root data
       std::cout << "Type  = " << Type.toStdString().c_str() << std::endl;
@@ -129,17 +146,17 @@ int MainController::parseStateChart(){
       std::cout <<"initial = " << initial.toStdString().c_str() << std::endl;
       std::cout << std::endl;
 
-      QDomElement Component=root.firstChild().toElement();
+        _domElement =root.firstChild().toElement();
 
       // Loop while there is a child
-      while(!Component.isNull()){
+      while(!_domElement.isNull()){
           // Check if the child tag name is COMPONENT
-          if (Component.tagName()=="state"){
+          if (_domElement.tagName()=="state"){
               // Read and display the component ID
-              QString ID=Component.attribute("id","unknow id");
+              QString ID=_domElement.attribute("id","unknow id");
 
               // Get the first child of the component
-              QDomElement Child=Component.firstChild().toElement();
+              QDomElement Child=_domElement.firstChild().toElement();
 
               // Display component data
               std::cout << "Component " << ID.toStdString().c_str() << std::endl;
@@ -168,7 +185,7 @@ int MainController::parseStateChart(){
           }
 
           // Next component
-          Component = Component.nextSibling().toElement();
+          _domElement = _domElement.nextSibling().toElement();
       }
       return 0;
 }

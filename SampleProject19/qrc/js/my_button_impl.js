@@ -2,15 +2,19 @@
 
 function clickOnItemOfList( ){
     console.log("js::ListView screenName=" + screenName)
-    console.log("js::ListView listId=" + listId)
-    console.log("js::ListView index=" + index)
+    var obj = { sceneName:  screenName, listViewId:  listId, ListItem:  index };
+    return  JSON.stringify(obj);
+}
 
-    var obj = { name:  screenName, listId:  listId, city: "New York" };
-
+function clickOnButton( butonName){
+    console.log("js::ListView screenName=" + screenName)
+    var obj = { sceneName:  screenName, listViewId:  0, buttonName:  butonName };
     return  JSON.stringify(obj);
 }
 
 
-function clickOnButton(screenName, butonName){
-    return ""
+function clickOnBack( ){
+    console.log("js::ListView screenName=" + screenName)
+    var obj = { sceneName:  screenName };
+    return  JSON.stringify(obj);
 }
