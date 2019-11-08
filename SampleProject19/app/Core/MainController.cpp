@@ -243,10 +243,7 @@ QString MainController::nextSceenbutton( const QString &currentSceen, const QStr
                 std::cout << "nextSceenbutton currentSceen =" << currentSceen.toStdString().c_str() << std::endl;
              if(currentSceen.toStdString() == ID.toStdString() ){
                  QDomElement Child=domElement.firstChild().toElement();
-                 // Display component data
-                 std::cout << "Component " << ID.toStdString().c_str() << std::endl;
                  QString event;
-
                  QString cond;
                  // Read each child of the component node
                  while (!Child.isNull()) {
@@ -266,12 +263,10 @@ QString MainController::nextSceenbutton( const QString &currentSceen, const QStr
                               }
                           }
                      }
-
-                     // Next child
                      Child = Child.nextSibling().toElement();
 
                  }
-                 // break;
+                 break;
              }
          }
          domElement = domElement.nextSibling().toElement();
@@ -318,10 +313,9 @@ QString MainController::nextSceenItem( const QString &currentSceen,  int item){
                           }
                       }
 
-                     // Next child
                      Child = Child.nextSibling().toElement();
                  }
-             //   break;
+                 break;
              }
          }
          domElement = domElement.nextSibling().toElement();
@@ -379,13 +373,13 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
                                       return  target;
                                   }
                               }
-
                           }
                       }
 
                      // Next child
                      Child = Child.nextSibling().toElement();
                  }
+                 break;
              }
          }
          domElement = domElement.nextSibling().toElement();

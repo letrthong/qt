@@ -19,44 +19,24 @@ Item {
 
 
     EditText_250_50{
-        x: 15
-        y: 346
+        x: 25
+        y: 402
 
-    }
-
-    Button {
-        x: 15
-        y: 7
-        text: "Quit"
-        onClicked: Qt.quit()
-    }
-
-    Button {
-        x: 189
-        y: 7
-
-        text: "NextPage"
-        // 1 -> send model
-        onClicked: id_screen1.qmlSignalButton(1, "screen1/netpage")
-    }
-
-    BackButton_160_80 {
-        id: backButton
-        x: 15
-        y: 387
     }
 
     ToggleButton_160_80 {
         id: pushButton
-        x: 50
-        y: 181
+        x: 40
+        y: 205
         toggleButtonName: "button01"
     }
 
     ToggleButton_160_80 {
         id: pushButton1
         x: 27
-        y: 260
+        y: 316
+        width: 158
+        height: 80
         toggleButtonName: "button02"
     }
 
@@ -64,6 +44,7 @@ Item {
         id: pushButton_250_50
         x: 27
         y: 44
+        color: "#00ff00"
         pushButtonName: "button01"
     }
 
