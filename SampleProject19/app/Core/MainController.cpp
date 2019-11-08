@@ -31,7 +31,7 @@ MainController::MainController(InfoStore *pInfoStor ){
     _pTimer->start(100);
     screenIndex = 1;
 
-    _initScreen = parseStateChart();
+     parseStateChart();
 }
 
 MainController::~MainController(){
@@ -181,12 +181,12 @@ QString MainController::parseStateChart(){
       // Get root names and attributes
       QString Type=_DomElement.tagName();
       QString name=_DomElement.attribute("name","unknow");
-      QString initial=_DomElement.attribute("initial","unknow");
+      _initScreen =_DomElement.attribute("initial","unknow");
 
       // Display root data
       std::cout << "Type  = " << Type.toStdString().c_str() << std::endl;
       std::cout << "name = " << name.toStdString().c_str() << std::endl;
-      std::cout <<"initial = " << initial.toStdString().c_str() << std::endl;
+      std::cout <<"initial = " << _initScreen.toStdString().c_str() << std::endl;
       std::cout << std::endl;
 
       QDomElement  domElement = _DomElement.firstChild().toElement();
@@ -217,7 +217,7 @@ QString MainController::parseStateChart(){
           }
           domElement = domElement.nextSibling().toElement();
       }
-      return  initial;
+      return  _initScreen;
 }
 
 QString MainController::nextSceenbutton( const QString &currentSceen, const QString &  buttonName){
