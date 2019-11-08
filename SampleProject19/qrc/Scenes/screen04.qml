@@ -14,9 +14,15 @@ Item {
 
     PushButton_250_50 {
         id: pushButton_250_50
-        x: 27
-        y: 79
-       pushButtonName: "button01"
+        x: 37
+        y: 153
+        pushButtonName: "button01"
+    }
+
+    BackButton_160_80 {
+        id: backButton_160_80
+        x: 8
+        y: 0
     }
 
 }

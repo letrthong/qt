@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls  1.2
-
+import "../js/my_button_impl.js" as MyScript
 
 Item {
     id: id_back_button
@@ -38,7 +38,8 @@ Item {
 
             onClicked: {
                 // 0 -> send to state machine
-                 qmlSignalButton(0, getButtonName())
+                  var text = MyScript.clickOnBack();
+                 qmlSignalButton(0,  text)
                  id_rectangle.color= "lightsteelblue"
             }
 

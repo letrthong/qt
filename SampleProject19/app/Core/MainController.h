@@ -9,6 +9,7 @@
 #include <QQuickView>
 #include <QTimer>
 #include <QDomElement>
+#include <QMutex>
 
 class MainController  :public QObject
 {
@@ -20,13 +21,15 @@ public:
 
 public slots:
       void onControllerSlot(QVariant id);
-     void eventClickCppSlot(int sendTo, const QString &msg) ;
+      void eventClickCppSlot(int sendTo, const QString &msg) ;
 
       void onTimeoutSlot();
 private:
-
      void loadScreen();
-     int parseStateChart();
+     QString  parseStateChart();
+     QString nextSceenbutton( const QString &currentSceen,const QString &  buttonName);
+     QString nextSceenItem( const QString &currentSceen, int ListId);
+     QString nextSceenBack( const QString &currentSceen );
 private:
       SceneBase *_pCurrentScreen ;
       InfoStore *_pInfoStore;
@@ -35,9 +38,15 @@ private:
       QTimer *_pTimer;
 
       int  screenIndex;
+      QDomDocument xmlBOM;
+      QDomElement _DomElement ;
 
-       QDomElement _domElement;
+      QMutex mutex;
 
+      QString _initScreen;
+
+      QString _prexScreen;
+      QString _curxScreen;
 
       static QQueue<QString>  _qMessage;
 };

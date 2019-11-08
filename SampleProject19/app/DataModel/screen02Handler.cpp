@@ -5,6 +5,8 @@
 screen02Handler::screen02Handler(QQuickView * pQuickView,InfoStore *pInfoStore )
     :SceneBase (pQuickView){
     _pInfoStore =pInfoStore;
+    qInfo() << "screen02Handler.cpp::constructure";
+
 }
 
 void  screen02Handler::onToggleButtonClick(const std::string& from){

@@ -13,8 +13,8 @@ Item {
 
     BackButton_160_80 {
         id: backButton_160_801
-        x: 89
-        y: 305
+        x: 13
+        y: 3
     }
 
     ListView_250_250 {
@@ -23,7 +23,7 @@ Item {
         x: 23
         y: 89
         width: 239
-        height: 177
+        height: 273
         delegate: ListView_Item_Text_CheckBox_250_50{
             itemText : model.getText
             itemValue: model.getValue

@@ -63,8 +63,15 @@ Item {
     PushButton_250_50 {
         id: pushButton_250_50
         x: 27
-        y: 79
-       pushButtonName: "button01"
+        y: 44
+        pushButtonName: "button01"
+    }
+
+    PushButton_250_50 {
+        id: pushButton_250_501
+        x: 15
+        y: 112
+         pushButtonName: "button02"
     }
 
 }

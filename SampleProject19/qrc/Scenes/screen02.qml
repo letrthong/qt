@@ -11,30 +11,30 @@ Item {
 
     signal qmlSignalButton(int sendTo, string msg)
 
-    Text { x: 23; y: 17; text: currentDateTime }
+    //Text { x: 23; y: 17; text: currentDateTime }
 
-    EditText_250_50{
-        x: 15
-        y: 382
+    //EditText_250_50{
+    //    x: 15
+   //     y: 382
 
-    }
+   // }
 
     BackButton_160_80 {
         id: backButton_160_801
-        x: 123
-        y: 315
+        x: 15
+        y: 0
     }
 
-    TextView_250_50 {
-        id: textView_250_50
-        x: 23
-        y: 430
-    }
+    //TextView_250_50 {
+    //    id: textView_250_50
+    //    x: 23
+    //    y: 430
+   // }
 
     Background_ListView_250_250 {
         id: background_ListView_250_250
-        x: 23
-        y: 54
+        x: 15
+        y: 103
 
         ListView_250_250 {
             listviewId: listId
