@@ -69,10 +69,7 @@ void MainController::onControllerSlot(QVariant id){
 }
 
 void MainController::loadScreen(){
-    /*if(_pCurrentScreen != nullptr){
-        delete  _pCurrentScreen;
-        _pCurrentScreen = nullptr;
-    }*/
+
 
     QString listViewId = "";
     QString listItem = "";
@@ -128,6 +125,18 @@ void MainController::loadScreen(){
         scene = nextSceenBack(sceneName);
     }
 
+     static bool flag = false;
+
+    if(scene.isEmpty() && flag == true){
+        return ;
+    }
+    else{
+        if(_pCurrentScreen != nullptr){
+            delete  _pCurrentScreen;
+            _pCurrentScreen = nullptr;
+        }
+    }
+
 
 
     qDebug()<<"loadScreen target = ["<< scene <<"]";
@@ -149,7 +158,7 @@ void MainController::loadScreen(){
        _pCurrentScreen->createScene("./qrc/Scenes/screen05.qml");
     }else
     {
-        static bool flag = false;
+
         if(flag == false){
             flag = true;
             _pCurrentScreen = new screen01Handler(_pQuickView, _pInfoStore);
