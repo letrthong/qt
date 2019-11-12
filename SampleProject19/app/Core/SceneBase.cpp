@@ -20,7 +20,6 @@
 #include "singleton.h"
 
 SceneBase::SceneBase(QQuickView * pQuickView  ){
-     qInfo() << "SceneBase::constructor" ;
     _pSignalManager = new SignalManager(this);
     _pQuickView  = pQuickView;
 
@@ -53,15 +52,14 @@ SceneBase::~SceneBase(){
 
 void  SceneBase::createScene(const QString & screenName){
     qmlRegisterType<EditTextBase>("io.qt.examples.backend", 1, 0,  "EditTextBackEnd");
-    qmlRegisterType<ItemCheckBoxText>("io.qt.examples.backend", 1, 0, "ListViewBackEnd");
 
        if(0 != getListId()) {
+            qmlRegisterType<ItemCheckBoxText>("io.qt.examples.backend", 1, 0, "ListViewBackEnd");
             _pQmlContext =_pQuickView->rootContext();
             _pQmlContext->setContextProperty("myModel", getListDataProvider());
        }
 
     _pQuickView->setSource(QUrl(screenName));
-     qInfo() <<"SceneBase::createScene setSource="<< screenName;
 
     //QML to C++
     _pMainScreen = _pQuickView->rootObject();
@@ -77,7 +75,7 @@ void  SceneBase::createScene(const QString & screenName){
          QString  QclassName = child->metaObject()->className();
          std::string className = QclassName.toStdString();
 
-          qInfo() <<"SceneBase::className="<<QclassName;
+          //qInfo() <<"SceneBase::className="<<QclassName;
           if(className.find("PushButton") != std::string::npos){
             _vecPushButton.push_back(child);
           }else if(className.find("ToggleButton") != std::string::npos){

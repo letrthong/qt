@@ -72,32 +72,22 @@ void MainController::loadScreen(){
     QString listViewId = "";
     QString listItem = "";
     QString  buttonName = "";
-    QString  sceneName ="";
-    QString  event ="";
+    QString  sceneName = "";
+    QString  event = "";
 
    if(! _qMessage.isEmpty()){
         QString msg = _qMessage.dequeue();
-         qInfo() << "MainController::onControllerSlot msg="  << msg;
-         //http://erickveil.github.io/2016/04/06/How-To-Manipulate-JSON-With-C++-and-Qt.html
-           QJsonDocument jsonResponse = QJsonDocument::fromJson(msg.toUtf8());
-
-          QJsonObject json_obj=jsonResponse.object();
-          QVariantMap json_map = json_obj.toVariantMap();
-          sceneName =   json_map["sceneName"].toString();
-           event =   json_map["event"].toString();
-          qDebug()<<"loadScreen name="<< sceneName;
-         qDebug()<<"loadScreen event=["<< event <<"]";
-          listViewId  = json_map["listViewId"].toString();
-
-
-           if( !listViewId.isEmpty() && (listViewId != "0") ){
-                listItem =  json_map["ListItem"].toString();
-                 qDebug()<<"loadScreen listItem="<< listItem;
-                 qDebug()<<"loadScreen listViewId="<< listViewId;
-           }else {
-                buttonName =  json_map["buttonName"].toString();
-                qDebug()<<"loadScreen buttonName="<< buttonName;
-           }
+        QJsonDocument jsonResponse = QJsonDocument::fromJson(msg.toUtf8());
+        QJsonObject json_obj=jsonResponse.object();
+        QVariantMap json_map = json_obj.toVariantMap();
+        sceneName =   json_map["sceneName"].toString();
+        event =   json_map["event"].toString();
+        listViewId  = json_map["listViewId"].toString();
+        if( !listViewId.isEmpty() && (listViewId != "0") ){
+            listItem =  json_map["ListItem"].toString();
+        }else {
+            buttonName =  json_map["buttonName"].toString();
+        }
     }
 
     QString scene = "";
@@ -109,9 +99,6 @@ void MainController::loadScreen(){
     if( !sceneName.isEmpty()){
          _curxScreen = sceneName;
     }
-
-    qDebug()<<"loadScreen _prexScreen = ["<< _prexScreen <<"]";
-    qDebug()<<"loadScreen _curxScreen = ["<< _curxScreen <<"]";
 
     if( event.contains("onButton") ){
         scene = nextSceenbutton(sceneName, buttonName);
@@ -155,9 +142,6 @@ void MainController::loadScreen(){
 }
 
 QString MainController::parseStateChart(){
-    //https://www.lucidar.me/en/dev-c-cpp/reading-xml-files-with-qt/
-     qInfo() << "MainController::parseStateChart";
-
       //QDomDocument xmlBOM;
       QFile f("./SM/myState.scxml");
       if (!f.open(QIODevice::ReadOnly ))
@@ -176,12 +160,6 @@ QString MainController::parseStateChart(){
       QString name=_DomElement.attribute("name","unknow");
       _initScreen =_DomElement.attribute("initial","unknow");
 
-      // Display root data
-      std::cout << "Type  = " << Type.toStdString().c_str() << std::endl;
-      std::cout << "name = " << name.toStdString().c_str() << std::endl;
-      std::cout <<"initial = " << _initScreen.toStdString().c_str() << std::endl;
-      std::cout << std::endl;
-
       QDomElement  domElement = _DomElement.firstChild().toElement();
       // Loop while there is a child
       while(!domElement.isNull()){
@@ -191,19 +169,14 @@ QString MainController::parseStateChart(){
               QString ID=domElement.attribute("id","unknow id");
               // Get the first child of the component
               QDomElement Child=domElement.firstChild().toElement();
-              QString event;
-              QString target;
-              QString cond;
-
+              QString event = "";
+              QString target = "";
+              QString cond = "";
               while (!Child.isNull()) {
-                    // Read Name and value
                     if (Child.tagName()=="transition") {
                         event=Child.attribute("event","unknow");
                         target=Child.attribute("target","unknow");
                         cond=Child.attribute("cond","unknow");
-                        std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
-                        std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
-                        std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
                     }
                     Child = Child.nextSibling().toElement();
               }
@@ -214,34 +187,27 @@ QString MainController::parseStateChart(){
 }
 
 QString MainController::nextSceenbutton( const QString &currentSceen, const QString &  buttonName){
-    QString target ="";
+    QString target = "";
     QDomElement  domElement = _DomElement.firstChild().toElement();
      while(!domElement.isNull()){
-
          if (domElement.tagName()=="state"){
              QString ID=domElement.attribute("id","unknow id");
              if(currentSceen.toStdString() == ID.toStdString() ){
                  QDomElement Child=domElement.firstChild().toElement();
-                 QString event;
-                 QString cond;
-                 // Read each child of the component node
+                 QString event = "";
+                 QString cond = "";
                  while (!Child.isNull()) {
                      if (Child.tagName()=="transition") {
                             event=Child.attribute("event","unknow");
                             target=Child.attribute("target","unknow");
                             cond=Child.attribute("cond","unknow");
-
                             if(event == "onClickButton"){
-                                  std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
-                                  std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
-                                  std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
-                                  if(cond.toStdString().find(buttonName.toStdString()) != string::npos){
+                                  if(cond.contains(buttonName)){
                                       return target;
                                   }
                             }
                      }
                      Child = Child.nextSibling().toElement();
-
                  }
                  break;
              }
@@ -259,20 +225,17 @@ QString MainController::nextSceenItem( const QString &currentSceen,  int item){
              QString ID=domElement.attribute("id","unknow id");
              if(currentSceen.toStdString() == ID.toStdString() ){
                  QDomElement Child=domElement.firstChild().toElement();
-                 QString event;
-                 QString cond;
+                 QString event = "";
+                 QString cond = "";
                  while (!Child.isNull()) {
                      if (Child.tagName()=="transition") {
                             event=Child.attribute("event","unknow");
                             target=Child.attribute("target","unknow");
                             cond=Child.attribute("cond","unknow");
                             if(event == "onClickIterm"){
-                                std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
-                                std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
-                                std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
-                                QString stringValue2   =  QString::number(item) ;
+                                QString stringValue2 =  QString::number(item) ;
                                 if(cond.contains(stringValue2)) {
-                                       return target;
+                                   return target;
                                 }
                             }
                       }
@@ -288,10 +251,9 @@ QString MainController::nextSceenItem( const QString &currentSceen,  int item){
 
 
 QString MainController::nextSceenBack( const QString &currentSceen ){
-    QString target ="";
+    QString target = "";
     std::string temp  = _prexScreen.toStdString();
     std::string txt = "";
-
     for ( unsigned int i = 0; i < temp.length(); i++){
         if(isalpha(temp[i]) || isdigit(temp[i]) ){
             txt = txt + temp[i] ;
@@ -300,17 +262,14 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
 
     QDomElement  domElement = _DomElement.firstChild().toElement();
      while(!domElement.isNull()){
-
          if (domElement.tagName()=="state"){
              QString ID=domElement.attribute("id","unknow id");
              if(currentSceen.toStdString() == ID.toStdString() ){
                  QDomElement Child=domElement.firstChild().toElement();
-
-                 QString event;
-                 QString cond;
-                 // Read each child of the component node
+                 QString event = "";
+                 QString cond = "";
                  while (!Child.isNull()) {
-                     if (Child.tagName()=="transition") {
+                        if (Child.tagName()=="transition") {
                             event=Child.attribute("event","unknow");
                             target=Child.attribute("target","unknow");
                             cond=Child.attribute("cond","unknow");
@@ -323,8 +282,8 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
                                   }
                                 }
                             }
-                      }
-                     Child = Child.nextSibling().toElement();
+                        }
+                        Child = Child.nextSibling().toElement();
                  }
                  break;
              }
