@@ -15,9 +15,8 @@ Item {
 
     //EditText_250_50{
     //    x: 15
-   //     y: 382
-
-   // }
+    //     y: 382
+    // }
 
     BackButton_160_80 {
         id: backButton_160_801

@@ -155,10 +155,7 @@ void MainController::loadScreen(){
             _pCurrentScreen = new screen01Handler(_pQuickView, _pInfoStore);
              _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
         }
-
     }
-
-
 }
 
 QString MainController::parseStateChart(){

@@ -17,7 +17,6 @@ Item {
         console.log("screen1.qml::setTextField: " + text)
     }
 
-
     EditText_250_50{
         x: 25
         y: 402
