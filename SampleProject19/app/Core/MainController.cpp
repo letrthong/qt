@@ -266,13 +266,12 @@ QString MainController::nextSceenItem( const QString &currentSceen,  int item){
                             event=Child.attribute("event","unknow");
                             target=Child.attribute("target","unknow");
                             cond=Child.attribute("cond","unknow");
-
                             if(event == "onClickIterm"){
-                              std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
-                              std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
-                              std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
-                                   QString stringValue2   =  QString::number(item) ;
-                               if(cond.contains( stringValue2  )) {
+                                std::cout << "   event  = [" << event.toStdString().c_str() <<"]"<< std::endl;
+                                std::cout << "   target = [" << target.toStdString().c_str() <<"]"<< std::endl;
+                                std::cout << "   cond =[" << cond.toStdString().c_str() <<"]"<< std::endl;
+                                QString stringValue2   =  QString::number(item) ;
+                                if(cond.contains(stringValue2)) {
                                        return target;
                                 }
                             }
@@ -293,7 +292,7 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
     std::string temp  = _prexScreen.toStdString();
     std::string txt = "";
 
-    for (int i = 0; i < temp.length(); i++){
+    for ( unsigned int i = 0; i < temp.length(); i++){
         if(isalpha(temp[i]) || isdigit(temp[i]) ){
             txt = txt + temp[i] ;
         }
@@ -308,7 +307,6 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
                  QDomElement Child=domElement.firstChild().toElement();
 
                  QString event;
-
                  QString cond;
                  // Read each child of the component node
                  while (!Child.isNull()) {
@@ -316,15 +314,14 @@ QString MainController::nextSceenBack( const QString &currentSceen ){
                             event=Child.attribute("event","unknow");
                             target=Child.attribute("target","unknow");
                             cond=Child.attribute("cond","unknow");
-
                             if(event == "goBack"){
-                              if(cond == "unknow"){
+                                if(cond == "unknow"){
                                   return  target;
-                              }else{
+                                }else{
                                   if(cond.contains( QString::fromStdString(txt) )){
                                       return  target;
                                   }
-                              }
+                                }
                             }
                       }
                      Child = Child.nextSibling().toElement();
