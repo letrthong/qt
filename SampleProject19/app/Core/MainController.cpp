@@ -69,13 +69,11 @@ void MainController::onControllerSlot(QVariant id){
 }
 
 void MainController::loadScreen(){
-
-
     QString listViewId = "";
     QString listItem = "";
     QString  buttonName = "";
     QString  sceneName ="";
-   QString  event ="";
+    QString  event ="";
 
    if(! _qMessage.isEmpty()){
         QString msg = _qMessage.dequeue();
@@ -101,8 +99,6 @@ void MainController::loadScreen(){
                 qDebug()<<"loadScreen buttonName="<< buttonName;
            }
     }
-
-
 
     QString scene = "";
 
@@ -136,8 +132,6 @@ void MainController::loadScreen(){
             _pCurrentScreen = nullptr;
         }
     }
-
-
 
     qDebug()<<"loadScreen target = ["<< scene <<"]";
 
