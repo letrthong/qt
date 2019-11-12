@@ -141,7 +141,8 @@ void MainController::loadScreen(){
 
     qDebug()<<"loadScreen target = ["<< scene <<"]";
 
-    if (scene.contains("screen01")){
+    if (scene.contains("screen01") || flag == false ){
+         flag = true;
        _pCurrentScreen = new screen01Handler(_pQuickView, _pInfoStore);
        _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
     }else  if(scene.contains("screen02") ){
@@ -156,14 +157,6 @@ void MainController::loadScreen(){
     } if( scene.contains("screen05")) {
        _pCurrentScreen = new SceneBase(_pQuickView);
        _pCurrentScreen->createScene("./qrc/Scenes/screen05.qml");
-    }else
-    {
-
-        if(flag == false){
-            flag = true;
-            _pCurrentScreen = new screen01Handler(_pQuickView, _pInfoStore);
-             _pCurrentScreen->createScene("./qrc/Scenes/screen01.qml");
-        }
     }
 }
 
