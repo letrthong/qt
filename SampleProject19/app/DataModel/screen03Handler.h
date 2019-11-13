@@ -12,17 +12,17 @@
 class screen03Handler :public SceneBase
 {
   public:
-     explicit screen03Handler(QQuickView * pQuickView, InfoStore *pInfoStore);
+    explicit screen03Handler(QQuickView * pQuickView, InfoStore *pInfoStore);
 
     /*
-     * when Clicking on button from QML
-     */
-     void onToggleButtonClick(const std::string& from) override;
+    * when Clicking on button from QML to set new value for parameter
+    */
+    void onToggleButtonClick(const std::string& from) override;
 
-     /*
-      * when middleware changed data
-      */
-     void onPropertyChange(int id) override;
+    /*
+    * when middleware changed data
+    */
+    void onPropertyChange(int id) override;
   private:
 
      unsigned int getListId() override;
