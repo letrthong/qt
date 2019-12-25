@@ -96,9 +96,15 @@ void  SceneBase::createScene(const QString & screenName){
 
 
    // if(_pQQuickListView != nullptr){
-        QQmlComponent component(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
-        QQuickItem *object = qobject_cast<QQuickItem*>(component.create());
-        //@Todo: Chechk memory leak
+        //QQmlComponent component(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
+        // QQuickItem *object = qobject_cast<QQuickItem*>(component.create());
+
+         QQmlComponent * pQMLComponent = new QQmlComponent(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
+         QQuickItem *object = qobject_cast<QQuickItem*>(pQMLComponent->create());
+         
+         delete object;
+         delete pQMLComponent;  
+
 
    // }
 }
