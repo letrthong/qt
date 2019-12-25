@@ -96,7 +96,7 @@ void  SceneBase::createScene(const QString & screenName){
 
 
    // if(_pQQuickListView != nullptr){
-        QQmlComponent component(_pQuickView->engine(), "./qrc/Scenes/MessageDialog.qml");
+        QQmlComponent component(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
         QQuickItem *object = qobject_cast<QQuickItem*>(component.create());
    // }
 }
