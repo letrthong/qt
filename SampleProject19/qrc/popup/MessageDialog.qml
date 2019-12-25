@@ -1,13 +1,19 @@
-import QtQuick 2.2
-import QtQuick.Dialogs 1.1
+import QtQuick 2.3
+import QtQuick.Controls 1.2
+import QtQuick.Dialogs 1.2
 
-MessageDialog {
-    id: messageDialog
-    title: "May I have your attention please"
-    text: "It's so cool that you are using Qt Quick."
-    onAccepted: {
-        console.log("And of course you could only agree.")
-        messageDialog.close()
+Dialog {
+    visible: true
+    title: "Blue sky dialog"
+
+    contentItem: Rectangle {
+        color: "lightskyblue"
+        implicitWidth: 400
+        implicitHeight: 100
+        Text {
+            text: "Hello blue sky!"
+            color: "navy"
+            anchors.centerIn: parent
+        }
     }
-    Component.onCompleted: visible = true
 }

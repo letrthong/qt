@@ -95,18 +95,18 @@ void  SceneBase::createScene(const QString & screenName){
      initScene();
 
 
-   // if(_pQQuickListView != nullptr){
-        //QQmlComponent component(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
-        // QQuickItem *object = qobject_cast<QQuickItem*>(component.create());
-
-         QQmlComponent * pQMLComponent = new QQmlComponent(_pQuickView->engine(), "./qrc/popup/MessageDialog.qml");
-         QQuickItem *object = qobject_cast<QQuickItem*>(pQMLComponent->create());
-         
-         delete object;
-         delete pQMLComponent;  
-
-
-   // }
+	QQmlComponent component(_pQuickView->engine(), QUrl(QStringLiteral("./qrc/popup/MessageDialog.qml")) );
+	if (component.status()  != QQmlComponent::Ready) {
+		qInfo() << "QQmlComponent::Ready is not ready";
+		//sudo apt-get install qml-module-qtquick-dialogs
+		//https://ubuntu.pkgs.org/16.04/ubuntu-main-amd64/qml-module-qtquick-dialogs_5.5.1-1ubuntu1_amd64.deb.html
+		qInfo() <<  component.errorString();
+	}
+	else{
+		QQuickItem* object = qobject_cast<QQuickItem*>(component.create()); 
+	}
+       
+	 
 }
 
 void   SceneBase::destroyScreen()
