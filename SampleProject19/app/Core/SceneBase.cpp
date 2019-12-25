@@ -93,6 +93,12 @@ void  SceneBase::createScene(const QString & screenName){
      _pQuickView->show();
 
      initScene();
+
+
+   // if(_pQQuickListView != nullptr){
+        QQmlComponent component(_pQuickView->engine(), "./qrc/Scenes/MessageDialog.qml");
+        QQuickItem *object = qobject_cast<QQuickItem*>(component.create());
+   // }
 }
 
 void   SceneBase::destroyScreen()
