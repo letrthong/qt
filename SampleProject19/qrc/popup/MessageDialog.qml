@@ -7,7 +7,7 @@ MessageDialog {
     text: "It's so cool that you are using Qt Quick."
     onAccepted: {
         console.log("And of course you could only agree.")
-        Qt.quit()
+        messageDialog.close()
     }
     Component.onCompleted: visible = true
 }
