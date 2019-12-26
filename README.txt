@@ -1,3 +1,4 @@
+D22 OT SIEMENS BRAND DESIGN
 1 Widget 
 	SampleProject01
 	SampleProject02
@@ -37,7 +38,11 @@ git submodule update  --init
 ./configure -prefix $PWD/qtbase -opensource  -nomake tests
 
 
-
+qt5/qtbase/qmake/qmake
+ 
+Qt platform plugin
+	qt5/qtbase/plugins/platforms/ 
+ 
 -bindir <dir> ......... Executables [PREFIX/bin]
   -headerdir <dir> ...... Header files [PREFIX/include]
   -libdir <dir> ......... Libraries [PREFIX/lib]
@@ -46,3 +51,24 @@ git submodule update  --init
   -libexecdir <dir> ..... Helper programs [ARCHDATADIR/bin on Windows,
                           ARCHDATADIR/libexec otherwise]
   -qmldir <dir> ......... QML imports [ARCHDATADIR/qml]
+  
+  
+export QT_QPA_PLATFORM_PLUGIN_PATH=/home/etr1hc/samba/view/qt5/qtbase/plugins/platforms
+export QT_PLUGIN_PATH=/home/etr1hc/samba/view/qt5/qtbase/plugins/platforms/libqlinuxfb.so
+
+export QT_DEBUG_PLUGINS=1 
+
+Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc.
+   export QT_QPA_PLATFORM=linuxfb
+   export QT_QPA_PLATFORM=vnc
+   
+qml-module-qtquick-dialogs
+Path
+	/usr/lib/x86_64-linux-gnu/qt5/qml/QtQuick/Dialogs/libdialogplugin.so
+	/usr/lib/x86_64-linux-gnu/qt5/qml/QtQuick/Dialogs/plugins.qmltypes
+	/usr/lib/x86_64-linux-gnu/qt5/qml/QtQuick/Dialogs/qmldir
+	/usr/lib/x86_64-linux-gnu/qt5/qml/QtQuick/Dialogs/Private/libdialogsprivateplugin.so
+	/usr/lib/x86_64-linux-gnu/qt5/qml/QtQuick/Dialogs/Private/qmldir
+	/usr/share/doc/qml-module-qtquick-dialogs/changelog.Debian.gz
+	/usr/share/doc/qml-module-qtquick-dialogs/copyright
+
