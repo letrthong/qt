@@ -25,3 +25,24 @@
 	
 Expanding Delegate
 https://doc.qt.io/archives/qt-4.8/qt-declarative-modelviews-listview-expandingdelegates-example.html
+
+
+
+#https://github.com/qt/qt5.git
+git fetch
+git checked v5.12.0
+git submodule update  --init
+
+
+./configure -prefix $PWD/qtbase -opensource  -nomake tests
+
+
+
+-bindir <dir> ......... Executables [PREFIX/bin]
+  -headerdir <dir> ...... Header files [PREFIX/include]
+  -libdir <dir> ......... Libraries [PREFIX/lib]
+  -archdatadir <dir> .... Arch-dependent data [PREFIX]
+  -plugindir <dir> ...... Plugins [ARCHDATADIR/plugins]
+  -libexecdir <dir> ..... Helper programs [ARCHDATADIR/bin on Windows,
+                          ARCHDATADIR/libexec otherwise]
+  -qmldir <dir> ......... QML imports [ARCHDATADIR/qml]
