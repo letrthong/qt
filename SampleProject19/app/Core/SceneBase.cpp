@@ -49,6 +49,10 @@ SceneBase::~SceneBase(){
     }
 
     //destroyScreen();
+    if(_pPopup ){
+        delete _pPopup;
+        _pPopup = nullptr;
+    }
 }
 
 
@@ -97,7 +101,7 @@ void  SceneBase::createScene(const QString & screenName){
      initScene();
 
 
-	 QQmlComponent* pQMLComponent = new QQmlComponent(_pQuickView->engine(), QUrl(QStringLiteral("./qrc/popup/MessageDialog.qml")) );
+	QQmlComponent* pQMLComponent = new QQmlComponent(_pQuickView->engine(), QUrl(QStringLiteral("./qrc/popup/MessageDialog.qml")) );
 	if (pQMLComponent->status()  != QQmlComponent::Ready) {
 		qInfo() << "QQmlComponent::Ready is not ready";
 		//sudo apt-get install qml-module-qtquick-dialogs
