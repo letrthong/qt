@@ -26,6 +26,8 @@ SceneBase::SceneBase(QQuickView * pQuickView  ){
     _pQQuickListView = nullptr;
     _pQmlContext = nullptr;
 
+	_pPopup = nullptr;
+
       Singleton::getSingle()->setPointerOfSignalManager(_pSignalManager);
 
 }
@@ -95,18 +97,34 @@ void  SceneBase::createScene(const QString & screenName){
      initScene();
 
 
-	QQmlComponent component(_pQuickView->engine(), QUrl(QStringLiteral("./qrc/popup/MessageDialog.qml")) );
-	if (component.status()  != QQmlComponent::Ready) {
+	 QQmlComponent* pQMLComponent = new QQmlComponent(_pQuickView->engine(), QUrl(QStringLiteral("./qrc/popup/MessageDialog.qml")) );
+	if (pQMLComponent->status()  != QQmlComponent::Ready) {
 		qInfo() << "QQmlComponent::Ready is not ready";
 		//sudo apt-get install qml-module-qtquick-dialogs
 		//https://ubuntu.pkgs.org/16.04/ubuntu-main-amd64/qml-module-qtquick-dialogs_5.5.1-1ubuntu1_amd64.deb.html
-		qInfo() <<  component.errorString();
+		qInfo() << pQMLComponent->errorString();
 	}
 	else{
-		QQuickItem* object = qobject_cast<QQuickItem*>(component.create()); 
+		_pPopup = pQMLComponent->create();
+		//QQuickItem* pQuickItem = qobject_cast<QQuickItem*>(pObject);
+	   
+		//_pPopup->setProperty("visible", false);
+		//_pPopup->deleteLater() ;
+
+		QTimer* timer = new QTimer(this);
+		connect(timer, SIGNAL(timeout()),this, SLOT(closePopup()));
+		timer->start(5000);
 	}
        
 	 
+}
+
+void  SceneBase::closePopup() {
+	if (_pPopup) {
+		//_pPopup->deleteLater();
+		delete   _pPopup;
+		_pPopup = nullptr;  
+	}
 }
 
 void   SceneBase::destroyScreen()

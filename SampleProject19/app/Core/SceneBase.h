@@ -50,6 +50,7 @@ class SceneBase :public QObject, public ISceneBase
 
 public slots:
         void onInfoStoreSlot(QVariant id);
+		void  closePopup();
 
   private:
         SignalManager*  _pSignalManager;
@@ -64,5 +65,8 @@ public slots:
         std::vector<QQuickItem*> _vecTextView;
         std::vector<QQuickItem*> _vecEditText;
         QQuickItem* _pQQuickListView;
+
+
+		QObject* _pPopup;
 };
 #endif // SCENE_BASE_H_
